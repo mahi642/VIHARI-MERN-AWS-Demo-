@@ -33,7 +33,8 @@ import BookTour from './pages/BookTour';
 import Contact from './pages/Contact';
 import AdminAnnouncementForm from './pages/Announcements';
 import AdminHome from './pages/AdminHome';
-
+import AgentSignUp from './pages/AgentSignUp';
+import AllAgents from './pages/AllAgents';
 
 function App() {
   return (
@@ -48,12 +49,13 @@ function App() {
           <Route exact path='/tours' element={<Tours/>}/>
           <Route exact path='/Gallery' element={<Gallery/>}/>
           <Route exact  path='/buses' element={<BusList/>}/>
-
+          <Route exact path='/agentSignUp' element={<AgentSignUp/>}/>
           <Route exact  path='/passengers' element={<PassengerDetails/>}/>
 
 
           <Route exact path='/agent/allbuses' element={<AllBuses/>} />
           <Route exact path='/admindb/allusers' element={<AllUsers/>} />
+          <Route exact path='/admindb/allagents' element={<AllAgents/>} />
           <Route exact path='/agent/alltours' element={<AllTours/>}/>
           <Route exact path='/agent/addbus' element={<AddBus/>}/>
           <Route exact path='/admindb/adduser' element={<AddUser/>}/>

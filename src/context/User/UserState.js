@@ -43,6 +43,42 @@ const UserState = (props) => {
 
   }
 
+
+  const verifyAgent= async(email,password)=>{
+
+    // Verifying user with api call 
+      const res = await fetch(`${host}/agentLogin`,{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json",
+    },
+    body:JSON.stringify({email,password})
+    })
+
+    // Returning response that contains unique token generated for the user
+    const response =await res.json()
+    return response
+     }
+
+  const createAgent = async(agentName,email,password)=>{
+  
+    // Creating user with api call 
+    const res = await fetch(`${host}/agentSignUp`,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        agentName,
+        email,
+        password
+      })
+      })
+      const response =await res.json()
+      return response
+
+}
+
 // search Details
 const [searchDetails, setsearchDetails] = useState({srcname:'',destname:'',date:''})
 
@@ -50,7 +86,7 @@ const updateSearch=(srcname,destname,date)=>{
 setsearchDetails({srcname,destname,date})
 }
   return (
-    <userContext.Provider value={{verifyUser,createUser,searchDetails,updateSearch}}>
+    <userContext.Provider value={{verifyUser,createUser,verifyAgent,createAgent,searchDetails,updateSearch}}>
         {props.children}
     </userContext.Provider>
   )

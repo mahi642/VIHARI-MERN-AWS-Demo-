@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Agent = require('../models/agent');
 const nodemailer = require("nodemailer");
 const sendgridTransport = require("nodemailer-sendgrid-transport");
 const bcrypt=require('bcryptjs');
@@ -38,6 +39,7 @@ exports.postsendmail = async (req, res, next) => {
   }
 };
 
+
 exports.getAllUsers = async (req, res) => {
     try {
       const Users = await User.find({});
@@ -45,10 +47,82 @@ exports.getAllUsers = async (req, res) => {
     } catch (error) {
       res.status(500).json({ message: "Error while fetching users" });
     }
-  };
+};
+
+exports.getAllAgents = async (req, res) => {
+  try {
+    const Agents = await Agent.find({});
+    res.status(200).json({ agents: Agents });
+  } catch (error) {
+    res.status(500).json({ message: "Error while fetching users" });
+  }
+};
+
+exports.acceptAgent = async (req, res) => {
+  const agentId = req.params.agentId;
+  try {
+    const agent = await Agent.findById(agentId);
+    if (!agent) {
+      return res.status(404).json({ message: "Agent not found" });
+    }
+    agent.flag = 1; // Update flag to 1 for accepted agent
+    await agent.save();
+    res.status(200).json({ message: "Agent accepted successfully" });
+  } catch (error) {
+    console.error("Error accepting agent:", error);
+    res.status(500).json({ message: "Error accepting agent" });
+  }
+};
+
+exports.rejectAgent = async (req, res) => {
+  const agentId = req.params.agentId;
+  try {
+    const agent = await Agent.findById(agentId);
+    if (!agent) {
+      return res.status(404).json({ message: "Agent not found" });
+    }
+    agent.flag = 0; // Update flag to 0 for rejected agent
+    await agent.save();
+    res.status(200).json({ message: "Agent rejected successfully" });
+  } catch (error) {
+    console.error("Error rejecting agent:", error);
+    res.status(500).json({ message: "Error rejecting agent" });
+  }
+};
+
+exports.blockAgent = async (req, res) => {
+  const agentId = req.params.agentId;
+  try {
+      const agent = await Agent.findById(agentId);
+      if (!agent) {
+          return res.status(404).json({ message: 'Agent not found' });
+      }
+      agent.blocked = true;
+      await agent.save();
+      res.status(200).json({ message: 'Agent blocked successfully' });
+  } catch (error) {
+      console.error('Error blocking agent:', error);
+      res.status(500).json({ message: 'Error blocking agent' });
+  }
+};
+
+exports.unblockAgent = async (req, res) => {
+  const agentId = req.params.agentId;
+  try {
+      const agent = await Agent.findById(agentId);
+      if (!agent) {
+          return res.status(404).json({ message: 'Agent not found' });
+      }
+      agent.blocked = false;
+      await agent.save();
+      res.status(200).json({ message: 'Agent unblocked successfully' });
+  } catch (error) {
+      console.error('Error unblocking agent:', error);
+      res.status(500).json({ message: 'Error unblocking agent' });
+  }
+};
 
 
-  
   exports.addUser = async (req, res) => {
       const {
           firstName,
@@ -57,7 +131,6 @@ exports.getAllUsers = async (req, res) => {
           password,
           confirmPassword,
       } = req.body;
-  
       try {
           
           const existingUser = await User.findOne({ email });
@@ -65,9 +138,7 @@ exports.getAllUsers = async (req, res) => {
           if (existingUser) {
               return res.status(400).json({ message: "User already exists" });
              
-          }
-  
-   
+          } 
           const hashedPassword = await bcrypt.hash(password, 10);
  
           const newUser = new User({
