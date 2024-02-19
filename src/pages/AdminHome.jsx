@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import AdminNavbar1 from "../components/UI/AdminNavbar1";
+import AdminNavbar1 from "../components/UI/AdminNavbar";
 
-import Header from "../components/UI/AdminHeader";
+import AdminHeader from "../components/UI/AdminHeader";
 
 const AdminHome = () =>{
 return (
     <div>
     <AdminNavbar1 />
-    <Header />
+    <AdminHeader />
     </div>
 
 );

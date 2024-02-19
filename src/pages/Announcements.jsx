@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AdminNavbar1 from "../components/UI/AdminNavbar1";
+import AdminNavbar1 from "../components/UI/AdminNavbar";
 import '../components/CSS/AdminAnnouncementForm.css';
 import { useSendMailsMutation } from '../Slices/adminApiSlice';
 import Loader from '../components/Loader/Loader'

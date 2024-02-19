@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AdminNavbar1 from "../components/UI/AdminNavbar1";
+import AdminNavbar1 from "../components/UI/AdminNavbar";
 import { useAddUserDetailsMutation } from "../Slices/adminApiSlice";
 
 const AddUser = () => {
