@@ -14,7 +14,7 @@ const AddBus = () => {
     durtime: "",
     tktprice: "",
     btype: "",
-    image: null, 
+    image: null,
   });
 
   const handleInputChange = (e) => {
@@ -36,9 +36,9 @@ const AddBus = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
-    
+
       const formDataToSend = new FormData();
       formDataToSend.append("srcname", formData.srcname);
       formDataToSend.append("destname", formData.destname);
@@ -48,12 +48,12 @@ const AddBus = () => {
       formDataToSend.append("durtime", formData.durtime);
       formDataToSend.append("tktprice", formData.tktprice);
       formDataToSend.append("btype", formData.btype);
-      formDataToSend.append("image", formData.image); 
+      formDataToSend.append("image", formData.image);
 
-    
+
       await addBus(formDataToSend).unwrap();
-      
-    
+
+
       alert("Bus added successfully");
       navigate('/admindb/allbuses');
     } catch (error) {
@@ -70,7 +70,7 @@ const AddBus = () => {
               <div className="row ">
                 <div className="">
                   <h1 style={{ color: 'white', marginTop: '50px', fontSize: '30px' }}>Add Bus</h1>
-                  <div className="row login-row" style={{ marginTop: '50px', display: 'flex', flexDirection: 'column', marginLeft: '100px', width: '450px' }}>
+                  <div className="row login-row" style={{ marginTop: '30px', display: 'flex', flexDirection: 'column', marginLeft: '100px', width: '450px' }}>
 
                     {/* Source Name */}
                     <div className="col-md-6">
@@ -250,23 +250,24 @@ const AddBus = () => {
                         </div>
                       </div>
                     </div>
+                    <div className="col-md-6">
+                      <div className="input-group mb-3 user">
+                        <span className="input-group-text span">
+                          <i className="fa fa-image" aria-hidden="true"></i>
+                        </span>
+                        <div className="form-floating">
+                          <input
+                            type="file"
+                            className="form-control inputs"
+                            name="image"
+                            onChange={handleImageChange}
+                          />
+
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="col-md-6">
-                <div className="input-group mb-3 user">
-                  <span className="input-group-text span">
-                    <i className="fa fa-image" aria-hidden="true"></i>
-                  </span>
-                  <div className="form-floating">
-                    <input
-                      type="file"
-                      className="form-control inputs"
-                      name="image"
-                      onChange={handleImageChange}
-                    />
-                    
-                  </div>
-                </div>
-              </div>
+
                   <input
                     type="submit"
                     value="ADD BUS"
