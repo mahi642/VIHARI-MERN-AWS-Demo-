@@ -1,0 +1,34 @@
+.cancel-save {
+  margin-top: 20px; /* Add margin for spacing */
+}
+
+.cancel-save button {
+  margin: -2rem 10px;
+  background-color: darkgrey; /* Add margin between buttons */
+}
+
+.inp-name {
+  width: 15rem; /* Adjust the width as needed */
+  height: 2rem;
+  border: 1px solid rgb(220, 213, 213);
+
+  padding: 1.2rem; /* Adjust padding as needed */
+  color: black;
+  font-size: 16px;
+  font-weight: bolder;
+  
+}
+.inp-name::placeholder {
+  text-align: start;
+}
+
+.nameAndGender label {
+  font-size: 2rem;
+}
+
+.female-radio-btn {
+  margin-left: 1rem;
+}
+.dob1 {
+  color: rgb(137, 132, 132);
+}
