@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import {
   BrowserRouter as Router,
   Routes,
-  Route
+  Route 
 } from 'react-router-dom'
 import UserState from './context/User/UserState';
 import Layout from './components/UI/Layout';
