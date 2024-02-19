@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import AdminNavbar from "../components/UI/AdminNavbar";
+import AgentNavbar from "../components/UI/AgentNavbar";
+import AgentHeader from "../components/UI/AgentHeader";
 
-import Header from "../components/UI/AdminHeader";
-
-const AdminHome = () =>{
+const AgentHome = () =>{
 return (
     <div>
-    <AdminNavbar />
-    <Header />
+    <AgentNavbar />
+    <AgentHeader />
     </div>
 );
 }
 
-export default AdminHome;
+export default AgentHome;

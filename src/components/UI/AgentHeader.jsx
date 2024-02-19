@@ -20,7 +20,7 @@ const Header = () => {
             </div>
             <div className="header-content">
               <h1 className="header-title">Teacher's Home Page</h1>
-              <p className="header-welcome">Welcome, {user.teacher.FullName}</p>
+              {/* <p className="header-welcome">Welcome, {user.teacher.FullName}</p> */}
               <div className="header-description">
                 <p>
                   This is a place for teachers to access resources, manage

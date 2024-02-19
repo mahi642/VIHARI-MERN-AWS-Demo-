@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const AdminNavbar = () => {
+const AgentNavbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark" id="navbar" style={{ backgroundColor: '#222271',fontSize:'20px',padding:'10px' }}>
       <Link className="navbar-brand" to="/agent/allbuses">
@@ -61,4 +61,4 @@ const AdminNavbar = () => {
 
 
 
-export default AdminNavbar;
+export default AgentNavbar;
