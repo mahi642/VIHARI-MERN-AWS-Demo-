@@ -36,7 +36,7 @@ import EditProfile from "./pages/EditProfile";
 import AdminAnnouncementForm from './pages/Announcements';
 import AdminHome from './pages/AdminHome';
 import AgentHome from './pages/AgentHome';
-
+import AgentSignUp from './pages/AgentSignUp';
 
 function App() {
   return (
@@ -80,6 +80,7 @@ function App() {
               />
               <Route exact path="/contact" element={<Contact />} />
               <Route exact path="/profile" element={<Profile />} />
+              <Route exact path="/agentSignUp" element={<AgentSignUp />} />
               <Route
                 exact
                 path="/profile/editUserProfile"
