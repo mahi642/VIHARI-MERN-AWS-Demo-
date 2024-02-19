@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
     tickets: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Ticket'
-    }]
+    }],
 },
 {timestamps: true}
 );

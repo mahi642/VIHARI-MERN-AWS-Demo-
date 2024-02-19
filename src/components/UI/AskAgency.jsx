@@ -1,7 +1,7 @@
 import React from "react";
-import "../components/CSS/AskAgency.css";
-import busAgency from "../Assets/bus_agency.jpg";
-import tripImage from "../Assets/trip_img.svg";
+import "../CSS/AskAgency.css";
+import busAgency from "../../Assets/bus_agency.jpg";
+import tripImage from "../../Assets/trip_img.svg";
 import { useNavigate } from "react-router-dom";
 const AskAgency = () => {
   const navigate = useNavigate();
