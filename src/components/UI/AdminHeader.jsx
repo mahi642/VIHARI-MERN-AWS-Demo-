@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from "react";
 import '../CSS/AdminHeader.css';
-import { Link } from "react-router-dom";
-import Ahome from '../../Assets/Admin.jpg'
-import { useGetAllUsersQuery } from "../../Slices/adminApiSlice";
+import { useGetAllUsersQuery, useGetAllAgentsQuery } from "../../Slices/adminApiSlice";
 import { FaUser } from 'react-icons/fa';
-
+import Ahome from '../../Assets/Admin.jpg'
 const Header = () => {
   const [numUsers, setNumUsers] = useState(0);
+  const [numAgents, setNumAgents] = useState(0);
+
   const { data: userData } = useGetAllUsersQuery();
+  const { data: agentData } = useGetAllAgentsQuery();
 
   useEffect(() => {
     if (userData && userData.users) {
       setNumUsers(userData.users.length);
     }
-  }, [userData]);
+    if (agentData && agentData.agents) {
+      const agentsWithFlag1 = agentData.agents.filter(agent => agent.flag === 1);
+      setNumAgents(agentsWithFlag1.length);
+    }
+  }, [userData, agentData]);
 
   return (
     <>
@@ -36,20 +41,15 @@ const Header = () => {
         </div>
         <div className="dashboard-container">
           <div className="dashboard-box">
-          <FaUser className="user-icon" /> 
+            <FaUser className="user-icon" /> 
             <h2>Total Users:</h2>
             <p style={{ color: '#007bff' }}>{numUsers}</p> 
           </div>
           <div className="dashboard-box">
-            <h2>Total agents:</h2>
-            
+          <FaUser className="user-icon" /> 
+            <h2>Total Agents:</h2>
+            <p style={{ color: '#007bff' }}>{numAgents}</p> 
           </div>
-
-          <div className="dashboard-box">
-            <h2>Total agents:</h2>
-            
-          </div>
-         
         </div>
       </header>
     </>

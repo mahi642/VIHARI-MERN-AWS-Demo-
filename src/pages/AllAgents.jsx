@@ -30,13 +30,20 @@ const AllAgents = () => {
 
     const handleReject = async (agentId) => {
         try {
-            await rejectAgent(agentId).unwrap();
-            refetch();
+          const confirmed = window.confirm('Are you sure you want to reject this agent?');
+          if (!confirmed) {
+            return; 
+          }
+          await rejectAgent(agentId).unwrap();
+          alert("Agent rejected successfully");
+          await refetch();
         } catch (error) {
-            console.error("Error rejecting agent:", error);
+    
+          console.error("Error deleting user:", error);
         }
-    };
-
+      };
+    
+    
     const handleBlock = async (agentId) => {
         try {
             await blockAgent(agentId).unwrap();

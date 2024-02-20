@@ -74,21 +74,10 @@ exports.acceptAgent = async (req, res) => {
   }
 };
 
-exports.rejectAgent = async (req, res) => {
-  const agentId = req.params.agentId;
-  try {
-    const agent = await Agent.findById(agentId);
-    if (!agent) {
-      return res.status(404).json({ message: "Agent not found" });
-    }
-    agent.flag = 0; // Update flag to 0 for rejected agent
-    await agent.save();
-    res.status(200).json({ message: "Agent rejected successfully" });
-  } catch (error) {
-    console.error("Error rejecting agent:", error);
-    res.status(500).json({ message: "Error rejecting agent" });
-  }
-};
+
+
+
+
 
 exports.blockAgent = async (req, res) => {
   const agentId = req.params.agentId;
@@ -174,3 +163,17 @@ exports.unblockAgent = async (req, res) => {
      })
   };
 
+  exports.rejectAgent = async (req, res) => {
+    const agentId = req.params.agentId;
+    Agent.findByIdAndDelete(agentId)
+     .then((deletedAgent)=>{
+      if(!deletedAgent){
+        return res.status(404).json({message: "Agent not found"});
+      }
+     }).then((agent)=>{
+      res.status(200).json({message: "User deleted successfully  "});
+     })
+     .catch((error)=>{
+      res.status(500).json({message:"Internal server error"});
+     })
+  };
