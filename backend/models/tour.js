@@ -13,6 +13,10 @@ const tourSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    agentId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Agent'
+  },
     places:[{
       type:mongoose.Schema.Types.ObjectId,
       ref:"Place"

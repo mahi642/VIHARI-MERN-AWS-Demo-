@@ -1,32 +1,34 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 import AdminNavbar from "../components/UI/AgentNavbar";
+import {useEditTourDetailsMutation,useGetTourQuery} from '../Slices/agentApiSlice';
+import Loader from '../components/Loader/Loader'
 const EditTour = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  const {data:tourData,isLoading}=useGetTourQuery(id);
+  const [editTour]=useEditTourDetailsMutation();
+
   const [formData, setFormData] = useState({
     tourName: "",
     tourPrice: 0,
-    imagePath: "/Bangalore.jpg",
+
   });
 
+ 
+
   useEffect(() => {
-
-    fetch(`http://localhost:8000/tours/${id}`)
-      .then((res) => res.json())
-      .then((tour) => {
-
-        setFormData({
-          tourName: tour.tourName,
-          tourPrice: tour.tourPrice,
-          imagePath: tour.imagePath,
-        });
+    if(tourData){
+      setFormData({
+        tourName:tourData.tour.tname,
+        tourPrice:tourData.tour.tprice
       })
-      .catch((err) => {
-        console.error(err.message);
-      });
-  }, [id]);
+      
+    }
+
+   
+  }, [tourData]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -36,24 +38,25 @@ const EditTour = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  if(isLoading){
+    return <Loader/>;
+  }
 
-    fetch(`http://localhost:8000/tours/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => {
-        alert("Tour updated successfully");
-        navigate('/admindb/alltours');
-      })
-      .catch((err) => {
-        console.error(err.message);
-      });
-  };
+  const handleSubmit = async (e) => {
+    try {
+        e.preventDefault();
+        const form_data = new FormData();
+        form_data.append('tname', formData.tourName);
+        form_data.append('tprice', formData.tourPrice);
+
+        await editTour({ tourId: id, data: formData }).unwrap();
+        alert("Tour edited successfully");
+        navigate('/agent/alltours');
+    } catch (error) {
+        console.log("Failed to edit tour", error);
+    }
+};
+
 
 
 

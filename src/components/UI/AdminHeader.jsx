@@ -1,24 +1,29 @@
 import React, { useState, useEffect } from "react";
 import '../CSS/AdminHeader.css';
 import { useGetAllUsersQuery, useGetAllAgentsQuery } from "../../Slices/adminApiSlice";
+import { useGetAllBusesQuery } from "../../Slices/agentApiSlice";
 import { FaUser } from 'react-icons/fa';
 import Ahome from '../../Assets/Admin.jpg'
 const Header = () => {
   const [numUsers, setNumUsers] = useState(0);
   const [numAgents, setNumAgents] = useState(0);
-
+  const [numBuses,setNumBuses] = useState(0);
   const { data: userData } = useGetAllUsersQuery();
   const { data: agentData } = useGetAllAgentsQuery();
-
+  const { data: busData } = useGetAllBusesQuery();
   useEffect(() => {
     if (userData && userData.users) {
       setNumUsers(userData.users.length);
+    }
+    if (busData && busData.buses) {
+      setNumBuses(busData.buses.length);
     }
     if (agentData && agentData.agents) {
       const agentsWithFlag1 = agentData.agents.filter(agent => agent.flag === 1);
       setNumAgents(agentsWithFlag1.length);
     }
-  }, [userData, agentData]);
+    
+  }, [userData, agentData,busData]);
 
   return (
     <>
@@ -44,6 +49,11 @@ const Header = () => {
             <FaUser className="user-icon" /> 
             <h2>Total Users:</h2>
             <p style={{ color: '#007bff' }}>{numUsers}</p> 
+          </div>
+          <div className="dashboard-box">
+            <FaUser className="user-icon" /> 
+            <h2>Total Buses:</h2>
+            <p style={{ color: '#007bff' }}>{numBuses}</p> 
           </div>
           <div className="dashboard-box">
           <FaUser className="user-icon" /> 

@@ -40,6 +40,11 @@ const AdminNavbar1 = () => {
             </Link>
           </li>
           <li className="nav-item">
+            <Link className="nav-link" to="/admindb/allbuses">
+              All Buses
+            </Link>
+          </li>
+          <li className="nav-item">
             <Link className="nav-link" to="/admindb/announcements">
               Announcements
             </Link>
@@ -54,7 +59,7 @@ const AdminNavbar1 = () => {
               Welcome, <b>Admin</b>!
             </span>
           </li>
-          <li className="nav-item" style={{marginLeft:'400px'}}>
+          <li className="nav-item" style={{marginLeft:'200px'}}>
             <Link className="nav-link" to="/">
               <i className="fa fa-sign-out" aria-hidden="true"></i>
               Sign Out

@@ -22,6 +22,12 @@ const agentSchema = new mongoose.Schema(
               ref:"Bus"
             }
         ],
+        tours: [
+            {
+              type:mongoose.Schema.Types.ObjectId,
+              ref:"Tour"
+            }
+        ],
         flag: {
             type: Number,
             default: 0,

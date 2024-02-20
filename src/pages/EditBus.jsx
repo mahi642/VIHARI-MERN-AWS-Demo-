@@ -24,6 +24,8 @@ const EditBus = () => {
     image:"",
   });
 
+  
+
   useEffect(()=>{
     if(busData){
       setFormData({

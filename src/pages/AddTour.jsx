@@ -1,43 +1,62 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminNavbar from "../components/UI/AgentNavbar";
+import { useAddTourDetailsMutation } from "../Slices/agentApiSlice";
+
 const AddTour = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     tourName: "",
-    tourPrice: '',
-    imagePath: "/Bangalore.jpg",
+    tourPrice: 0,
+    imageFile: "",
     places: []
 
   });
 
+  const [addTour]=useAddTourDetailsMutation();
+
+  const agentId=localStorage.getItem("agentId");
+
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    if(name==="tourImage"){
+      setFormData({
+        ...formData,
+        [name]: e.target.files[0],
+      });
+
+    } else{
+
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+    try{
 
-    fetch("http://localhost:8000/tours", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => {
-        alert("Tour added successfully");
-        navigate('/admindb/alltours');
-      })
-      .catch((err) => {
-        console.error(err.message);
-      });
-    console.log("Form data submitted:", formData);
+      e.preventDefault();
+      const form_data = new FormData();
+      form_data.append("tname",formData.tourName);
+      form_data.append("tprice",formData.tourPrice);
+      form_data.append("tourImage",formData.tourImage);
+      form_data.append("places",[]);
+      form_data.append("agentId",agentId);
+
+  
+      await addTour(form_data);
+      alert("Tour added successfully");
+      navigate('/agent/alltours');
+      window.location.reload();
+      
+      console.log("Form data submitted:", formData);
+    } catch(error){
+      console.log("Failed to submit form data");
+    }
 
   };
 
@@ -96,6 +115,31 @@ const AddTour = () => {
                           <span
                             className="invalid-form"
                             id="invalid-lname"
+                          ></span>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="col-md-6">
+                      <div className="input-group mb-3 user">
+                        <span className="input-group-text span">
+                          <i class="fa fa-inr" aria-hidden="true"></i>
+                        </span>
+                        <div className="form-floating">
+                          <input
+                            type="file"
+                            className="form-control inputs"
+                            id="timage"
+                            name="tourImage"
+                            placeholder="Tour Image"
+                            fdprocessedid="2myzgp"
+                            onChange={handleInputChange}
+                            
+                          />
+                          <span
+                            className="invalid-form"
+                            id="invalid-timage"
                           ></span>
 
                         </div>

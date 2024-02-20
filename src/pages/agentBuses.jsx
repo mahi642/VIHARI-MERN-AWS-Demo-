@@ -5,7 +5,6 @@ import AgentNavbar from "../components/UI/AgentNavbar";
 import { useGetAgentBusesQuery,useDeleteBusMutation } from '../Slices/agentApiSlice'
 import Loader from '../components/Loader/Loader';
 
-
 const AgentBuses = () => {    
   const [Buses, setAllBuses] = useState([]);
   const getAgentId=()=>{
@@ -110,5 +109,7 @@ const AgentBuses = () => {
     </div>
   );
 };
+
+
 
 export default AgentBuses;

@@ -70,6 +70,7 @@ function App() {
                 path="/admindb/addplace/:id"
                 element={<AddPlace />}
               />
+              <Route exact path ="/admindb/allbuses" element={<AllBuses />} />
               <Route exact path="/admindb/editbus/:id" element={<EditBus />} />
               <Route exact path="/about" element={<About />} />
               <Route exact path="/admindb/adminhome" element={<AdminHome />} />
