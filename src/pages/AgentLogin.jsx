@@ -20,6 +20,7 @@ const AgentLogin = () => {
 
     if (response.success) {
       localStorage.token = response.authToken;
+      localStorage.agentId=response.agentId;
       
       if (response.agent.flag === 1 && !response.agent.blocked) {
         navigate('/agent/agentHome');

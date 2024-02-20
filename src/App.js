@@ -39,6 +39,7 @@ import AgentHome from './pages/AgentHome';
 import AgentSignUp from './pages/AgentSignUp';
 import AgentLogin from './pages/AgentLogin';
 import AllAgents from './pages/AllAgents';
+import AgentBuses from './pages/agentBuses';
 
 function App() {
   return (
@@ -58,7 +59,7 @@ function App() {
           <Route exact  path='/passengers' element={<PassengerDetails/>}/>
 
               <Route exact path="/agent/agentHome" element={<AgentHome />} />
-              <Route exact path="/agent/allbuses" element={<AllBuses />} />
+              <Route exact path="/agent/allbuses" element={<AgentBuses />} />
               <Route exact path="/admindb/allusers" element={<AllUsers />} />
               <Route exact path="/agent/alltours" element={<AllTours />} />
               <Route exact path="/agent/addbus" element={<AddBus />} />

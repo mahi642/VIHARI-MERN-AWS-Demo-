@@ -2,20 +2,28 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../components/CSS/AdminDasboard.css";
 import AgentNavbar from "../components/UI/AgentNavbar";
-import { useGetAllBusesQuery,useDeleteBusMutation } from '../Slices/agentApiSlice'
+import { useGetAgentBusesQuery,useDeleteBusMutation } from '../Slices/agentApiSlice'
 import Loader from '../components/Loader/Loader';
 
 
-const AllBuses = () => {    
+const AgentBuses = () => {    
   const [Buses, setAllBuses] = useState([]);
+  const getAgentId=()=>{
+    const agentId =localStorage.getItem('agentId');
+    return agentId;
+  }
 
-  const {data:BusData,isLoading,refetch}=useGetAllBusesQuery();
+  const agentId =localStorage.getItem('agentId');
+  console.log(agentId);
+
+  const {data:BusData,isLoading,refetch}=useGetAgentBusesQuery(agentId);
 
   const [deleteBus]=useDeleteBusMutation();
 
   useEffect(()=>{
     if(BusData){
       setAllBuses(BusData.buses);
+      console.log(BusData.buses);
     }
   },[BusData]);
 
@@ -103,4 +111,4 @@ const AllBuses = () => {
   );
 };
 
-export default AllBuses;
+export default AgentBuses;

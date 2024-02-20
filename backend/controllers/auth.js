@@ -99,15 +99,17 @@ module.exports.verifyAgent = async (req, res) => {
     if (agent.flag !== 1 || agent.blocked) {
       return res.json({ success: false, error: "Agent is not authorized to log in" });
     }
-    
+
     const data = {
       agent: {
         id: agent.id,
       },
     };
 
+    const agentId=agent._id;
+
     const authToken = JWT.sign(data, JWT_SECRET);
-    res.json({ success: true, authToken, agent });
+    res.json({ success: true, authToken, agent,agentId });
   } catch (error) {
     console.log(error);
     res.send("Internal server error");
