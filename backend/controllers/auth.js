@@ -66,9 +66,6 @@ module.exports.createUser = async(req,res)=>{
             email: req.body.email,
             mobile:req.body.mobile,
             password: secPass
-        }).then(user => {
-
-          const authToken =JWT.sign(user.id,JWT_SECRET)
         }).then(async user => {
 
           // Creating authToken for user
