@@ -1,38 +1,53 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import bus1 from '../../Assets/bus1.png';
 import bus3 from '../../Assets/bus3.jpg';
-import bus5 from '../../Assets/bus5.jpg';
+// import bus5 from '../../Assets/bus5.jpg';
 import Layout from './Layout'
 import Footer from './Footer';
-import Navbar from './Navbar';
+import BusNav from './BusNav';
+import userContext from '../../context/User/userContext';
 const BusList = () => {
-  const [selectedBusName, setSelectedBusName] = useState();
+  const [selectedBus, setselectedBus] = useState();
   const [showSeats, setShowSeats] = useState(false);
-
-  const buses = [
-    { id: 1, name: 'APSRTC', route: 'Route 1', departure: '10:00 AM', arrival: '2:00 PM', duration: '4 hours', type: 'Express', fare: '320', image: bus1 },
-    { id: 2, name: 'PSR travels', route: 'Route 2', departure: '12:00 PM', arrival: '4:00 PM', duration: '4 hours', type: 'Standard', fare: '230', image: bus3 },
+  const {searchDetails} =useContext(userContext)
+  const [buses, setbuses] = useState([
+    { id: 1, trname: 'APSRTC', route: 'Route 1', deptime: '10:00 AM', arrtime: '2:00 PM', duration: '4 hours', btype: 'Express', tktprice: '320', image: bus1 },
+    { id: 2, trname: 'PSR travels', route: 'Route 2', deptime: '12:00 PM', arrtime: '4:00 PM', duration: '4 hours', btype: 'Standard', tktprice: '230', image: bus3 },
     // Add more buses as needed
-  ];
-  const seatRows = [
-    { row: 'A', seats: ['A1', 'A2', 'A3', 'A4', 'A5'] },
-    { row: 'B', seats: ['B1', 'B2', 'B3', 'B4', 'B5'] },
-    { row: 'C', seats: ['C1', 'C2', 'C3', 'C4', 'C5'] },
-  ];
+  ])
+  
+  const buslist = async()=>{
+    if(searchDetails.srcname!=='' && searchDetails.destname!==''){
+    const response = await fetch('http://localhost:4000/buslist',{
+    method:'POST',
+    headers:{
+      "Content-type":"application/json"
+    },
+    body:JSON.stringify({srcname:searchDetails.srcname,destname:searchDetails.destname})  
+    })
+    const data = await response.json();
+    setbuses(data)
+  }
+  }
+  useEffect(()=>{
+    buslist();
+  },[searchDetails])
   const toggleSeats = (bus) => {
-    if(showSeats && selectedBusName === bus.name){
+
+    if(showSeats && selectedBus === bus){
     setShowSeats(!showSeats);
     }
-    setSelectedBusName(bus.name);
+   else { setselectedBus(bus);
     setShowSeats(true)
+   }
   };
 
   return (
     <> 
-    <Navbar />
+    <BusNav/>
    <div className="container-fluid mt-5">
-      <h2 className="text-center mb-4" style={{fontSize:'25px',color:'blue'}}>Bus List</h2>
-      <table className="table" style={{ padding: '5px' }}>
+      <h2 className="text-center mb-4">Bus List</h2>
+      <table className="table" style={{fontSize:'60px',padding: '5px' }}>
         <thead>
          <tr>
             <th scope="col">Bus Image</th>
@@ -51,28 +66,27 @@ const BusList = () => {
             <tr key={bus.id} className='bus-row'>
               <td>
                 <img
-                  src={bus.image}
+                  src={bus.Imageurl}
                   alt=""
                   style={{ height: '80px', objectFit: 'cover' }}
                 />
               </td>
-              <td>{bus.name}</td>
-              <td>{bus.departure}</td>
-              <td>{bus.arrival}</td>
+              <td>{bus.trname}</td>
+              <td>{bus.deptime}</td>
+              <td>{bus.arrtime}</td>
               <td>{bus.duration}</td>
-              <td>{bus.type}</td>
-              <td>₹{bus.fare}</td>
+              <td>{bus.btype}</td>
+              <td>₹{bus.tktprice}</td>
               <td>
                 <button className="btn btn-primary" style={{ fontSize: '15px' }} onClick={() => toggleSeats(bus)}>
                   Select Seats
                 </button>
               </td>
             </tr>
-            <tr>
+            <tr className='my-5'>
               <td colSpan='7' className='text-center' >
-            {showSeats && selectedBusName === bus.name && (
+            {showSeats && selectedBus === bus && (
                     <div>
-                      <h5 className="text-center mb-3">Seat Layout for {selectedBusName}</h5>
                       <Layout bus={bus}/>
                     </div>
                   )}
