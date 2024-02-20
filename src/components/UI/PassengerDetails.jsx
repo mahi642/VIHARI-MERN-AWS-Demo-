@@ -6,10 +6,12 @@ import BusNav from './BusNav';
 import useRazorpay from "react-razorpay";
 import { useNavigate } from 'react-router-dom';
 import Bus from '../../Assets/city bus.gif'
+import userContext from '../../context/User/userContext';
 
 const PassengerDetails = () => {
  const [Razorpay] = useRazorpay()
-  const { selectedSeats,orderRazorpay } = useContext(busContext);
+  const { setselectedseats,selectedSeats,orderRazorpay } = useContext(busContext);
+  const {searchDetails} = useContext(userContext)
   const navigate = useNavigate()
   // Initialize forms for each selected seat
   const initialFormsData = selectedSeats.seats.reduce((acc, seat) => {
@@ -49,16 +51,17 @@ const PassengerDetails = () => {
    let order = await orderRazorpay(selectedSeats.seats.length * selectedSeats.bus.fare)
    console.log(order)
    const options = {
-    key: "rzp_test_4R2LUNV53xXIN1", // Enter the Key ID generated from the Dashboard
+    key: "rzp_test_lQaiC5AbagJXwZ", // Enter the Key ID generated from the Dashboard
     amount: selectedSeats.seats.length * selectedSeats.bus.fare * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
     currency: "INR",
     name: "Vihari",
     description: "A travel-site",
     order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of createOrder().
-    handler: function (response) {
+    handler: function async(response) {
       // alert(response.razorpay_payment_id);
       // alert(response.razorpay_order_id);
       // alert(response.razorpay_signature);
+      console.log(formsData);
       alert('payment successfull')
       navigate('/')
     },

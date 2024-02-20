@@ -15,14 +15,14 @@ const Navbar = () => {
           </button>
         </form>
         <div className='links'>
-          <Link to="/" class="nav-item nav-link">Home</Link>
-          <Link to="/tours" class="nav-item nav-link">Tours</Link>
-          <Link to="/about" class="nav-item nav-link">About</Link>
-          <Link to="/contact" class="nav-item nav-link">Contact</Link>
-          {localStorage.getItem('token') &&  <Link to="/profile" class="nav-item nav-link">profile</Link>}
+          <Link to="/" className="nav-item nav-link">Home</Link>
+          <Link to="/tours" className="nav-item nav-link">Tours</Link>
+          <Link to="/about" className="nav-item nav-link">About</Link>
+          <Link to="/contact" className="nav-item nav-link">Contact</Link>
+          {localStorage.getItem('token') &&  <Link to="/profile" className="nav-item nav-link">profile</Link>}
           
-          <div class="icons">
-           {localStorage.getItem('token')?<Link to="/" onClick={()=>{localStorage.removeItem('token')}}><i class="fa fa-sign-out" aria-hidden="true"></i></Link>:<Link to="/login"><i class="fa fa-user" aria-hidden="true" id="login-btn"></i></Link>}
+          <div className="icons">
+           {localStorage.getItem('token')?<Link to="/" onClick={()=>{localStorage.removeItem('token')}}><i className="fa fa-sign-out" aria-hidden="true"></i></Link>:<Link to="/login"><i className="fa fa-user" aria-hidden="true" id="login-btn"></i></Link>}
           </div>
 
         </div>

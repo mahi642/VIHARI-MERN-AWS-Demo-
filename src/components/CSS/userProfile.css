@@ -9,7 +9,7 @@
 .rightdiv {
   width: 75%;
   height: 100vh;
-  background-color: antiquewhite;
+  background-color: rgb(218, 226, 232);
 }
 .profile-items {
   display: flex;

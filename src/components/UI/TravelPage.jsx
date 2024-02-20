@@ -51,6 +51,7 @@ const {updateSearch} = useContext(userContext)
 const handleOnClick=(e)=>{
    e.preventDefault()
    const {srcname,destname,date} = localsearchDetails
+   console.log(date)
    if(srcname!=='' && destname!=='' && date !==''){
    updateSearch(srcname,destname,date)
   setlocalsearchDetails({srcname:'',destname:'',date:''})

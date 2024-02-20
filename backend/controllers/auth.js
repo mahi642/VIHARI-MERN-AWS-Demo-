@@ -3,6 +3,7 @@ const User = require('../models/user')
 const JWT = require("jsonwebtoken")
 const JWT_SECRET = "VihariTravelSite"
 const Agent = require('../models/agent');
+
 module.exports.verifyUser =  async(req,res)=>{
 
     const {email,password} =req.body;
@@ -63,10 +64,20 @@ module.exports.createUser = async(req,res)=>{
             firstName: req.body.firstName,
             lastName:req.body.lastName,
             email: req.body.email,
+            mobile:req.body.mobile,
             password: secPass
         }).then(user => {
 
           const authToken =JWT.sign(user.id,JWT_SECRET)
+        }).then(async user => {
+
+          // Creating authToken for user
+          const data ={
+            user:{
+              id:user.id
+            }
+          }
+          const authToken = await JWT.sign(data,JWT_SECRET)
           res.json({success:true,authToken,user})
   
         }).catch((error) => {
