@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 import profileImage from "../Assets/profile.png";
 import myProfile from "../Assets/myProfile.png";
@@ -8,6 +8,22 @@ import { useNavigate } from "react-router-dom";
 import "../components/CSS/userProfile.css";
 const Profile = () => {
   const navigate = useNavigate();
+  const [user, setuser] = useState({})
+  const getDetails = async()=>{
+    const response = await fetch('http://localhost:4000/userdetails',{
+      method:"POST",
+      headers:{
+        "Content-type":"application/json",
+        "auth-token":localStorage.getItem('token')
+      }
+    })
+    const json = await response.json();
+    console.log(json.user)
+   setuser(json.user)
+  }
+  useEffect(()=>{
+    getDetails()
+  },[])
   const handleEditInProfile = (e) => {
     e.preventDefault();
     navigate("/profile/editUserProfile");
@@ -40,7 +56,7 @@ const Profile = () => {
             <div className="nameAndGender">
               <div>
                 <h2>Name</h2>
-                <h3>Mahesh Balabadra</h3>
+                <h3>{user.firstName + " " + user.lastName}</h3>
               </div>
               <div>
                 <h2>Gender</h2>
@@ -58,7 +74,7 @@ const Profile = () => {
               <div className="nameAndGender">
                 <div>
                   <h2>Email</h2>
-                  <h3>mahesh.b21@iits.in</h3>
+                  <h3>{user.email}</h3>
                 </div>
                 <div>
                   <h2>Mobile Number</h2>

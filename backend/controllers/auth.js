@@ -2,7 +2,6 @@ const bcrypt = require('bcryptjs')
 const User = require('../models/user')
 const JWT = require("jsonwebtoken")
 const JWT_SECRET = "VihariTravelSite"
-
 module.exports.verifyUser =  async(req,res)=>{
 
     const {email,password} =req.body;
@@ -31,6 +30,21 @@ module.exports.verifyUser =  async(req,res)=>{
       res.send("Internal server error");
     }
   
+}
+module.exports.getUserDetails = async(req,res)=>{
+  try {
+    const userId = req.user.id;
+    const user = await User.findById(userId);
+
+    if (user) {
+      return res.json({ success: true, user });
+    }
+
+    return res.json({ success: false, error: "User not found" });
+  } catch (error) {
+    console.error("Error in getUserDetails:", error);
+    return res.status(500).json({ success: false, error: "Something went wrong" });
+  }
 }
 
 module.exports.createUser = async(req,res)=>{

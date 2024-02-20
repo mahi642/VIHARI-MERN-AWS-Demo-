@@ -54,7 +54,13 @@ const handleOnClick=(e)=>{
    if(srcname!=='' && destname!=='' && date !==''){
    updateSearch(srcname,destname,date)
   setlocalsearchDetails({srcname:'',destname:'',date:''})
+  if(localStorage.getItem('token')){
    navigate('/buses')
+  }
+  else {
+    alert('Please login before accessing')
+    navigate('/login')
+  }
    }
    else {
     alert('Fill the inputs')
