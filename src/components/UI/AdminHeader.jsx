@@ -30,7 +30,7 @@ const Header = () => {
           <p className="header-welcome">Welcome, Admin</p>
           <div className="header-description">
             <p>
-              This is a place for Admin to control users and send announcements
+              This is a place for Admin to control users,Manage agents and send announcements
             </p>
           </div>
         </div>

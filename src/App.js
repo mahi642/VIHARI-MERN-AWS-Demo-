@@ -53,7 +53,7 @@ function App() {
           <Route exact  path='/buses' element={<BusList/>}/>
           <Route exact path='/agentSignUp' element={<AgentSignUp/>}/>
           <Route exact  path='/passengers' element={<PassengerDetails/>}/>
-
+           
               <Route exact path="/agent/allbuses" element={<AllBuses />} />
               <Route exact path="/admindb/allusers" element={<AllUsers />} />
               <Route exact path="/agent/alltours" element={<AllTours />} />
