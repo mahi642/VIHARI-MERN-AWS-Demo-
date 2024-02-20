@@ -35,6 +35,7 @@ import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import AdminAnnouncementForm from './pages/Announcements';
 import AdminHome from './pages/AdminHome';
+import AgentHome from './pages/AgentHome';
 import AgentSignUp from './pages/AgentSignUp';
 import AllAgents from './pages/AllAgents';
 
@@ -97,6 +98,7 @@ function App() {
           <Route exact path="/admindb/editbus/:id" element={ <EditBus/>}/>
           <Route exact path='/about' element={<About/>}/>
           <Route exact path='/admindb/adminhome' element={<AdminHome/>}/>
+          <Route exact path='/agent/agenthome' element={<AgentHome/>}/>
           <Route exact path="/admindb/edittour/:id" element={ <EditTour/>}/>
           <Route exact path="/admindb/opentour/:id" element={ <TourDetails/>}/>
           <Route exact path='/admindb/booktour/:id' element={ <BookTour/>}/>
