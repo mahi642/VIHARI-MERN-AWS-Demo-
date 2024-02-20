@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 import '../components/CSS/Login.css'
+import Navbar from '../components/UI/Navbar'
 import Footer from '../components/UI/Footer'
 import { useNavigate } from 'react-router-dom'
 import userContext from '../context/User/userContext'
@@ -16,10 +17,10 @@ const Login = () => {
 		const response = await verifyUser(loginCreds.email, loginCreds.password)
 		if (response.success) {
 			localStorage.token = response.authToken
-			if(response.user.email === 'vihari.t05@gmail.com'){
+			if (response.user.email === 'vihari.t05@gmail.com') {
 				navigate('/admindb/adminhome')
 			}
-			else{
+			else {
 				navigate('/')
 			}
 		}
@@ -56,6 +57,7 @@ const Login = () => {
 	}
 	return (
 		<>
+			<Navbar />
 			<div className="login-body">
 				<div className="main">
 					<input className='login-input' type="checkbox" id="chk" aria-hidden="true" />

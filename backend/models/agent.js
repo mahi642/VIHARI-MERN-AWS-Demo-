@@ -2,14 +2,19 @@ const mongoose = require("mongoose");
 
 const agentSchema = new mongoose.Schema(
     {
-        AgentName: {
+        agentName: {
+            type: "string",
             required: true,
         },
         password:{
+            type: "string",
             required:true,
         },
         email:{
-            required:true,
+            type: String,
+            required: true,
+            trim: true,
+            unique: true
         },
         buses: [
             {
@@ -17,6 +22,16 @@ const agentSchema = new mongoose.Schema(
               ref:"Bus"
             }
         ],
+        flag: {
+            type: Number,
+            default: 0,
+          },
+          blocked: {
+            type: Boolean,
+            default: false
+        }
+        
+
     },
     { timestamps: true }
 );

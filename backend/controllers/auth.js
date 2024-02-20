@@ -2,6 +2,11 @@ const bcrypt = require('bcryptjs')
 const User = require('../models/user')
 const JWT = require("jsonwebtoken")
 const JWT_SECRET = "VihariTravelSite"
+<<<<<<< HEAD
+=======
+const Agent = require('../models/agent')
+
+>>>>>>> 069457dfb9057ad72b0429af49186ccd79d2f545
 module.exports.verifyUser =  async(req,res)=>{
 
     const {email,password} =req.body;
@@ -79,4 +84,67 @@ module.exports.createUser = async(req,res)=>{
         }
       })
   
+}
+
+module.exports.verifyAgent =  async(req,res)=>{
+
+  const {email,password} =req.body;
+  try {
+   let agent,success;
+  await Agent.findOne({email}).then((result)=>{
+    agent=result
+   })
+   if(agent==null){
+    return res.json({sucees:false,error:"Agent not found"})
+   }
+   const passCompare = await bcrypt.compare(password,agent.password);
+   if(!passCompare){
+    success=false
+    return res.json({success,error:"Invalid password"})
+   }
+   const data ={
+    agent:{
+      id:agent.id
+    }
+  }
+  const authToken = JWT.sign(data,JWT_SECRET);
+  res.json({success:true,authToken,agent})
+  } catch (error) {
+    console.log(error)
+    res.send("Internal server error");
+  }
+
+}
+
+module.exports.createAgent = async(req,res)=>{
+  await Agent.findOne({ email: req.body.email }).then(async user => {
+      if (user) {
+        return res.json({ error: "Email already exists!!" })
+      }
+      else {
+       
+        // Hashing password
+        const salt = await bcrypt.genSalt(5);
+        const secPass = await bcrypt.hash(req.body.password,salt) 
+        
+        // Creating a user
+       await Agent.create({
+          agentName: req.body.agentName,
+          email: req.body.email,
+          password: secPass
+      }).then(agent => {
+
+        // Creating authToken for user
+
+        const authToken =JWT.sign(agent.id,JWT_SECRET)
+        res.json({success:true,authToken,agent})
+
+      }).catch((error) => {
+          console.log(error);
+          // sending errors
+          res.json({error:"Internal server error"});
+        })
+      }
+    })
+
 }

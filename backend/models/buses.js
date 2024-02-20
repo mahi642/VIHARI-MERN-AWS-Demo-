@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const busSchema = new mongoose.Schema({
+    agent: {
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'Agent'
+    },
     srcname: {
         type: String,
         required: true

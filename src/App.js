@@ -35,24 +35,24 @@ import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import AdminAnnouncementForm from './pages/Announcements';
 import AdminHome from './pages/AdminHome';
-import AgentHome from './pages/AgentHome';
 import AgentSignUp from './pages/AgentSignUp';
+import AllAgents from './pages/AllAgents';
 
 function App() {
   return (
     <div className="App">
       <BusState>
-        <UserState>
-          <Router>
-            <Routes>
-              <Route exact path="/" element={<Home />} />
-              <Route exact path="/login" element={<Login />} />
-              <Route exact path="/layout" element={<Layout />} />
-              <Route exact path="/tours" element={<Tours />} />
-              <Route exact path="/Gallery" element={<Gallery />} />
-              <Route exact path="/buses" element={<BusList />} />
-
-              <Route exact path="/passengers" element={<PassengerDetails />} />
+      <UserState>
+      <Router>
+        <Routes>
+          <Route exact path='/' element={ <Home/>}/>
+          <Route exact path='/login' element={ <Login/>}/>
+          <Route exact path='/layout' element={ <Layout/>}/>
+          <Route exact path='/tours' element={<Tours/>}/>
+          <Route exact path='/Gallery' element={<Gallery/>}/>
+          <Route exact  path='/buses' element={<BusList/>}/>
+          <Route exact path='/agentSignUp' element={<AgentSignUp/>}/>
+          <Route exact  path='/passengers' element={<PassengerDetails/>}/>
 
               <Route exact path="/agent/allbuses" element={<AllBuses />} />
               <Route exact path="/admindb/allusers" element={<AllUsers />} />
@@ -67,7 +67,6 @@ function App() {
               />
               <Route exact path="/admindb/editbus/:id" element={<EditBus />} />
               <Route exact path="/about" element={<About />} />
-              <Route exact path='/agent/agenthome' element={<AgentHome />} />
               <Route exact path="/admindb/adminhome" element={<AdminHome />} />
               <Route exact path="/admindb/edittour/:id" element={<EditTour />} />
               <Route exact path="/admindb/opentour/:id"
@@ -87,15 +86,26 @@ function App() {
                 element={<EditProfile />}
               />
 
-              <Route
-                exact
-                path="/admindb/announcements"
-                element={<AdminAnnouncementForm />}
-              />
-            </Routes>
-          </Router>
-        </UserState>
-      </BusState>
+          <Route exact path='/agent/allbuses' element={<AllBuses/>} />
+          <Route exact path='/admindb/allusers' element={<AllUsers/>} />
+          <Route exact path='/admindb/allagents' element={<AllAgents/>} />
+          <Route exact path='/agent/alltours' element={<AllTours/>}/>
+          <Route exact path='/agent/addbus' element={<AddBus/>}/>
+          <Route exact path='/admindb/adduser' element={<AddUser/>}/>
+          <Route exact path='/agent/addtour' element={<AddTour/>}/>
+          <Route exact path='/admindb/addplace/:id' element={<AddPlace/>}/>
+          <Route exact path="/admindb/editbus/:id" element={ <EditBus/>}/>
+          <Route exact path='/about' element={<About/>}/>
+          <Route exact path='/admindb/adminhome' element={<AdminHome/>}/>
+          <Route exact path="/admindb/edittour/:id" element={ <EditTour/>}/>
+          <Route exact path="/admindb/opentour/:id" element={ <TourDetails/>}/>
+          <Route exact path='/admindb/booktour/:id' element={ <BookTour/>}/>
+          <Route exact path='/contact' element={ <Contact/>}/>
+          <Route exact path='/admindb/announcements' element={ <AdminAnnouncementForm/> }/>
+        </Routes>
+    </Router>
+    </UserState>
+    </BusState>
     </div>
   );
 }
