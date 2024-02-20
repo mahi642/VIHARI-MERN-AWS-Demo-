@@ -9,7 +9,7 @@ router.post('/adduser', adminController.addUser);
 router.post('/announcements', adminController.postsendmail);
 router.delete('/deleteuser/:userId', adminController.deleteUser);
 router.put('/acceptagent/:agentId', adminController.acceptAgent);
-router.put('/rejectagent/:agentId', adminController.rejectAgent);
+router.delete('/rejectagent/:agentId', adminController.rejectAgent);
 router.put('/blockagent/:agentId', adminController.blockAgent); // Add this line
 router.put('/unblockagent/:agentId', adminController.unblockAgent);
 

@@ -8,5 +8,5 @@ router.get('/allbuses',agentController.getBuses);
 router.delete('/deletebus/:busId',agentController.deleteBus);
 router.get('/getbus/:busId',agentController.getBusDetails);
 router.put('/editbus/:busId',agentController.editBus);
-
+router.get('/agentbuses/:agentId',agentController.getAgentBuses);
 module.exports=router;

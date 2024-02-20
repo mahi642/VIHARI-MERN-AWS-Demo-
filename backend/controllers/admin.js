@@ -39,14 +39,13 @@ exports.postsendmail = async (req, res, next) => {
   }
 };
 
-
 exports.getAllUsers = async (req, res) => {
-    try {
-      const Users = await User.find({});
-      res.status(200).json({ users: Users });
-    } catch (error) {
-      res.status(500).json({ message: "Error while fetching users" });
-    }
+  try {
+    const Users = await User.find({});
+    res.status(200).json({ users: Users });
+  } catch (error) {
+    res.status(500).json({ message: "Error while fetching users" });
+  }
 };
 
 exports.getAllAgents = async (req, res) => {
@@ -67,6 +66,17 @@ exports.acceptAgent = async (req, res) => {
     }
     agent.flag = 1; // Update flag to 1 for accepted agent
     await agent.save();
+
+    // Send email to the agent
+    const mailOptions = {
+      from: "vihari.t05@gmail.com",
+      to: agent.email,
+      subject: "Agent Status Update",
+      text: "Congratulations! Your agent status has been accepted.",
+    };
+
+    await mailTransporter.sendMail(mailOptions);
+    
     res.status(200).json({ message: "Agent accepted successfully" });
   } catch (error) {
     console.error("Error accepting agent:", error);
@@ -74,103 +84,129 @@ exports.acceptAgent = async (req, res) => {
   }
 };
 
-exports.rejectAgent = async (req, res) => {
+exports.blockAgent = async (req, res) => {
   const agentId = req.params.agentId;
   try {
     const agent = await Agent.findById(agentId);
     if (!agent) {
-      return res.status(404).json({ message: "Agent not found" });
+      return res.status(404).json({ message: 'Agent not found' });
     }
-    agent.flag = 0; // Update flag to 0 for rejected agent
+    agent.blocked = true;
     await agent.save();
-    res.status(200).json({ message: "Agent rejected successfully" });
-  } catch (error) {
-    console.error("Error rejecting agent:", error);
-    res.status(500).json({ message: "Error rejecting agent" });
-  }
-};
 
-exports.blockAgent = async (req, res) => {
-  const agentId = req.params.agentId;
-  try {
-      const agent = await Agent.findById(agentId);
-      if (!agent) {
-          return res.status(404).json({ message: 'Agent not found' });
-      }
-      agent.blocked = true;
-      await agent.save();
-      res.status(200).json({ message: 'Agent blocked successfully' });
+    // Send email to the agent
+    const mailOptions = {
+      from: "vihari.t05@gmail.com",
+      to: agent.email,
+      subject: "Agent Status Update",
+      text: "Your agent account has been blocked.",
+    };
+
+    await mailTransporter.sendMail(mailOptions);
+    
+    res.status(200).json({ message: 'Agent blocked successfully' });
   } catch (error) {
-      console.error('Error blocking agent:', error);
-      res.status(500).json({ message: 'Error blocking agent' });
+    console.error('Error blocking agent:', error);
+    res.status(500).json({ message: 'Error blocking agent' });
   }
 };
 
 exports.unblockAgent = async (req, res) => {
   const agentId = req.params.agentId;
   try {
-      const agent = await Agent.findById(agentId);
-      if (!agent) {
-          return res.status(404).json({ message: 'Agent not found' });
-      }
-      agent.blocked = false;
-      await agent.save();
-      res.status(200).json({ message: 'Agent unblocked successfully' });
+    const agent = await Agent.findById(agentId);
+    if (!agent) {
+      return res.status(404).json({ message: 'Agent not found' });
+    }
+    agent.blocked = false;
+    await agent.save();
+
+    // Send email to the agent
+    const mailOptions = {
+      from: "vihari.t05@gmail.com",
+      to: agent.email,
+      subject: "Agent Status Update",
+      text: "Your agent account has been unblocked.",
+    };
+
+    await mailTransporter.sendMail(mailOptions);
+    
+    res.status(200).json({ message: 'Agent unblocked successfully' });
   } catch (error) {
-      console.error('Error unblocking agent:', error);
-      res.status(500).json({ message: 'Error unblocking agent' });
+    console.error('Error unblocking agent:', error);
+    res.status(500).json({ message: 'Error unblocking agent' });
+  }
+};
+
+exports.addUser = async (req, res) => {
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    confirmPassword,
+  } = req.body;
+  try {
+    
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" });
+    } 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new User({
+      firstName,
+      lastName,
+      email,
+      password: hashedPassword,
+      confirmPassword,
+    });
+
+    const result = await newUser.save();
+    res.status(201).json(result);
+  } catch (error) {
+    console.error("Error adding user:", error);
+    res.status(500).json({ message: "Adding User failed, please try again later." });
   }
 };
 
 
-  exports.addUser = async (req, res) => {
-      const {
-          firstName,
-          lastName,
-          email,
-          password,
-          confirmPassword,
-      } = req.body;
-      try {
-          
-          const existingUser = await User.findOne({ email });
-  
-          if (existingUser) {
-              return res.status(400).json({ message: "User already exists" });
-             
-          } 
-          const hashedPassword = await bcrypt.hash(password, 10);
- 
-          const newUser = new User({
-              firstName,
-              lastName,
-              email,
-              password: hashedPassword,
-              confirmPassword,
-          });
-  
+exports.deleteUser =  (req, res) => {
+  const userId=req.params.userId;
+  User.findByIdAndDelete(userId)
+   .then((deletedUser)=>{
+    if(!deletedUser){
+      return res.status(404).json({message: "User not found"});
+    }
+   }).then((user)=>{
+    res.status(200).json({message: "User deleted successfully  "});
+   })
+   .catch((error)=>{
+    res.status(500).json({message:"Internal server error"});
+   })
+};
 
-          const result = await newUser.save();
-          res.status(201).json(result);
-      } catch (error) {
-          console.error("Error adding user:", error);
-          res.status(500).json({ message: "Adding User failed, please try again later." });
-      }
-  };
-  
+exports.rejectAgent = async (req, res) => {
+  const agentId = req.params.agentId;
+  try {
+    const agent = await Agent.findByIdAndDelete(agentId);
+    if (!agent) {
+      return res.status(404).json({ message: "Agent not found" });
+    }
 
-  exports.deleteUser =  (req, res) => {
-    const userId=req.params.userId;
-     User.findByIdAndDelete(userId)
-     .then((deletedUser)=>{
-      if(!deletedUser){
-        return res.status(404).json({message: "User not found"});
-      }
-     }).then((user)=>{
-      res.status(200).json({message: "User deleted successfully  "});
-     })
-     .catch((error)=>{
-      res.status(500).json({message:"Internal server error"});
-     })
-  };
+    const mailOptions = {
+      from: "vihari.t05@gmail.com",
+      to: agent.email,
+      subject: "Agent Status Update",
+      text: "Your agent application has been rejected.",
+    };
 
+    await mailTransporter.sendMail(mailOptions);
+    
+    res.status(200).json({ message: "Agent rejected successfully" });
+  } catch (error) {
+    console.error("Error rejecting agent:", error);
+    res.status(500).json({ message: "Error rejecting agent" });
+  }
+};

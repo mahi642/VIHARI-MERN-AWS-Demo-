@@ -1,5 +1,5 @@
 const Bus = require("../models/buses");
-
+const Agent=require('../models/agent');
 exports.addBus = async (req, res) => {
   const {
     srcname,
@@ -10,6 +10,7 @@ exports.addBus = async (req, res) => {
     durtime,
     tktprice,
     btype,
+    agentId
   } = req.body;
   const BusImage = req.file;
   const Imageurl = BusImage.path;
@@ -24,8 +25,12 @@ exports.addBus = async (req, res) => {
       tktprice,
       btype,
       Imageurl,
+      agent: agentId,
     });
     const result = await newBus.save();
+    const agent =await Agent.findById(agentId);
+    agent.buses.push(result._id);
+    await agent.save();
     res.status(201).json(result);
   } catch (error) {
     console.error("Error adding bus:", error);
@@ -37,12 +42,26 @@ exports.addBus = async (req, res) => {
 
 exports.getBuses = async (req, res) => {
   try {
+
     const Buses = await Bus.find({});
     res.status(200).json({ buses: Buses });
   } catch (error) {
     res.status(500).json({ message: "Error while fetching buses" });
   }
 };
+
+exports.getAgentBuses = async (req, res) => {
+  try {
+    const agentId=req.params.agentId;
+    const agent = await Agent.findById(agentId).populate('buses');
+    const Buses=agent.buses;
+    console.log(Buses);
+    res.status(200).json({ buses: Buses });
+  } catch (error) {
+    res.status(500).json({ message: "Error while fetching buses" });
+  }
+};
+
 
 exports.deleteBus =  (req, res) => {
   const busId=req.params.busId;

@@ -44,6 +44,15 @@ export const agentApiSLice=apiSlice.injectEndpoints({
             invalidateTages:['Bus']
         }),
 
+        getAgentBuses: builder.query({
+            query: (agentId) => ({
+              url: `${AGENT_URL}/agentbuses/${agentId}`
+            }),
+            providesTags: ['Bus'],
+            keepUnusedDataFor: 5,
+          }),
+          
+
     })
 });
 
@@ -52,5 +61,6 @@ export const {
     useGetAllBusesQuery,
     useDeleteBusMutation,
     useGetBusQuery,
-    useEditBusDetailsMutation
+    useEditBusDetailsMutation,
+    useGetAgentBusesQuery
 } = agentApiSLice;

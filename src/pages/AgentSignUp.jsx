@@ -22,7 +22,7 @@ const AgentSignUp = () => {
 			const response = await createAgent(agentName, email, password)
 			if (response.success) {
 				localStorage.token = response.authToken
-				navigate('/')
+				navigate('/agentLogin')
 			}
 			else {
 				if (response.error) {
@@ -33,7 +33,8 @@ const AgentSignUp = () => {
 		}
 	}
   return (
-     
+    <>
+  
     <div className="login-body">
       <div className="main">
         <div className="signup">
@@ -83,6 +84,7 @@ const AgentSignUp = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

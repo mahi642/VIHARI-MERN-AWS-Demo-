@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs')
 const User = require('../models/user')
 const JWT = require("jsonwebtoken")
 const JWT_SECRET = "VihariTravelSite"
-const Agent = require('../models/agent')
+const Agent = require('../models/agent');
 
 module.exports.verifyUser =  async(req,res)=>{
 
@@ -60,13 +60,15 @@ module.exports.createUser = async(req,res)=>{
           const salt = await bcrypt.genSalt(5);
           const secPass = await bcrypt.hash(req.body.password,salt) 
           
-          // Creating a user
          await User.create({
             firstName: req.body.firstName,
             lastName:req.body.lastName,
             email: req.body.email,
             mobile:req.body.mobile,
             password: secPass
+        }).then(user => {
+
+          const authToken =JWT.sign(user.id,JWT_SECRET)
         }).then(async user => {
 
           // Creating authToken for user
@@ -80,7 +82,6 @@ module.exports.createUser = async(req,res)=>{
   
         }).catch((error) => {
             console.log(error);
-            // sending errors
             res.json({error:"Internal server error"});
           })
         }
@@ -88,35 +89,43 @@ module.exports.createUser = async(req,res)=>{
   
 }
 
-module.exports.verifyAgent =  async(req,res)=>{
-
-  const {email,password} =req.body;
+module.exports.verifyAgent = async (req, res) => {
+  const { email, password } = req.body;
   try {
-   let agent,success;
-  await Agent.findOne({email}).then((result)=>{
-    agent=result
-   })
-   if(agent==null){
-    return res.json({sucees:false,error:"Agent not found"})
-   }
-   const passCompare = await bcrypt.compare(password,agent.password);
-   if(!passCompare){
-    success=false
-    return res.json({success,error:"Invalid password"})
-   }
-   const data ={
-    agent:{
-      id:agent.id
+    let agent, success;
+    await Agent.findOne({ email }).then((result) => {
+      agent = result;
+    });
+
+    if (agent == null) {
+      return res.json({ success: false, error: "Agent not found" });
     }
-  }
-  const authToken = JWT.sign(data,JWT_SECRET);
-  res.json({success:true,authToken,agent})
+
+    const passCompare = await bcrypt.compare(password, agent.password);
+    if (!passCompare) {
+      success = false;
+      return res.json({ success, error: "Invalid password" });
+    }
+
+    if (agent.flag !== 1 || agent.blocked) {
+      return res.json({ success: false, error: "Agent is not authorized to log in" });
+    }
+
+    const data = {
+      agent: {
+        id: agent.id,
+      },
+    };
+
+    const agentId=agent._id;
+
+    const authToken = JWT.sign(data, JWT_SECRET);
+    res.json({ success: true, authToken, agent,agentId });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.send("Internal server error");
   }
-
-}
+};
 
 module.exports.createAgent = async(req,res)=>{
   await Agent.findOne({ email: req.body.email }).then(async user => {

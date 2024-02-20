@@ -5,6 +5,10 @@ import { useAddBusDetailsMutation } from "../Slices/agentApiSlice";
 const AddBus = () => {
   const navigate = useNavigate();
   const [addBus] = useAddBusDetailsMutation();
+  const getUserId=()=>{
+    const agentId=localStorage.getItem('agentId');
+    return agentId;
+  }
   const [formData, setFormData] = useState({
     srcname: "",
     destname: "",
@@ -15,6 +19,7 @@ const AddBus = () => {
     tktprice: "",
     btype: "",
     image: null,
+    agentId:getUserId(),
   });
 
   const handleInputChange = (e) => {
@@ -49,13 +54,14 @@ const AddBus = () => {
       formDataToSend.append("tktprice", formData.tktprice);
       formDataToSend.append("btype", formData.btype);
       formDataToSend.append("image", formData.image);
+      formDataToSend.append("agentId", formData.agentId);
 
 
       await addBus(formDataToSend).unwrap();
 
 
       alert("Bus added successfully");
-      navigate('/admindb/allbuses');
+      navigate('/agent/allbuses');
     } catch (error) {
       console.error("Error adding bus:", error);
     }

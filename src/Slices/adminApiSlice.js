@@ -50,10 +50,11 @@ export const adminApiSlice = apiSlice.injectEndpoints({
         rejectAgent: builder.mutation({
             query: (agentId) => ({
                 url: `${ADMIN_URL}/rejectagent/${agentId}`,
-                method: 'PUT',
+                method: 'DELETE',
             }),
-            invalidatesTags: ['Agent']
+            invalidatesTags: ['Agent'],
         }),
+        
         blockAgent: builder.mutation({
             query: (agentId) => ({
                 url: `${ADMIN_URL}/blockagent/${agentId}`,
