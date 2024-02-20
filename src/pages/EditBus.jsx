@@ -69,7 +69,7 @@ const EditBus = () => {
       }).unwrap();
       
       alert("Bus updated successfully");
-      navigate('/admindb/allbuses');
+      navigate('/agent/allbuses');
     } catch (error) {
       console.error("Error updating bus:", error);
     }

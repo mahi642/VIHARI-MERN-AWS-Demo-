@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import UserAvatar from '../Assets/User_avatar.jpg';
 import { Link } from 'react-router-dom';
-import AdminNavbar1 from '../components/UI/AdminNavbar';
+import AdminNavbar from '../components/UI/AdminNavbar';
 import { useGetAllAgentsQuery, useAcceptAgentMutation, useRejectAgentMutation, useBlockAgentMutation, useUnblockAgentMutation } from "../Slices/adminApiSlice";
 import Loader from '../components/Loader/Loader';
 
@@ -117,7 +117,7 @@ const AllAgents = () => {
 
     return (
         <div>
-            <AdminNavbar1 />
+            <AdminNavbar />
             <div>
                 <h1>Agent Details</h1>
             </div>

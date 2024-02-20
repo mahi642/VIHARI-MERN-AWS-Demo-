@@ -55,7 +55,7 @@ const AddBus = () => {
 
 
       alert("Bus added successfully");
-      navigate('/admindb/allbuses');
+      navigate('/agent/allbuses');
     } catch (error) {
       console.error("Error adding bus:", error);
     }
