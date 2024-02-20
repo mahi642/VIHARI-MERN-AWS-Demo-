@@ -31,18 +31,18 @@ const Login = () => {
 		}
 		setloginCreds({ email: '', password: '' })
 	}
-	const [SignupCreds, setSignupCreds] = useState({ fname: '', lname: '', email: '', password: '', cpassword: '' })
+	const [SignupCreds, setSignupCreds] = useState({ fname: '', lname: '', email: '',mobile:'', password: '', cpassword: '' })
 	const onSignupInput = (e) => {
 		setSignupCreds({ ...SignupCreds, [e.target.name]: e.target.value })
 	}
 	const HandleSignup = async (e) => {
 		e.preventDefault()
-		const { fname, lname, email, password, cpassword } = SignupCreds
+		const { fname, lname, email, password, cpassword, mobile} = SignupCreds
 		if (password !== cpassword) {
 			alert('Password mismatch')
 		}
 		else {
-			const response = await createUser(fname, lname, email, password)
+			const response = await createUser(fname, lname, email, mobile, password)
 			if (response.success) {
 				localStorage.token = response.authToken
 				navigate('/')
@@ -52,7 +52,7 @@ const Login = () => {
 					alert(response.error)
 				}
 			}
-			setSignupCreds({ name: '', lname: '', email: '', password: '' })
+			setSignupCreds({ fname: '', lname: '', email: '',mobile:'', password: '', cpassword: ''})
 		}
 	}
 	return (
@@ -64,8 +64,9 @@ const Login = () => {
 					<div className="signup">
 						<form>
 							<label htmlFor="chk" className='login-label' aria-hidden="true">Sign up</label>
-							<input className='signup-input' type="text" name="fname" onChange={onSignupInput} value={SignupCreds.fname} placeholder="First name" required="" />
+							<input className='signup-input' type="text" name="fname" onChange={onSignupInput} value={SignupCreds.fname} placeholder="First name" required=""/>
 							<input className='signup-input' type="text" name="lname" onChange={onSignupInput} value={SignupCreds.lname} placeholder="Last name" required="" />
+							<input className='signup-input' type="text" name="mobile" onChange={onSignupInput} value={SignupCreds.mobile} placeholder="Phone" required="" minLength={10} maxLength={10}/>
 							<input className='signup-input' type="email" name="email" onChange={onSignupInput} value={SignupCreds.email} placeholder="Email" required="" />
 							<input className='signup-input' type="password" name="password" onChange={onSignupInput} value={SignupCreds.password} placeholder="Password" required="" />
 							<input className='signup-input' type="password" name="cpassword" onChange={onSignupInput} value={SignupCreds.cpassword} placeholder="Confirm Password" required="" />

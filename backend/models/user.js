@@ -19,10 +19,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required:true
     },
-    tickets: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Ticket'
-    }],
+    mobile:{
+      type: String,
+      required:true
+    }
 },
 {timestamps: true}
 );

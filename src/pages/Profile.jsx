@@ -18,7 +18,6 @@ const Profile = () => {
       }
     })
     const json = await response.json();
-    console.log(json.user)
    setuser(json.user)
   }
   useEffect(()=>{
@@ -74,11 +73,11 @@ const Profile = () => {
               <div className="nameAndGender">
                 <div>
                   <h2>Email</h2>
-                  <h3>{user.email}</h3>
+                  <h3 style={{textDecoration:""}}>{user.email}</h3>
                 </div>
                 <div>
                   <h2>Mobile Number</h2>
-                  <h3>9555555559</h3>
+                  <h3>{user.mobile}</h3>
                 </div>
               </div>
 

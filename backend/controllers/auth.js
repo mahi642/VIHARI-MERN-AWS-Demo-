@@ -2,11 +2,8 @@ const bcrypt = require('bcryptjs')
 const User = require('../models/user')
 const JWT = require("jsonwebtoken")
 const JWT_SECRET = "VihariTravelSite"
-<<<<<<< HEAD
-=======
 const Agent = require('../models/agent')
 
->>>>>>> 069457dfb9057ad72b0429af49186ccd79d2f545
 module.exports.verifyUser =  async(req,res)=>{
 
     const {email,password} =req.body;
@@ -68,12 +65,17 @@ module.exports.createUser = async(req,res)=>{
             firstName: req.body.firstName,
             lastName:req.body.lastName,
             email: req.body.email,
+            mobile:req.body.mobile,
             password: secPass
-        }).then(user => {
+        }).then(async user => {
 
           // Creating authToken for user
-  
-          const authToken =JWT.sign(user.id,JWT_SECRET)
+          const data ={
+            user:{
+              id:user.id
+            }
+          }
+          const authToken = await JWT.sign(data,JWT_SECRET)
           res.json({success:true,authToken,user})
   
         }).catch((error) => {

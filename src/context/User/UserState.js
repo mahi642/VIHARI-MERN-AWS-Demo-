@@ -23,8 +23,7 @@ const UserState = (props) => {
 		  return response
        }
 
-  const createUser = async(firstName,lastName,email,password)=>{
-  
+  const createUser = async(firstName,lastName,email,mobile,password)=>{
       // Creating user with api call 
       const res = await fetch(`${host}/signup`,{
         method:"POST",
@@ -35,6 +34,7 @@ const UserState = (props) => {
           firstName,
           lastName,
           email,
+          mobile,
           password
         })
         })

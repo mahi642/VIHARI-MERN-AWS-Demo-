@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import UserAvatar from '../Assets/User_avatar.jpg';
 import { Link } from 'react-router-dom';
-import AdminNavbar1 from "../components/UI/AdminNavbar1";
+import AdminNavbar1 from "../components/UI/AdminNavbar";
 import { useGetAllAgentsQuery, useAcceptAgentMutation, useRejectAgentMutation, useBlockAgentMutation, useUnblockAgentMutation } from "../Slices/adminApiSlice";
 import Loader from '../components/Loader/Loader';
 
