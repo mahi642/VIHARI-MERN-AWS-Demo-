@@ -55,7 +55,6 @@ const UserState = (props) => {
     body:JSON.stringify({email,password})
     })
 
-    // Returning response that contains unique token generated for the user
     const response =await res.json()
     return response
      }
