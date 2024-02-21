@@ -1,3 +1,4 @@
+const Bus = require('../models/buses');
 const bus = require('../models/buses')
 const Ticket = require('../models/ticket')
 
@@ -23,4 +24,15 @@ module.exports.booking = async(req,res)=>{
       res.json({success:false,error:'Internal error'})
    }
 
+}
+module.exports.getBusDetails = async(req,res)=>{
+   try {
+      const {id} = req.body;
+      const bus = await Bus.findById(id);
+      res.json({success:true,bus:bus});  
+   } catch (error) {
+      console.log(error)
+      res.json({success:false,error:error})
+   }
+   
 } 

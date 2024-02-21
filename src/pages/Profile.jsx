@@ -11,9 +11,8 @@ const Profile = () => {
   const navigate = useNavigate();
   const [user, setuser] = useState({})
   const [history, sethistory] = useState(false)
-  const [bookings, setbookings] = useState([
-
-  ])
+  const [bookings, setbookings] = useState([])
+  const [buses, setbuses] = useState([])
   const getDetails = async()=>{
     const response = await fetch('http://localhost:4000/userdetails',{
       method:"POST",
@@ -33,6 +32,10 @@ const Profile = () => {
     })
     const data = await response.json();
     setbookings(data.tickets)
+    data.tickets.forEach(async booking=>{
+      const bus = await getBusDetails(booking.bus)
+      setbuses([...buses,bus])
+    })
   }
   useEffect(()=>{
     getDetails()
@@ -42,7 +45,7 @@ const Profile = () => {
     e.preventDefault();
     navigate("/profile/editUserProfile");
   };
- const getBusDetails = async(id)=>{
+  const getBusDetails = async(id)=>{
   const response = await fetch("http://localhost:4000/busdetails",{
     method:"POST",
     headers:{
@@ -51,7 +54,7 @@ const Profile = () => {
     body:JSON.stringify({id})
   })
   const json = await response.json();
-  return json.Imageurl
+  return json.bus
  } 
   return (
     <>
@@ -122,14 +125,14 @@ const Profile = () => {
             <th scope="col">DOJ</th>
             </tr>
           </thead>
+          
           <tbody>
-            {bookings.map(booking=>{
-              const bus = getBusDetails(booking.bus)
-            return  <tr>
-                <td><img src="bus1.png" alt={"Images/2c49814340c6b960c44a5c6296bdccd0"} style={{height:'60px'}}/></td>
-                <td>{booking.bus}</td>
+            {bookings.map((booking,index)=>{
+            return <tr>
+                <td><img src="bus1.png" alt=""  style={{height:'60px'}}/></td>
+                <td>{buses[index].tktprice}</td>
                 <td>{booking.tickets.length}</td>
-                <td>{booking.tickets.length}</td>
+                <td>{booking.tickets.length * buses[index].tktprice}</td>
                 <td>{booking.date}</td>
               </tr> 
             })}

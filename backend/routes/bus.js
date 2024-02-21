@@ -4,4 +4,5 @@ const busController = require('../controllers/bus')
 const fetchUser = require('../middleware/fetchUser')
 router.post('/buslist',busController.busList);
 router.post('/booking',fetchUser,busController.booking)
+router.post('/busdetails',busController.getBusDetails)
 module.exports = router;
