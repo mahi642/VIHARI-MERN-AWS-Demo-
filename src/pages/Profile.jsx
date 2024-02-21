@@ -11,6 +11,9 @@ const Profile = () => {
   const navigate = useNavigate();
   const [user, setuser] = useState({})
   const [history, sethistory] = useState(false)
+  const [bookings, setbookings] = useState([
+
+  ])
   const getDetails = async()=>{
     const response = await fetch('http://localhost:4000/userdetails',{
       method:"POST",
@@ -29,7 +32,7 @@ const Profile = () => {
       }
     })
     const data = await response.json();
-    console.log(data)
+    setbookings(data.tickets)
   }
   useEffect(()=>{
     getDetails()
@@ -39,11 +42,21 @@ const Profile = () => {
     e.preventDefault();
     navigate("/profile/editUserProfile");
   };
-  
+ const getBusDetails = async(id)=>{
+  const response = await fetch("http://localhost:4000/busdetails",{
+    method:"POST",
+    headers:{
+      "Content-type":"application/json"
+    },
+    body:JSON.stringify({id})
+  })
+  const json = await response.json();
+  return json.Imageurl
+ } 
   return (
     <>
       <Navbar />
-    {!history && <div className="profile">
+    <div className="profile">
       <div className="leftdiv">
         <div style={{ marginBottom: "4rem" }} className="profile-items">
           <img className="profile-icons" src={profileImage} alt="profile" />
@@ -63,8 +76,7 @@ const Profile = () => {
 
       <div className="rightdiv">
         <h1>My Profile</h1>
-
-        <div className="profile-details">
+{ !history && <div className="profile-details">
           <div className="nameAndGender">
             <div>
               <h2>Name</h2>
@@ -98,13 +110,36 @@ const Profile = () => {
               Edit Info{" "}
             </button>
           </div>
-        </div>
-      </div>
-    </div>}
-    {history && <div>
-      
-      
+        </div>}
+        {history && <div className="profile-details">
+        <table className="table" style={{fontSize:'20px',padding:'10px'}}>
+          <thead >
+            <tr >
+            <th scope="col">Bus</th>
+            <th scope="col">cost</th>
+            <th scope="col">seats</th>
+            <th scope="col">fare</th>
+            <th scope="col">DOJ</th>
+            </tr>
+          </thead>
+          <tbody>
+            {bookings.map(booking=>{
+              const bus = getBusDetails(booking.bus)
+            return  <tr>
+                <td><img src="bus1.png" alt={"Images/2c49814340c6b960c44a5c6296bdccd0"} style={{height:'60px'}}/></td>
+                <td>{booking.bus}</td>
+                <td>{booking.tickets.length}</td>
+                <td>{booking.tickets.length}</td>
+                <td>{booking.date}</td>
+              </tr> 
+            })}
+            </tbody>
+        </table>
+        
       </div>}
+      </div>
+    </div>
+  
     <Footer/>
     </>
   );
