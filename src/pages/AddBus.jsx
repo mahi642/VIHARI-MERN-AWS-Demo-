@@ -5,6 +5,10 @@ import { useAddBusDetailsMutation } from "../Slices/agentApiSlice";
 const AddBus = () => {
   const navigate = useNavigate();
   const [addBus] = useAddBusDetailsMutation();
+  const getUserId=()=>{
+    const agentId=localStorage.getItem('agentId');
+    return agentId;
+  }
   const [formData, setFormData] = useState({
     srcname: "",
     destname: "",
@@ -14,7 +18,8 @@ const AddBus = () => {
     durtime: "",
     tktprice: "",
     btype: "",
-    image: null, 
+    image: null,
+    agentId:getUserId(),
   });
 
   const handleInputChange = (e) => {
@@ -36,9 +41,9 @@ const AddBus = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
-    
+
       const formDataToSend = new FormData();
       formDataToSend.append("srcname", formData.srcname);
       formDataToSend.append("destname", formData.destname);
@@ -48,14 +53,15 @@ const AddBus = () => {
       formDataToSend.append("durtime", formData.durtime);
       formDataToSend.append("tktprice", formData.tktprice);
       formDataToSend.append("btype", formData.btype);
-      formDataToSend.append("image", formData.image); 
+      formDataToSend.append("image", formData.image);
+      formDataToSend.append("agentId", formData.agentId);
 
-    
+
       await addBus(formDataToSend).unwrap();
-      
-    
+
+
       alert("Bus added successfully");
-      navigate('/admindb/allbuses');
+      navigate('/agent/allbuses');
     } catch (error) {
       console.error("Error adding bus:", error);
     }
@@ -69,8 +75,8 @@ const AddBus = () => {
             <form onSubmit={handleSubmit}>
               <div className="row ">
                 <div className="">
-                  <h1 style={{ color: 'white', marginTop: '50px', fontSize: '30px' }}>Add Bus</h1>
-                  <div className="row login-row" style={{ marginTop: '50px', display: 'flex', flexDirection: 'column', marginLeft: '100px', width: '450px' }}>
+                  <h1 style={{ color: 'white', marginTop: '30px', fontSize: '30px' }}>Add Bus</h1>
+                  <div className="row login-row" style={{ marginTop: '20px', display: 'flex', flexDirection: 'column', marginLeft: '100px', width: '450px' }}>
 
                     {/* Source Name */}
                     <div className="col-md-6">
@@ -250,23 +256,24 @@ const AddBus = () => {
                         </div>
                       </div>
                     </div>
+                    <div className="col-md-6">
+                      <div className="input-group mb-3 user">
+                        <span className="input-group-text span">
+                          <i className="fa fa-image" aria-hidden="true"></i>
+                        </span>
+                        <div className="form-floating">
+                          <input
+                            type="file"
+                            className="form-control inputs"
+                            name="image"
+                            onChange={handleImageChange}
+                          />
+
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="col-md-6">
-                <div className="input-group mb-3 user">
-                  <span className="input-group-text span">
-                    <i className="fa fa-image" aria-hidden="true"></i>
-                  </span>
-                  <div className="form-floating">
-                    <input
-                      type="file"
-                      className="form-control inputs"
-                      name="image"
-                      onChange={handleImageChange}
-                    />
-                    
-                  </div>
-                </div>
-              </div>
+
                   <input
                     type="submit"
                     value="ADD BUS"

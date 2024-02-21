@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors =require('cors')
-
+const path=require('path');
 const app = express()
 app.use(express.json())
 
@@ -21,7 +21,8 @@ app.get('/',(req,res)=>{
   res.send("Hello World!")
 })
 
-app.use('/uploads',express.static(__dirname+'/uploads'));
+// app.use('/uploads',express.static(__dirname+'/uploads'));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/images',express.static(__dirname+'/public/Images'));
 
 

@@ -6,10 +6,12 @@ import BusNav from './BusNav';
 import useRazorpay from "react-razorpay";
 import { useNavigate } from 'react-router-dom';
 import Bus from '../../Assets/city bus.gif'
+import userContext from '../../context/User/userContext';
 
 const PassengerDetails = () => {
  const [Razorpay] = useRazorpay()
-  const { selectedSeats,orderRazorpay } = useContext(busContext);
+  const { setselectedseats,selectedSeats,orderRazorpay } = useContext(busContext);
+  const {searchDetails} = useContext(userContext)
   const navigate = useNavigate()
   // Initialize forms for each selected seat
   const initialFormsData = selectedSeats.seats.reduce((acc, seat) => {
@@ -42,25 +44,41 @@ const PassengerDetails = () => {
     }));
   };
 
-
+  const bookSeats = async()=>{
+    const data = selectedSeats.seats.map(seat => ({seat:seat,...formsData[seat]}));
+    alert('payment successfull')
+    const response = await fetch('http://localhost:4000/booking',{
+      method:'POST',
+      headers:{
+        "Content-type":"application/json",
+        "auth-token":localStorage.getItem('token')
+      },
+      body:JSON.stringify({bus:selectedSeats.bus,seats:data,date:searchDetails.date})
+    })
+    const json = await response.json();
+    if(json.success){
+      alert("Booking successful");
+      navigate('/')
+    }
+    else {
+      alert("Booking failed ! Your amount will return to your account in 3-5 hours")
+      navigate('/')
+    }
+  }
 
   const handlePayNow = async() => {
+   
     console.log('Payment logic goes here');
-   let order = await orderRazorpay(selectedSeats.seats.length * selectedSeats.bus.fare)
-   console.log(order)
+   let order = await orderRazorpay(selectedSeats.seats.length * selectedSeats.bus.tktprice)
    const options = {
-    key: "rzp_test_4R2LUNV53xXIN1", // Enter the Key ID generated from the Dashboard
-    amount: selectedSeats.seats.length * selectedSeats.bus.fare * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    key: "rzp_test_lQaiC5AbagJXwZ", // Enter the Key ID generated from the Dashboard
+    amount: selectedSeats.seats.length * selectedSeats.bus.tktprice * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
     currency: "INR",
     name: "Vihari",
     description: "A travel-site",
     order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of createOrder().
-    handler: function (response) {
-      // alert(response.razorpay_payment_id);
-      // alert(response.razorpay_order_id);
-      // alert(response.razorpay_signature);
-      alert('payment successfull')
-      navigate('/')
+    handler: ()=>{
+      bookSeats()
     },
     prefill: {
       name:'Nithin' ,
@@ -76,15 +94,38 @@ const PassengerDetails = () => {
   };
 
   const rzp1 = new Razorpay(options);
-
+  rzp1.on("payment.success",async(res)=>{
+    const data = selectedSeats.seats.map(seat => ({seat:seat,...formsData[seat]}));
+    setselectedseats({...selectedSeats,seats:data})
+    alert('payment successfull')
+    const response = await fetch('http://localhost:4000/booking',{
+      method:'POST',
+      headers:{
+        "Content-type":"application/json",
+        "auth-token":localStorage.getItem('token')
+      },
+      body:JSON.stringify({bus:selectedSeats.bus,seats:data,date:searchDetails.date})
+    })
+    const json = await response.json();
+    if(json.success){
+      alert("Booking successful");
+      navigate('/')
+    }
+    else {
+      alert("Booking failed ! Your amount will return to your account in 3-5 hours")
+      navigate('/')
+    }
+  })
   rzp1.on("payment.failed", function (response) {
-    alert(response.error.code);
-    alert(response.error.description);
-    alert(response.error.source);
-    alert(response.error.step);
-    alert(response.error.reason);
-    alert(response.error.metadata.order_id);
-    alert(response.error.metadata.payment_id);
+    // alert(response.error.code);
+    // alert(response.error.description);
+    // alert(response.error.source);
+    // alert(response.error.step);
+    // alert(response.error.reason);
+    // alert(response.error.metadata.order_id);
+    // alert(response.error.metadata.payment_id);
+    alert('payment failed')
+    navigate('/')
   });
 
   rzp1.open();

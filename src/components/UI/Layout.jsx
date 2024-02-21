@@ -48,8 +48,8 @@ const Layout = ({bus}) => {
           <label htmlFor="1D">Occupied</label>
         </li>
         <li className="seat my-2 mx-3">
-          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="1E" />
-          <label htmlFor="1E">1E</label>
+          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="1D" />
+          <label htmlFor="1D">1D</label>
         </li>
       </ol>
     </li>
@@ -67,12 +67,12 @@ const Layout = ({bus}) => {
 
         </li>
         <li className="seat my-2 mx-3">
-          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="2D" />
-          <label htmlFor="2D">2D</label>
+          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="2C" />
+          <label htmlFor="2C">2C</label>
         </li>
         <li className="seat my-2 mx-3">
-          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="2E" />
-          <label htmlFor="2E">2E</label>
+          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="2D" />
+          <label htmlFor="2D">2D</label>
         </li>
       </ol>
     </li>
@@ -90,12 +90,12 @@ const Layout = ({bus}) => {
 
         </li>
         <li className="seat my-2 mx-3">
-          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="3D" />
-          <label htmlFor="3D">3D</label>
+          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="3C" />
+          <label htmlFor="3C">3C</label>
         </li>
         <li className="seat my-2 mx-3">
-          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="3E" />
-          <label htmlFor="3E">3E</label>
+          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="3D" />
+          <label htmlFor="3D">3D</label>
         </li>
 
       </ol>
@@ -114,12 +114,12 @@ const Layout = ({bus}) => {
 
         </li>
         <li className="seat my-2 mx-3">
-          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="4D" />
-          <label htmlFor="4D">4D</label>
+          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="4C" />
+          <label htmlFor="4C">4C</label>
         </li>
         <li className="seat my-2 mx-3">
-          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="4E" />
-          <label htmlFor="4E">4E</label>
+          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="4D" />
+          <label htmlFor="4D">4D</label>
         </li>
       </ol>
     </li>
@@ -137,12 +137,12 @@ const Layout = ({bus}) => {
 
         </li>
         <li className="seat my-2 mx-3">
-          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="5D" />
-          <label htmlFor="5D">5D</label>
+          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="5C" />
+          <label htmlFor="5C">5C</label>
         </li>
         <li className="seat my-2 mx-3">
-          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="5E" />
-          <label htmlFor="5E">5E</label>
+          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="5D" />
+          <label htmlFor="5D">5D</label>
         </li>
 
       </ol>
@@ -161,12 +161,12 @@ const Layout = ({bus}) => {
 
         </li>
         <li className="seat my-2 mx-3">
-          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="6D" />
-          <label htmlFor="6D">6D</label>
+          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="6C" />
+          <label htmlFor="6C">6C</label>
         </li>
         <li className="seat my-2 mx-3">
-          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="6E" />
-          <label htmlFor="6E">6E</label>
+          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="6D" />
+          <label htmlFor="6D">6D</label>
         </li>
 
       </ol>
@@ -185,12 +185,12 @@ const Layout = ({bus}) => {
 
         </li>
         <li className="seat my-2 mx-3">
-          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="7D" />
-          <label htmlFor="7D">7D</label>
+          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="7C" />
+          <label htmlFor="7C">7C</label>
         </li>
         <li className="seat my-2 mx-3">
-          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="7E" />
-          <label htmlFor="7E">7E</label>
+          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="7D" />
+          <label htmlFor="7D">7D</label>
         </li>
 
       </ol>
@@ -209,12 +209,12 @@ const Layout = ({bus}) => {
 
         </li>
         <li className="seat my-2 mx-3">
-          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="8D" />
-          <label htmlFor="8D">8D</label>
+          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="8C" />
+          <label htmlFor="8C">8C</label>
         </li>
         <li className="seat my-2 mx-3">
-          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="8E" />
-          <label htmlFor="8E">8E</label>
+          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="8D" />
+          <label htmlFor="8D">8D</label>
         </li>
 
       </ol>
@@ -233,12 +233,12 @@ const Layout = ({bus}) => {
 
         </li>
         <li className="seat my-2 mx-3">
-          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="9D" />
-          <label htmlFor="9D">9D</label>
+          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="9C" />
+          <label htmlFor="9C">9C</label>
         </li>
         <li className="seat my-2 mx-3">
-          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="9E" />
-          <label htmlFor="9E">9E</label>
+          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="9D" />
+          <label htmlFor="9D">9D</label>
         </li>
 
       </ol>
@@ -257,12 +257,12 @@ const Layout = ({bus}) => {
 
         </li>
         <li className="seat my-2 mx-3">
-          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="10D" />
-          <label htmlFor="10D">10D</label>
+          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="10C" />
+          <label htmlFor="10C">10C</label>
         </li>
         <li className="seat my-2 mx-3">
-          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="10E" />
-          <label htmlFor="10E">10E</label>
+          <input type="checkbox" onChange={(e)=>{onchange(e)}} id="10D" />
+          <label htmlFor="10D">10D</label>
         </li>
       </ol>
     </li>

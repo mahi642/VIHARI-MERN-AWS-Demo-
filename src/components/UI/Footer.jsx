@@ -18,16 +18,14 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="box">
-                    <h3>quick links</h3>
+                    <h3>Quick links</h3>
                     <Link to="/" className="links"><i className="fas fa-arrow-right"></i> home</Link>
-                    <Link to="/#gallery" className="links"><i className="fas fa-arrow-right"></i> destination</Link>
                     <Link to="/tours" className="links"><i className="fas fa-arrow-right"></i> tours</Link>
-                    <Link to="/#services" className="links"><i className="fas fa-arrow-right"></i> services</Link>
                     <Link to="/about" className="links"><i className="fas fa-arrow-right"></i> about us</Link>
                     <Link to="/contact" className="links"><i className="fas fa-arrow-right"></i> contact us</Link>
                 </div>
                 <div className="box">
-                    <h3>newsletter</h3>
+                    <h3>Newsletter</h3>
                     <p style={{marginLeft:"0px"}}>subscribe for latest updates</p>
                     <form action="">
                         <input type="email" name="" placeholder="enter your email" className="email" id="" />

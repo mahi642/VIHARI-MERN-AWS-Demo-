@@ -1,16 +1,25 @@
 const Razorpay = require('razorpay')
 
 module.exports.createorder =async(req,res)=>{
-
-var instance = new Razorpay({ key_id: 'rzp_test_4R2LUNV53xXIN1', key_secret: 'shSo85WEMnmOgqFJ3HSEvuQY' })
-
-var options ={
-  amount: req.body.price*100,
-  currency: "INR",
-  receipt: "receipt#1",
-}
-await instance.orders.create(options,(err, order)=> {
+  try {
+    var instance = new Razorpay({ key_id: 'rzp_test_lQaiC5AbagJXwZ', key_secret: 'OIbscxDvgT55qLYOKZpOxKx6' })
+  var options = {
+    amount: req.body.price * 100,
+    currency: "INR",
+    receipt: "receipt#2",
+  }
+  await instance.orders.create(options, (err, order) => {
+    if(order){
+      res.json(order.id)
+    }
+    else {
+      console.log(err)
+    }
     res.json(order.id)
-}); 
+  });  
+  } catch (error) {
+    console.log('not generated')
+  }
+ 
  
 }

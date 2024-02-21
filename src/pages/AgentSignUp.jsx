@@ -1,14 +1,18 @@
 import React from "react";
+import { useContext, useState } from 'react'
+import Footer from '../components/UI/Footer'
+import { useNavigate, Link} from 'react-router-dom'
 import "../components/CSS/Login.css";
+import userContext from '../context/User/userContext'
+import Navbar from "../components/UI/Navbar";
+
 import { useNavigate } from "react-router-dom";
 const AgentSignUp = () => {
-  const navigate = useNavigate();
-  const handleAgentLogin = (e) => {
-    navigate("/agentLogin");
-  };
   return (
+    <>
+    <Navbar />
     <div className="login-body">
-      <div className="main">
+      <div className="main" style={{height:'500px'}}>
         <div className="signup">
           <form>
             <label htmlFor="chk" className="login-label" aria-hidden="true">
@@ -17,9 +21,9 @@ const AgentSignUp = () => {
             <input
               className="signup-input"
               type="text"
-              // name="fname"
-              // onChange={onSignupInput}
-              // value={SignupCreds.fname}
+              name="agentName"
+              onChange={onSignupInput}
+              value={SignupCreds.agentName}
               placeholder="Agency  name"
               required=""
             />
@@ -27,37 +31,37 @@ const AgentSignUp = () => {
             <input
               className="signup-input"
               type=" email"
-              // name="email"
-              // onChange={onSignupInput}
-              // value={SignupCreds.email}
+              name="email"
+              onChange={onSignupInput}
+              value={SignupCreds.email}
               placeholder="Agency Email"
               required=""
             />
             <input
               className="signup-input"
               type="password"
-              // name="password"
-              // onChange={onSignupInput}
-              // value={SignupCreds.password}
+              name="password"
+              onChange={onSignupInput}
+              value={SignupCreds.password}
               placeholder="Password"
               required=""
             />
             <input
               className="signup-input"
               type="password"
-              // name="cpassword"
-              // onChange={onSignupInput}
-              // value={SignupCreds.cpassword}
+              name="cpassword"
+              onChange={onSignupInput}
+              value={SignupCreds.cpassword}
               placeholder="Confirm Password"
               required=""
             />
-            <button className="login-submit" onClick={handleAgentLogin}>
-              Sign up
-            </button>
+            <button className="login-submit">Sign up</button>
           </form>
+         
         </div>
       </div>
     </div>
+    </>
   );
 };
 
