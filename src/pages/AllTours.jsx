@@ -99,7 +99,7 @@ const AllTours = () => {
                         </p>
                       </div>
                       <div className="about-btn" style={{ display: 'flex', margin: '20px' }}>
-                        <Link to={`/admindb/edittour/${tour._id}`} style={{ textDecoration: 'none' }}>
+                        <Link to={`/agent/edittour/${tour._id}`} style={{ textDecoration: 'none' }}>
                           <button
                             style={{ backgroundColor: "#06bbcc" }}
                             className="about-view packages-btn"

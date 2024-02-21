@@ -1,9 +1,10 @@
 import React from "react";
 import { useContext, useState } from 'react'
 import Footer from '../components/UI/Footer'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link} from 'react-router-dom'
 import "../components/CSS/Login.css";
 import userContext from '../context/User/userContext'
+import Navbar from "../components/UI/Navbar";
 
 const AgentSignUp = () => {
   const navigate = useNavigate()  
@@ -34,9 +35,9 @@ const AgentSignUp = () => {
 	}
   return (
     <>
-  
+    <Navbar />
     <div className="login-body">
-      <div className="main">
+      <div className="main" style={{height:'500px'}}>
         <div className="signup">
           <form>
             <label htmlFor="chk" className="login-label" aria-hidden="true">
@@ -80,7 +81,11 @@ const AgentSignUp = () => {
               required=""
             />
             <button className="login-submit" onClick={HandleSignup}>Sign up</button>
+            <h4 className="login-redirect" style={{color:"white"}}>
+              Already an agent? <Link to="/agentLogin">Login here</Link>
+            </h4>
           </form>
+         
         </div>
       </div>
     </div>

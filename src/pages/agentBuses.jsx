@@ -90,11 +90,11 @@ const AgentBuses = () => {
                             <td>{bus.btype}</td>
                             <td>₹{bus.tktprice}</td>
                             <td style={{ display: 'flex', flexDirection: 'column' }}>
-                                <Link to={`/admindb/editbus/${bus._id}`}>
+                                <Link to={`/agent/editbus/${bus._id}`}>
                                     <button className="btn btn-success" style={{ fontSize: '15px' }}> Edit Bus</button>
                                 </Link>
                                 <button
-                                    type="button" style={{ marginTop: "10px", fontSize: '15px', width: '80px', marginLeft: '30px', marginRight: '-20px' }}
+                                    type="button" style={{ marginTop: "10px", fontSize: '15px', width: '80px', marginLeft: '20px', marginRight: '5px' }}
                                     className="delete-bus-btn btn btn-danger"
                                     data-bus-id={bus.id}
                                     onClick={() => handleDeleteBus(bus._id)}

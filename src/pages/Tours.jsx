@@ -25,7 +25,7 @@ const Tours = () => {
     <>
       <Navbar />
       <div>
-        <h2>Tours</h2>
+        <h1 style={{marginTop:'20px'}}>Tours</h1>
         <div id="pack" className="packages" style={{ marginTop: '40px' }}>
           <div className="container">
             <div className="packages-content">

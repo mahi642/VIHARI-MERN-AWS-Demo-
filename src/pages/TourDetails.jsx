@@ -48,7 +48,7 @@ const TourDetails = () => {
       <div>
         <h1>Tour Place Details</h1>
       </div>
-      <Link to={`/admindb/addplace/${id}`}>
+      <Link to={`/agent/addplace/${id}`}>
         <button className="addnew btn btn-success" style={{ fontSize: '15px' }} type="button">
           <i className="fa fa-user-plus"></i>&nbsp; Add New Place
         </button>
@@ -60,9 +60,10 @@ const TourDetails = () => {
           <div className="place-image-container">
             <img
               className="place-image"
-              src={`http://localhost:4000/${place.Imageurl.replace(/\\/g, '/').replace('backend/', '')}`}
+              src={place.Imageurl ? `http://localhost:4000/${place.Imageurl.replace(/\\/g, '/').replace('backend/', '')}` : ''}
               alt={"Place"}
             />
+
 
           </div>
           <div className="place-text">

@@ -4,6 +4,7 @@ import Footer from '../components/UI/Footer'
 import { useNavigate } from 'react-router-dom'
 import "../components/CSS/AgentLogin.css";
 import userContext from '../context/User/userContext'
+import Navbar from '../components/UI/Navbar'
 
 const AgentLogin = () => {
   const navigate = useNavigate();
@@ -36,6 +37,8 @@ const AgentLogin = () => {
   }
 
   return (
+    < >
+    <Navbar />
     <div className="login-body1">
       <div className="login1">
         <form>
@@ -64,6 +67,7 @@ const AgentLogin = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

@@ -2,6 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const AgentNavbar = () => {
+  const handleSignOut = () => {
+    // Remove the token from localStorage or perform any other necessary sign-out actions
+    localStorage.removeItem('token');
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark" id="navbar" style={{ backgroundColor: '#222271', fontSize: '20px', padding: '10px' }}>
       <Link className="navbar-brand" to="/agent/agenthome">
@@ -53,10 +58,10 @@ const AgentNavbar = () => {
             </span>
           </li>
           <li className="nav-item">
-          <Link to="/agent/agentProfile"  className="nav-item nav-link" style={{ marginLeft: '270px' }}>Profile</Link>
+            <Link to="/agent/agentProfile" className="nav-item nav-link" style={{ marginLeft: '270px' }}>Profile</Link>
           </li>
           <li className="nav-item" style={{ marginLeft: '50px' }}>
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to="/" onClick={handleSignOut}>
               <i className="fa fa-sign-out" aria-hidden="true"></i>
               Sign Out
             </Link>
