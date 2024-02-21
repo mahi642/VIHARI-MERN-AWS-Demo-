@@ -123,18 +123,22 @@ const Profile = () => {
             <th scope="col">seats</th>
             <th scope="col">fare</th>
             <th scope="col">DOJ</th>
+            <th scope="col">cancel</th>
             </tr>
           </thead>
           
           <tbody>
             {bookings.map((booking,index)=>{
-            return <tr>
+            return <><tr>
                 <td><img src={buses[index].Imageurl.replace(/^.*backend\\/i, "")} alt=""  style={{height:'60px'}}/></td>
                 <td>{buses[index].tktprice}</td>
                 <td>{booking.tickets.length}</td>
                 <td>{booking.tickets.length * buses[index].tktprice}</td>
                 <td>{booking.date}</td>
+                <td><button className="btn btn-primary cancel-ticket" style={{fontSize:'15px'}}>cancel</button></td>
               </tr> 
+              <hr />
+              </>
             })}
             </tbody>
         </table>}
