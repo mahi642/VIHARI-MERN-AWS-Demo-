@@ -75,8 +75,8 @@ const AddBus = () => {
             <form onSubmit={handleSubmit}>
               <div className="row ">
                 <div className="">
-                  <h1 style={{ color: 'white', marginTop: '50px', fontSize: '30px' }}>Add Bus</h1>
-                  <div className="row login-row" style={{ marginTop: '30px', display: 'flex', flexDirection: 'column', marginLeft: '100px', width: '450px' }}>
+                  <h1 style={{ color: 'white', marginTop: '30px', fontSize: '30px' }}>Add Bus</h1>
+                  <div className="row login-row" style={{ marginTop: '20px', display: 'flex', flexDirection: 'column', marginLeft: '100px', width: '450px' }}>
 
                     {/* Source Name */}
                     <div className="col-md-6">

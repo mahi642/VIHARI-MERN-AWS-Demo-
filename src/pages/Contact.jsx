@@ -9,7 +9,7 @@ const Contact = ()=>{
     return(
         <>
         <Navbar />
-        <h1 >Contact Us</h1>
+        <h1 style={{marginTop:'20px'}}>Contact Us</h1>
         <div className = "contactUs">         
             <Left/>
             <Right/>

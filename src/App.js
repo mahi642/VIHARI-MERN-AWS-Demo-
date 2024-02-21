@@ -26,6 +26,7 @@ import AddTour from './pages/AddTour';
 import AllTours from './pages/AllTours';
 import EditTour from './pages/EditTour';
 import TourDetails from './pages/TourDetails';
+import TourPlaces from './pages/TourPlaces';
 import AddPlace from './pages/AddPlace';
 import BusState from './context/bus/BusState';
 import PassengerDetails from './components/UI/PassengerDetails';
@@ -79,8 +80,12 @@ function App() {
               <Route exact path="/about" element={<About />} />
               <Route exact path="/admindb/adminhome" element={<AdminHome />} />
               <Route exact path="/admindb/edittour/:id" element={<EditTour />} />
-              <Route exact path="/admindb/opentour/:id" element={<TourDetails />}
+              <Route exact path="/admindb/opentour/:id" element={<TourDetails />}/>
+              <Route exact path="/agent/edittour/:id" element={<EditTour />} />
+              <Route exact path="/agent/opentour/:id"
+                element={<TourDetails />}
               />
+              <Route exact path = "/tourplaces/:id" element={<TourPlaces />} />
               <Route
                 exact
                 path="/admindb/booktour/:id"
@@ -102,12 +107,12 @@ function App() {
           <Route exact path='/agent/addbus' element={<AddBus/>}/>
           <Route exact path='/admindb/adduser' element={<AddUser/>}/>
           <Route exact path='/agent/addtour' element={<AddTour/>}/>
-          <Route exact path='/admindb/addplace/:id' element={<AddPlace/>}/>
-          <Route exact path="/admindb/editbus/:id" element={ <EditBus/>}/>
+          <Route exact path='/agent/addplace/:id' element={<AddPlace/>}/>
+          <Route exact path="/agent/editbus/:id" element={ <EditBus/>}/>
           <Route exact path='/about' element={<About/>}/>
           <Route exact path='/admindb/adminhome' element={<AdminHome/>}/>
           <Route exact path='/agent/agenthome' element={<AgentHome/>}/>
-          <Route exact path="/admindb/edittour/:id" element={ <EditTour/>}/>
+          <Route exact path="/agent/edittour/:id" element={ <EditTour/>}/>
           <Route exact path="/agent/opentour/:id" element={ <TourDetails/>}/>
           <Route exact path='/admindb/booktour/:id' element={ <BookTour/>}/>
           <Route exact path='/contact' element={ <Contact/>}/>

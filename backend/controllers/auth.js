@@ -3,7 +3,9 @@ const User = require('../models/user')
 const JWT = require("jsonwebtoken")
 const JWT_SECRET = "VihariTravelSite"
 const Agent = require('../models/agent');
+const Ticket = require('../models/ticket');
 
+// Verifying login credentials
 module.exports.verifyUser =  async(req,res)=>{
 
     const {email,password} =req.body;
@@ -33,22 +35,10 @@ module.exports.verifyUser =  async(req,res)=>{
     }
   
 }
-module.exports.getUserDetails = async(req,res)=>{
-  try {
-    const userId = req.user.id;
-    const user = await User.findById(userId);
 
-    if (user) {
-      return res.json({ success: true, user });
-    }
 
-    return res.json({ success: false, error: "User not found" });
-  } catch (error) {
-    console.error("Error in getUserDetails:", error);
-    return res.status(500).json({ success: false, error: "Something went wrong" });
-  }
-}
 
+// Signup for new user
 module.exports.createUser = async(req,res)=>{
     await User.findOne({ email: req.body.email }).then(async user => {
         if (user) {
@@ -85,6 +75,35 @@ module.exports.createUser = async(req,res)=>{
       })
   
 }
+
+// Fetching user details
+module.exports.getUserDetails = async(req,res)=>{
+  try {
+    const userId = req.user.id;
+    const user = await User.findById(userId);
+
+    if (user) {
+      return res.json({ success: true, user });
+    }
+
+    return res.json({ success: false, error: "User not found" });
+  } catch (error) {
+    console.error("Error in getUserDetails:", error);
+    return res.status(500).json({ success: false, error: "Something went wrong" });
+  }
+}
+// Getting user booking history
+module.exports.getBookings = async(req,res)=>{
+  try {
+    const user = req.user;
+    const tickets = await Ticket.find({user:user.id})
+    res.json({success:true,tickets}) 
+  } catch (error) {
+    res.json({success:false,error:"Internal error"})
+  }
+
+}
+
 
 module.exports.verifyAgent = async (req, res) => {
   const { email, password } = req.body;

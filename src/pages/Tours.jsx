@@ -2,96 +2,80 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../components/UI/Navbar";
 import { Link } from "react-router-dom";
 import Footer from "../components/UI/Footer";
-
+import { useGetAllToursQuery } from '../Slices/agentApiSlice';
 import "../components/CSS/AllTours.css";
+import Loader from '../components/Loader/Loader';
+
 const Tours = () => {
-  const [tours, setTours] = useState([]);
+  const [tours, setAllTours] = useState([]);
+  const { data: tourData, isLoading } = useGetAllToursQuery();
 
   useEffect(() => {
-    const getTours = () => {
-      fetch("http://localhost:8000/tours")
-        .then((res) => {
-          return res.json();
-        })
-        .then((toursData) => {
-          setTours(toursData);
-        })
-        .catch((err) => {
-          console.error(err.message);
-        });
-    };
-    getTours();
-  }, []);
+    if (tourData) {
+      const updatedTourData = tourData.tours.map(tour => ({
+        ...tour,
+        DispImageurl: tour.DispImageurl.replace(/^backend\\/, '').replace(/\\/g, '/')      }));
+      setAllTours(updatedTourData);
+    }
+  }, [tourData]);
 
+  if (isLoading) return <Loader />;
 
   return (
     <>
       <Navbar />
       <div>
-        <h1 style={{fontSize:'30px'}}>Tours</h1>
-      </div>
-
-      <div id="pack" className="packages">
-        <div className="container">
-          <div className="packages-content">
-            <div className="row">
-              {tours.map((tour) => (
-                <div className="col-md-4 col-sm-6" key={tour.id}>
-                  <div className="single-package-item">
-                    <div>
-                      <img
-                        style={{ height: "200px" }}
-                        src={`${tour.imagePath}`}
-                        alt="package-place"
-                      />
-                    </div>
-                    <div className="single-package-item-txt">
-                      <h3>
-                        <Link to={`/admindb/booktour/${tour.id}`} style={{ textDecoration: "none", color: '#4e95a3' }}>
-                          {tour.tourName}
-                        </Link>
-                        <span className="pull-right" style={{ color: '#4e95a3' }} >
-                          &nbsp; ₹{tour.tourPrice}
-                        </span>
-                      </h3>
-                      <div className="packages-para">
-                        <p>
-                          <i className="fa fa-angle-right"></i> 5 star
-                          accommodation
-                        </p>
-                        <p>
-                          <span>
-                            <i className="fa fa-angle-right"></i> transportation
+        <h1 style={{marginTop:'20px'}}>Tours</h1>
+        <div id="pack" className="packages" style={{ marginTop: '40px' }}>
+          <div className="container">
+            <div className="packages-content">
+              <div className="row">
+                {tours.map((tour) => (
+                  <div className="col-md-4 col-sm-6" key={tour._id}>
+                    <div className="single-package-item">
+                      <div>
+                        <img style={{ height: '200px' }} src={`/${tour.DispImageurl}`} alt="package-place" />
+                      </div>
+                      <div className="single-package-item-txt">
+                        <h3>
+                          <a href={`/tourplaces/${tour._id}`}>{tour.tname}</a>
+                          <span className="pull-right">
+                            <i className="fa-solid fa-indian-rupee-sign"></i>
+                            {tour.tprice}
                           </span>
-                        </p>
-                      </div>
-                      <div className="packages-review">
-                        <p>
-                          <i className="fa fa-star"></i>
-                          <i className="fa fa-star"></i>
-                          <i className="fa fa-star"></i>
-                          <i className="fa fa-star"></i>
-                          <i className="fa fa-star"></i>
-                        </p>
-                      </div>
-                      <div className="about-btn" style={{ display: 'flex', margin: '0px' }}>
-                        <Link to="" style={{ textDecoration: 'none' }}>
-                          <button
-                            style={{ backgroundColor: "#06bbcc" }}
-                            className="about-view packages-btn"
-                            data-toggle="modal"
-                            data-target={`#my-${tour.id}`}
-                          >
-                            Book tour
-                          </button>
-                        </Link>
-
-                        
+                        </h3>
+                        <div className="packages-para">
+                          <p>
+                            <i className="fa fa-angle-right"></i> 5-star accommodation
+                          </p>
+                          <p>
+                            <span>
+                              <i className="fa fa-angle-right"></i> transportation
+                            </span>
+                            <i className="fa fa-angle-right"></i> food facilities
+                          </p>
+                        </div>
+                        <div className="packages-review">
+                          <p>
+                            <i className="fa fa-star"></i>
+                            <i className="fa fa-star"></i>
+                            <i className="fa fa-star"></i>
+                            <i className="fa fa-star"></i>
+                            <i className="fa fa-star"></i>
+                          </p>
+                        </div>
+                        <div className="about-btn">
+                          <a href="/payment">
+                            <button style={{ backgroundColor: '#06bbcc' }} className="about-view packages-btn">
+                              Book now
+                            </button>
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>

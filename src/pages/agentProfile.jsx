@@ -3,7 +3,7 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import profileImage from "../Assets/profile.png";
 import myProfile from "../Assets/myProfile.png";
 import { useNavigate } from "react-router-dom";
-import "../components/CSS/userProfile.css";
+import "../components/CSS/agentProfile.css";
 import AgentNavbar from "../components/UI/AgentNavbar";
 import { useGetAgentProfileQuery } from "../Slices/agentApiSlice";
 import Loader from '../components/Loader/Loader'
@@ -30,41 +30,23 @@ const AgentProfile = () => {
     <div>
       <AgentNavbar />
       <div className="profile">
-        <div className="leftdiv">
-          <div style={{ marginBottom: "4rem" }} className="profile-items">
-            <img className="profile-icons" src={profileImage} alt="profile" />
-            <h1>Agent Name</h1>
-          </div>
-          <div className="profile-items">
-            <img className="profile-icons" src={myProfile} alt="MyProfile" />
-            <h1>My profile</h1>
-          </div>
-          <hr />
-          <hr />
-        </div>
 
         <div className="rightdiv">
           <h1>My Profile</h1>
 
-          <div className="profile-details">
+          <div className="profile-details-agent">
             <div className="nameAndGender">
               <div>
-                <h2>Agency Name</h2>
+                <h1>Agency Name</h1>
                 <h3>{agent.agentName}</h3>
               </div>
             </div>
-            <div className="dob">
-              <h2>Date of Birth</h2>
-              <h3>27-08-2003</h3>
-            </div>
-            <div className="contact-info">
-              <hr />
+            <div className="contact-info-agent">
               <h1>My Contact Information</h1>
 
               <div className="nameAndGender">
                 <div>
-                  <h2>Email</h2>
-                  <h3 style={{textDecoration:""}}>{agent.email}</h3>
+                  <h3>{agent.email}</h3>
                 </div>
               </div>
 
