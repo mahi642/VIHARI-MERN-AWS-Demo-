@@ -79,8 +79,7 @@ function App() {
               <Route exact path="/about" element={<About />} />
               <Route exact path="/admindb/adminhome" element={<AdminHome />} />
               <Route exact path="/admindb/edittour/:id" element={<EditTour />} />
-              <Route exact path="/admindb/opentour/:id"
-                element={<TourDetails />}
+              <Route exact path="/admindb/opentour/:id" element={<TourDetails />}
               />
               <Route
                 exact
