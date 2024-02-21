@@ -1,4 +1,4 @@
-.profile {
+.profile-agent {
     display: flex;
   }
   /* .leftdiv {
@@ -6,30 +6,16 @@
     background-color: darkgrey;
     height: 100vh;
   } */
-  .rightdiv {
+  .rightdiv-agent {
     width: 100%;
     height: 100vh;
     background-color: rgb(218, 226, 232);
   }
-  .profile-items {
-    display: flex;
-    margin: 2rem 1rem;
-  
-    align-items: center;
-  }
-  .profile-items img {
-    margin-right: 2rem;
-  }
-  
-  .profile-icons {
-    height: 6rem;
-    width: 6rem;
-  }
-  
-  .rightdiv {
+
+  .rightdiv-agent {
     position: relative; /* Required for absolute positioning */
   }
-  .rightdiv h1 {
+  .rightdiv-agent h1 {
     margin-top: 3rem;
   }
   
@@ -46,7 +32,7 @@
     /* Optionally, add more styles as needed */
   }
   
-  .nameAndGender {
+  .nameAndGender-agent {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -54,29 +40,10 @@
     text-align: start;
   }
   
-  .dob {
-    justify-content: space-around;
-    align-items: center;
-    margin-left: 18rem;
-    text-align: start;
-  }
-  
-  .dob h2,
-  .nameAndGender h2 {
-    color: rgb(137, 132, 132);
-  }
-  
-  .dob h3,
-  .nameAndGender h3 {
-    /* font-weight: bolder; */
-    color: rgb(109, 73, 73);
-    text-align: center;
-    margin-top: 10px;
-  }
-  .contact-info {
+  .contact-info-agent {
     margin-top: 1rem; 
   }
-  .contact-info h1 {
+  .contact-info-agent h1 {
     color: rgb(16, 18, 9);
     font-size: 2rem;
     font-weight: bolder;
@@ -85,7 +52,7 @@
   .contact-info-agent h3{
     margin-top: -15px;
   }
-  .contact-info button {
+  .contact-info-agent button {
     /* Adjust margi5n as needed */
     padding: 8px;
     margin-top: -3rem;
@@ -100,7 +67,7 @@
     cursor: pointer;
   }
   
-  .contact-info button:hover {
+  .contact-info-agent button:hover {
     background-color: #0056b3; /* Example button hover color */
   }
   

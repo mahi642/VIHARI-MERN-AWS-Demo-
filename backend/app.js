@@ -1,12 +1,19 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const cors =require('cors')
+const express = require('express');
+const mongoose = require('mongoose');
+const cors =require('cors');
 const path=require('path');
+const morgan = require('morgan');
+const rfs = require('rotating-file-stream');
 const app = express()
 app.use(express.json())
 
 app.use(cors());
 
+const accessLogStream = rfs.createStream("access.log",{
+  interval:'1d',
+  path:path.join(__dirname, 'logs')
+})
+app.use(morgan('combined',{stream:accessLogStream}))
 // Routing..
 app.use(require('./routes/auth'))
  

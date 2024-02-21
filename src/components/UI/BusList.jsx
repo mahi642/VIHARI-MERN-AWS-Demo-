@@ -66,7 +66,7 @@ const BusList = () => {
             <tr key={bus.id} className='bus-row'>
               <td>
                 <img
-                  src={bus.Imageurl}
+                  src={`http://localhost:4000/${bus.Imageurl?.replace(/^.*backend\\/i, "")}`}
                   alt=""
                   style={{ height: '80px', objectFit: 'cover' }}
                 />
@@ -74,7 +74,7 @@ const BusList = () => {
               <td>{bus.trname}</td>
               <td>{bus.deptime}</td>
               <td>{bus.arrtime}</td>
-              <td>{bus.duration}</td>
+              <td>{bus.durtime}</td>
               <td>{bus.btype}</td>
               <td>₹{bus.tktprice}</td>
               <td>

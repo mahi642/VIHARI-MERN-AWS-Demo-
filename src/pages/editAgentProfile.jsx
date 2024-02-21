@@ -32,9 +32,9 @@ const EditAgentProfile = () => {
     <div>
       <AgentNavbar />
       <div className="profile">
-        <div className="rightdiv">
+        <div className="rightdiv-agent">
           <h1>Edit Profile</h1>
-          <div className="profile-details">
+          <div className="profile-details-agent">
             <div>
               <h2 style={{marginTop:'70px'}}>Name</h2>
               <input

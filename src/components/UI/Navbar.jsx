@@ -19,7 +19,7 @@ const Navbar = () => {
           <Link to="/tours" className="nav-item nav-link">Tours</Link>
           <Link to="/about" className="nav-item nav-link">About</Link>
           <Link to="/contact" className="nav-item nav-link">Contact</Link>
-          {localStorage.getItem('token') &&  <Link to="/profile" className="nav-item nav-link">profile</Link>}
+          {localStorage.getItem('token') &&  <Link to="/profile" className="nav-item nav-link">Profile</Link>}
           
           <div className="icons">
            {localStorage.getItem('token')?<Link to="/" onClick={()=>{localStorage.removeItem('token')}}><i className="fa fa-sign-out" aria-hidden="true"></i></Link>:<Link to="/login"><i className="fa fa-user" aria-hidden="true" id="login-btn"></i></Link>}

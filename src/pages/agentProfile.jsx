@@ -29,22 +29,22 @@ const AgentProfile = () => {
   return (
     <div>
       <AgentNavbar />
-      <div className="profile">
+      <div className="profile-agent">
 
-        <div className="rightdiv">
+        <div className="rightdiv-agent">
           <h1>My Profile</h1>
 
           <div className="profile-details-agent">
-            <div className="nameAndGender">
+            <div className="nameAndGender-agent">
               <div>
                 <h1>Agency Name</h1>
-                <h3>{agent.agentName}</h3>
+                <h3 style={{textAlign:'center'}}>{agent.agentName}</h3>
               </div>
             </div>
             <div className="contact-info-agent">
               <h1>My Contact Information</h1>
 
-              <div className="nameAndGender">
+              <div className="nameAndGender-agent">
                 <div>
                   <h3>{agent.email}</h3>
                 </div>
