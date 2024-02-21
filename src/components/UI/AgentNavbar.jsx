@@ -52,6 +52,9 @@ const AgentNavbar = () => {
               Welcome, <b>Agent</b>!
             </span>
           </li>
+          <li className="nav-item">
+          <Link to="/agent/agentProfile"  className="nav-item nav-link">profile</Link>
+          </li>
           <li className="nav-item" style={{ marginLeft: '400px' }}>
             <Link className="nav-link" to="/">
               <i className="fa fa-sign-out" aria-hidden="true"></i>

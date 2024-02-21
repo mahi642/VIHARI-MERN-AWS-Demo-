@@ -40,6 +40,8 @@ import AgentSignUp from './pages/AgentSignUp';
 import AgentLogin from './pages/AgentLogin';
 import AllAgents from './pages/AllAgents';
 import AgentBuses from './pages/agentBuses';
+import AgentProfile from './pages/agentProfile';
+import EditAgentProfile from './pages/editAgentProfile';
 
 function App() {
   return (
@@ -63,6 +65,8 @@ function App() {
               <Route exact path="/admindb/allusers" element={<AllUsers />} />
               <Route exact path="/agent/alltours" element={<AllTours />} />
               <Route exact path="/agent/addbus" element={<AddBus />} />
+              <Route exact path="/agent/agentProfile" element={<AgentProfile />} />
+              <Route exact path='/agent/editAgentProfile' element={<EditAgentProfile />} />
               <Route exact path="/admindb/adduser" element={<AddUser />} />
               <Route exact path="/agent/addtour" element={<AddTour />} />
               <Route

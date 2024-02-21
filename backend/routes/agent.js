@@ -9,6 +9,9 @@ router.delete('/deletebus/:busId', agentController.deleteBus);
 router.get('/getbus/:busId', agentController.getBusDetails);
 router.put('/editbus/:busId', agentController.editBus);
 router.get('/agentbuses/:agentId', agentController.getAgentBuses);
+router.get('/agentProfile/:agentId',agentController.getAgentProfile);
+
+router.put('/editProfile/:agentId',agentController.agentEditProfile);
 
 // Tour routes
 router.post('/addtour', fileUpload.single('tourImage'), agentController.addTour);

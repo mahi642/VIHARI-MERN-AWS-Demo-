@@ -277,3 +277,34 @@ exports.deletePlace = (req, res) => {
       res.status(500).json({ message: "Internal server error" });
     });
 };
+
+exports.getAgentProfile=async (req,res)=>{
+  try{
+    const agentId = req.params.agentId;
+    const agentUser= await Agent.findById(agentId);
+    if(!agentUser){
+      return res.status(404).json({ message: "Agent not found" });
+    }
+    res.status(200).json({ agent : agentUser});
+
+  } catch(error){
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+exports.agentEditProfile= async (req,res)=>{
+  try{
+    const agentId = req.params.agentId;
+    const agentUser= await Agent.findById(agentId);
+    if(!agentUser){
+      return res.status(404).json({ message: "Agent not found" });
+    }
+    const {agentName,email}=req.body;
+    agentUser.email=email;
+    agentUser.agentName=agentName;
+    await agentUser.save();
+    res.status(200).json({ agent : agentUser,message:"Agent data saved successfully"});
+  } catch(error){
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
