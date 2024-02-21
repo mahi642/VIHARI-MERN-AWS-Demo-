@@ -36,3 +36,17 @@ module.exports.getBusDetails = async(req,res)=>{
    }
    
 } 
+module.exports.booked = async(req,res)=>{
+   try {
+     const {id,date} = req.body
+      const bookings = await Ticket.find({bus:id,date});
+      if(bookings){
+         res.json({success:true,bookings});   
+      }
+      else {
+         res.json({success:false,error:"Failed to fetch"})
+      }
+   } catch (error) {
+      res.json({success:false,error:"Internal error"})
+   }
+}

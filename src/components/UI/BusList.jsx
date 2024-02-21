@@ -87,7 +87,7 @@ const BusList = () => {
               <td colSpan='7' className='text-center' >
             {showSeats && selectedBus === bus && (
                     <div>
-                      <Layout bus={bus}/>
+                      <Layout bus={bus} date={searchDetails.date}/>
                     </div>
                   )}
               </td>
