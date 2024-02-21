@@ -15,7 +15,6 @@ module.exports.createorder =async(req,res)=>{
     else {
       console.log(err)
     }
-    res.json(order.id)
   });  
   } catch (error) {
     console.log('not generated')
