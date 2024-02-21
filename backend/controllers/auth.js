@@ -24,7 +24,7 @@ module.exports.verifyUser =  async(req,res)=>{
      }
      const data ={
       user:{
-        id:user.id
+        id:user.id,
       }
     }
     const authToken = JWT.sign(data,JWT_SECRET);

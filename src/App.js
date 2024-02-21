@@ -7,6 +7,7 @@ import {
   Routes,
   Route
 } from 'react-router-dom'
+import PrivateRoute from './privateroutes/PrivateRoutes'
 import UserState from './context/User/UserState';
 import Layout from './components/UI/Layout';
 
@@ -38,10 +39,10 @@ import AdminAnnouncementForm from './pages/Announcements';
 import AdminHome from './pages/AdminHome';
 import AgentHome from './pages/AgentHome';
 import AgentSignUp from './pages/AgentSignUp';
-import AgentBuses from "./pages/AgentBuses";
+import AgentBuses from "./pages/agentBuses";
 import AllAgents from "./pages/AllAgents";
-import AgentProfile from "./pages/AgentProfile";
-import EditAgentProfile from "./pages/EditAgentProfile";
+import AgentProfile from "./pages/agentProfile";
+import EditAgentProfile from "./pages/editAgentProfile";
 import Approval from "./pages/Approval";
 import AgentLogin from './pages/AgentLogin';
 function App() {
@@ -61,7 +62,6 @@ function App() {
           <Route exact path='/agentLogin' element={<AgentLogin/>}/>
           <Route exact  path='/passengers' element={<PassengerDetails/>}/>
 
-              <Route exact path="/agent/agentHome" element={<AgentHome />} />
               <Route exact path="/agent/allbuses" element={<AgentBuses />} />
               <Route exact path="/admindb/allusers" element={<AllUsers />} />
               <Route exact path="/agent/alltours" element={<AllTours />} />
@@ -92,7 +92,7 @@ function App() {
                 element={<BookTour />}
               />
               <Route exact path="/contact" element={<Contact />} />
-              <Route exact path="/profile" element={<Profile />} />
+              <Route exact path="/profile" element={<PrivateRoute role={"user"}><Profile /></PrivateRoute>} />
               <Route exact path="/agentSignUp" element={<AgentSignUp />} />
               <Route exact path="/agentLogin" element={<AgentLogin />} />
              <Route exact path = "/waitForApproval" element = {<Approval/>}/>
@@ -113,7 +113,7 @@ function App() {
           <Route exact path="/agent/editbus/:id" element={ <EditBus/>}/>
           <Route exact path='/about' element={<About/>}/>
           <Route exact path='/admindb/adminhome' element={<AdminHome/>}/>
-          <Route exact path='/agent/agenthome' element={<AgentHome/>}/>
+          <Route exact path='/agent/agenthome' element={<PrivateRoute role="agent"><AgentHome /></PrivateRoute>}/>
           <Route exact path="/agent/edittour/:id" element={ <EditTour/>}/>
           <Route exact path="/agent/opentour/:id" element={ <TourDetails/>}/>
           <Route exact path='/admindb/booktour/:id' element={ <BookTour/>}/>
