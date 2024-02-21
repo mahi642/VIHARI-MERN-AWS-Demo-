@@ -38,7 +38,12 @@ import AdminAnnouncementForm from './pages/Announcements';
 import AdminHome from './pages/AdminHome';
 import AgentHome from './pages/AgentHome';
 import AgentSignUp from './pages/AgentSignUp';
+import AgentBuses from "./pages/AgentBuses";
+import AllAgents from "./pages/AllAgents";
+import AgentProfile from "./pages/AgentProfile";
+import EditAgentProfile from "./pages/EditAgentProfile";
 import Approval from "./pages/Approval";
+import AgentLogin from './pages/AgentLogin';
 function App() {
   return (
     <div className="App">
