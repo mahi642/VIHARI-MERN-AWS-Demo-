@@ -115,7 +115,7 @@ const Profile = () => {
           </div>
         </div>}
         {history && <div className="profile-details">
-        <table className="table" style={{fontSize:'20px',padding:'10px'}}>
+        {bookings.length ===0?<div style={{alignContent:'center',alignItems:'center',justifyContent:"center",paddingTop:"15px"}}><img src="sweat.gif" alt="" style={{height:'70px'}}/><h1 >No Bookings yet</h1></div>:<table className="table" style={{fontSize:'20px',padding:'10px'}}>
           <thead >
             <tr >
             <th scope="col">Bus</th>
@@ -129,7 +129,7 @@ const Profile = () => {
           <tbody>
             {bookings.map((booking,index)=>{
             return <tr>
-                <td><img src="bus1.png" alt=""  style={{height:'60px'}}/></td>
+                <td><img src={buses[index].Imageurl.replace(/^.*backend\\/i, "")} alt=""  style={{height:'60px'}}/></td>
                 <td>{buses[index].tktprice}</td>
                 <td>{booking.tickets.length}</td>
                 <td>{booking.tickets.length * buses[index].tktprice}</td>
@@ -137,9 +137,10 @@ const Profile = () => {
               </tr> 
             })}
             </tbody>
-        </table>
+        </table>}
         
       </div>}
+      
       </div>
     </div>
   
