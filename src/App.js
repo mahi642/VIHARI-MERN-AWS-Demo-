@@ -37,7 +37,8 @@ import AdminAnnouncementForm from './pages/Announcements';
 import AdminHome from './pages/AdminHome';
 import AgentHome from './pages/AgentHome';
 import AgentSignUp from './pages/AgentSignUp';
-
+import AgentLogin from './pages/AgentLogin';
+import Approval from "./pages/Approval";
 function App() {
   return (
     <div className="App">
@@ -81,6 +82,8 @@ function App() {
               <Route exact path="/contact" element={<Contact />} />
               <Route exact path="/profile" element={<Profile />} />
               <Route exact path="/agentSignUp" element={<AgentSignUp />} />
+              <Route exact path="/agentLogin" element={<AgentLogin />} />
+             <Route exact path = "/waitForApproval" element = {<Approval/>}/>
               <Route
                 exact
                 path="/profile/editUserProfile"

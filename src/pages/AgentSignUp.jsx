@@ -1,6 +1,11 @@
 import React from "react";
 import "../components/CSS/Login.css";
+import { useNavigate } from "react-router-dom";
 const AgentSignUp = () => {
+  const navigate = useNavigate();
+  const handleAgentLogin = (e) => {
+    navigate("/agentLogin");
+  };
   return (
     <div className="login-body">
       <div className="main">
@@ -46,7 +51,9 @@ const AgentSignUp = () => {
               placeholder="Confirm Password"
               required=""
             />
-            <button className="login-submit">Sign up</button>
+            <button className="login-submit" onClick={handleAgentLogin}>
+              Sign up
+            </button>
           </form>
         </div>
       </div>
