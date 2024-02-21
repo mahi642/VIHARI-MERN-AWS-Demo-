@@ -5,9 +5,9 @@ const AdminNavbar1 = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark" id="navbar" style={{ backgroundColor: '#222271',fontSize:'20px',padding:'10px' }}>
       <Link className="navbar-brand" to="/">
-  <i className="fa fa-bus fa-2x" aria-hidden="true"></i> {/* fa-2x class makes the icon larger */}
+  <i className="fa fa-bus" aria-hidden="true"></i> {/* fa-2x class makes the icon larger */}
 </Link>
-<Link className="navbar-brand" to="/admindb/adminhome" style={{ fontSize: '24px' }}> {/* Adjust the font size as needed */}
+<Link className="navbar-brand" to="/admindb/adminhome" style={{ fontSize: '20px' }}> {/* Adjust the font size as needed */}
   Vihari
 </Link>
 
@@ -53,13 +53,13 @@ const AdminNavbar1 = () => {
           {/* Add more navbar items here */}
         </ul>
         <form id="frmLogout" action="/admin"></form>
-        <ul className="navbar-nav ml-auto" style={{marginLeft:'150px'}}>
+        <ul className="navbar-nav ml-auto" style={{marginLeft:'50px'}}>
           <li className="nav-item">
             <span className="nav-link">
               Welcome, <b>Admin</b>!
             </span>
           </li>
-          <li className="nav-item" style={{marginLeft:'200px'}}>
+          <li className="nav-item" style={{marginLeft:'150px'}}>
             <Link className="nav-link" to="/">
               <i className="fa fa-sign-out" aria-hidden="true"></i>
               Sign Out

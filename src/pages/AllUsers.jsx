@@ -65,7 +65,7 @@ const AllUsers = () => {
               </div>
               <div className="item-content col-md-6 userdetails">
                 <div>
-                  <h3>Student {index + 1}</h3>
+                  <h3>User {index + 1}</h3>
                 </div>
                 <div>
                   <p>Firstname: {user.firstName}</p>

@@ -3,32 +3,32 @@ import AdminNavbar from "../components/UI/AgentNavbar";
 import { Link, useParams } from "react-router-dom";
 import '../components/CSS/TourDetails.css'
 import "../components/CSS/AllTours.css";
-import { useGetTourPlacesQuery,useDeletePlaceMutation } from "../Slices/agentApiSlice";
+import { useGetTourPlacesQuery, useDeletePlaceMutation } from "../Slices/agentApiSlice";
 import Loader from "../components/Loader/Loader";
 const TourDetails = () => {
   const [places, setPlaces] = useState([]);
   const { id } = useParams();
-  const {data:placeData,isLoading,refetch}=useGetTourPlacesQuery(id);
-  const [deletePlace]=useDeletePlaceMutation();
+  const { data: placeData, isLoading, refetch } = useGetTourPlacesQuery(id);
+  const [deletePlace] = useDeletePlaceMutation();
 
 
 
   useEffect(() => {
-    if(placeData){
+    if (placeData) {
       setPlaces(placeData.places);
     }
-   
+
   }, [placeData]);
 
-  if(isLoading){
-    return <Loader/>;
+  if (isLoading) {
+    return <Loader />;
   }
 
-  const handleDeletePlace=async (id)=>{
+  const handleDeletePlace = async (id) => {
     const confirmDelete = window.confirm('Are you sure you want to delete this Place?');
 
-    try{
-      if(confirmDelete){
+    try {
+      if (confirmDelete) {
 
         await deletePlace(id);
         alert("Place deleted succesfully");
@@ -36,8 +36,8 @@ const TourDetails = () => {
       }
 
 
-    } catch(error){
-      console.log("Failed to delete place",error);
+    } catch (error) {
+      console.log("Failed to delete place", error);
     }
 
   }
@@ -58,11 +58,11 @@ const TourDetails = () => {
       {places.map((place) => (
         <div key={place._id} className="place-item-container" id={`place-item-${place._id}`}>
           <div className="place-image-container">
-          <img
-  className="place-image"
-  src={`http://localhost:4000/${place.Imageurl.replace(/\\/g, '/').replace('backend/', '')}`}
-  alt={"Place"}
-/>
+            <img
+              className="place-image"
+              src={`http://localhost:4000/${place.Imageurl.replace(/\\/g, '/').replace('backend/', '')}`}
+              alt={"Place"}
+            />
 
           </div>
           <div className="place-text">
@@ -73,19 +73,19 @@ const TourDetails = () => {
           </div>
 
           <div className="col-md-1">
-                <div>
-                  <button
-                    type="button"
-                    className="delete-user-btn btn btn-danger" style={{ fontSize: '15px' }}
-                    data-place-id={place._id}
-                    onClick={() => handleDeletePlace(place._id)}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
+            <div>
+              <button
+                type="button"
+                className="delete-user-btn btn btn-danger" style={{ fontSize: '15px' }}
+                data-place-id={place._id}
+                onClick={() => handleDeletePlace(place._id)}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
 
-          
+
         </div>
 
       ))}

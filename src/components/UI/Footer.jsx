@@ -20,9 +20,7 @@ const Footer = () => {
                 <div className="box">
                     <h3>quick links</h3>
                     <Link to="/" className="links"><i className="fas fa-arrow-right"></i> home</Link>
-                    <Link to="/#gallery" className="links"><i className="fas fa-arrow-right"></i> destination</Link>
                     <Link to="/tours" className="links"><i className="fas fa-arrow-right"></i> tours</Link>
-                    <Link to="/#services" className="links"><i className="fas fa-arrow-right"></i> services</Link>
                     <Link to="/about" className="links"><i className="fas fa-arrow-right"></i> about us</Link>
                     <Link to="/contact" className="links"><i className="fas fa-arrow-right"></i> contact us</Link>
                 </div>

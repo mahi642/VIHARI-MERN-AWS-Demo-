@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEditAgentDetailsMutation } from "../Slices/agentApiSlice";
 import AgentNavbar from "../components/UI/AgentNavbar";
+import '../components/CSS/EditProfile.css';
 
 const EditAgentProfile = () => {
   const navigate = useNavigate();
@@ -32,10 +33,10 @@ const EditAgentProfile = () => {
       <AgentNavbar />
       <div className="profile">
         <div className="rightdiv">
-          <h1>My Profile</h1>
+          <h1>Edit Profile</h1>
           <div className="profile-details">
             <div>
-              <h2>Name</h2>
+              <h2 style={{marginTop:'70px'}}>Name</h2>
               <input
                 className="inp-name"
                 type="text"
@@ -45,7 +46,7 @@ const EditAgentProfile = () => {
               />
             </div>
             <div>
-              <h2>Email</h2>
+              <h2 style={{marginTop:'20px'}}>Email</h2>
               <input
                 className="inp-name"
                 type="email"

@@ -53,9 +53,9 @@ const AgentNavbar = () => {
             </span>
           </li>
           <li className="nav-item">
-          <Link to="/agent/agentProfile"  className="nav-item nav-link">profile</Link>
+          <Link to="/agent/agentProfile"  className="nav-item nav-link" style={{ marginLeft: '270px' }}>Profile</Link>
           </li>
-          <li className="nav-item" style={{ marginLeft: '400px' }}>
+          <li className="nav-item" style={{ marginLeft: '50px' }}>
             <Link className="nav-link" to="/">
               <i className="fa fa-sign-out" aria-hidden="true"></i>
               Sign Out

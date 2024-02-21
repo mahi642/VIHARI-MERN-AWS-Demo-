@@ -26,6 +26,7 @@ import AddTour from './pages/AddTour';
 import AllTours from './pages/AllTours';
 import EditTour from './pages/EditTour';
 import TourDetails from './pages/TourDetails';
+import TourPlaces from './pages/TourPlaces';
 import AddPlace from './pages/AddPlace';
 import BusState from './context/bus/BusState';
 import PassengerDetails from './components/UI/PassengerDetails';
@@ -78,10 +79,11 @@ function App() {
               <Route exact path="/admindb/editbus/:id" element={<EditBus />} />
               <Route exact path="/about" element={<About />} />
               <Route exact path="/admindb/adminhome" element={<AdminHome />} />
-              <Route exact path="/admindb/edittour/:id" element={<EditTour />} />
-              <Route exact path="/admindb/opentour/:id"
+              <Route exact path="/agent/edittour/:id" element={<EditTour />} />
+              <Route exact path="/agent/opentour/:id"
                 element={<TourDetails />}
               />
+              <Route exact path = "/tourplaces/:id" element={<TourPlaces />} />
               <Route
                 exact
                 path="/admindb/booktour/:id"

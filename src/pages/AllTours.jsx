@@ -71,7 +71,7 @@ const AllTours = () => {
                     </div>
                     <div className="single-package-item-txt">
                       <h3>
-                        <Link to={`/admindb/opentour/${tour._id}`} style={{ textDecoration: "none", color: '#4e95a3' }}>
+                        <Link to={`/agent/opentour/${tour._id}`} style={{ textDecoration: "none", color: '#4e95a3' }}>
                           {tour.tname}
                         </Link>
                         <span className="pull-right" style={{ color: '#4e95a3' }} >
