@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import UserAvatar from '../Assets/User_avatar.jpg';
+import AgentAvatar from '../Assets/Agent_avatar.jpg';
 import { Link } from 'react-router-dom';
 import AdminNavbar from '../components/UI/AdminNavbar';
 import { useGetAllAgentsQuery, useAcceptAgentMutation, useRejectAgentMutation, useBlockAgentMutation, useUnblockAgentMutation } from "../Slices/adminApiSlice";
@@ -131,7 +131,7 @@ const AllAgents = () => {
                             <div className="item-image col-md-3">
                                 <img
                                     className="img-thumbnail item-image"
-                                    src={UserAvatar}
+                                    src={AgentAvatar}
                                     style={{ width: '200px' }}
                                     alt="Cannot display"
                                 />

@@ -40,6 +40,8 @@ import AgentSignUp from './pages/AgentSignUp';
 import AgentLogin from './pages/AgentLogin';
 import AllAgents from './pages/AllAgents';
 import AgentBuses from './pages/agentBuses';
+import AgentProfile from './pages/agentProfile';
+import EditAgentProfile from './pages/editAgentProfile';
 
 function App() {
   return (
@@ -63,6 +65,8 @@ function App() {
               <Route exact path="/admindb/allusers" element={<AllUsers />} />
               <Route exact path="/agent/alltours" element={<AllTours />} />
               <Route exact path="/agent/addbus" element={<AddBus />} />
+              <Route exact path="/agent/agentProfile" element={<AgentProfile />} />
+              <Route exact path='/agent/editAgentProfile' element={<EditAgentProfile />} />
               <Route exact path="/admindb/adduser" element={<AddUser />} />
               <Route exact path="/agent/addtour" element={<AddTour />} />
               <Route
@@ -105,7 +109,7 @@ function App() {
           <Route exact path='/admindb/adminhome' element={<AdminHome/>}/>
           <Route exact path='/agent/agenthome' element={<AgentHome/>}/>
           <Route exact path="/admindb/edittour/:id" element={ <EditTour/>}/>
-          <Route exact path="/admindb/opentour/:id" element={ <TourDetails/>}/>
+          <Route exact path="/agent/opentour/:id" element={ <TourDetails/>}/>
           <Route exact path='/admindb/booktour/:id' element={ <BookTour/>}/>
           <Route exact path='/contact' element={ <Contact/>}/>
           <Route exact path='/admindb/announcements' element={ <AdminAnnouncementForm/> }/>

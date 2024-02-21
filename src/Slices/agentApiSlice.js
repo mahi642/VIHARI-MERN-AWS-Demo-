@@ -126,6 +126,22 @@ export const agentApiSlice = apiSlice.injectEndpoints({
             providesTags: ['Place'],
             keepUnusedDataFor: 5,
         }),
+        getAgentProfile: builder.query({
+            query: (agentId) => ({
+                url: `${AGENT_URL}/agentProfile/${agentId}`
+            }),
+            providesTags: ['Place'],
+            keepUnusedDataFor: 5,
+        }),
+
+        editAgentDetails: builder.mutation({
+            query: ({ agentId, data }) => ({
+                url: `${AGENT_URL}/editProfile/${agentId}`,
+                method: 'PUT',
+                body: data
+            }),
+            invalidateTags: ['Place']
+        }),
 
     })
 });
@@ -147,4 +163,6 @@ export const {
     useEditPlaceDetailsMutation,
     useDeletePlaceMutation,
     useGetTourPlacesQuery,
+    useGetAgentProfileQuery,
+    useEditAgentDetailsMutation
 } = agentApiSlice;

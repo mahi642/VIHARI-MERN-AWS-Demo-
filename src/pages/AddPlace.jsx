@@ -41,7 +41,7 @@ const AddPlace = () => {
   
       await addPlace({tourId:id,data:form_data});
       alert("Place added successfully");
-      navigate(`/admindb/opentour/${id}`);
+      navigate(`/agent/opentour/${id}`);
     } catch(error){
       console.log("Failed to add place",error); 
     }
