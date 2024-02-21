@@ -105,7 +105,7 @@ function App() {
           <Route exact path='/admindb/adminhome' element={<AdminHome/>}/>
           <Route exact path='/agent/agenthome' element={<AgentHome/>}/>
           <Route exact path="/admindb/edittour/:id" element={ <EditTour/>}/>
-          <Route exact path="/admindb/opentour/:id" element={ <TourDetails/>}/>
+          <Route exact path="/agent/opentour/:id" element={ <TourDetails/>}/>
           <Route exact path='/admindb/booktour/:id' element={ <BookTour/>}/>
           <Route exact path='/contact' element={ <Contact/>}/>
           <Route exact path='/admindb/announcements' element={ <AdminAnnouncementForm/> }/>

@@ -58,11 +58,12 @@ const TourDetails = () => {
       {places.map((place) => (
         <div key={place._id} className="place-item-container" id={`place-item-${place._id}`}>
           <div className="place-image-container">
-            <img
-              className="place-image"
-              src={`${place.imagePath}`}
-              alt={"Place"}
-            />
+          <img
+  className="place-image"
+  src={`http://localhost:4000/${place.Imageurl.replace(/\\/g, '/').replace('backend/', '')}`}
+  alt={"Place"}
+/>
+
           </div>
           <div className="place-text">
             <h2 className="place-title">{place.name}</h2>

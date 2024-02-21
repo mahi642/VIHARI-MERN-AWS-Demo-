@@ -233,13 +233,13 @@ exports.getAgentTours = async (req, res) => {
 exports.addPlace = async (req, res) => {
   const { title, description } = req.body;
   const placeImage = req.file;
-  const imageUrl = placeImage.path;
+  const Imageurl = placeImage.path;
 
   try {
     const newPlace = new Place({
       name:title,
       description,
-      imageUrl,
+      Imageurl,
       tour: req.params.tourId
     });
 
@@ -277,4 +277,3 @@ exports.deletePlace = (req, res) => {
       res.status(500).json({ message: "Internal server error" });
     });
 };
-
