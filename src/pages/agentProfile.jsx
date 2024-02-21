@@ -34,14 +34,14 @@ const AgentProfile = () => {
         <div className="rightdiv">
           <h1>My Profile</h1>
 
-          <div className="profile-details">
+          <div className="profile-details-agent">
             <div className="nameAndGender">
               <div>
                 <h1>Agency Name</h1>
                 <h3>{agent.agentName}</h3>
               </div>
             </div>
-            <div className="contact-info">
+            <div className="contact-info-agent">
               <h1>My Contact Information</h1>
 
               <div className="nameAndGender">

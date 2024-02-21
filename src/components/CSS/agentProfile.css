@@ -33,7 +33,7 @@
     margin-top: 3rem;
   }
   
-  .profile-details {
+  .profile-details-agent {
     background-color: white;
     width: 50%;
     height: 65%;
@@ -82,7 +82,7 @@
     font-weight: bolder;
   }
   
-  .contact-info h3{
+  .contact-info-agent h3{
     margin-top: -15px;
   }
   .contact-info button {
