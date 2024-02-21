@@ -104,11 +104,11 @@ input.login-input::placeholder {
 }
 
 .signup input::placeholder {
-	font-size: 15px;
+  font-size: 15px;
 }
-
+                   
 .login input::placeholder {
-	font-size: 15px;
+  font-size: 15px;
 }
 
 button.login-submit {
@@ -130,7 +130,7 @@ button.login-submit {
 }
 
 button.login-submit:hover {
-	background: #6d44b8;
+  background: #6d44b8;
 }
 
 .login {
@@ -138,22 +138,22 @@ button.login-submit:hover {
 	background: #eee;
 	border-radius: 60% / 10%;
 	transform: translateY(-180px);
-	transition: .8s ease-in-out;
+  transition: 0.8s ease-in-out;
 }
 
 .login label {
-	color: #573b8a;
-	transform: scale(.6);
+  color: #573b8a;
+  transform: scale(0.6);
 }
 
-#chk:checked~.login {
-	transform: translateY(-600px);
+#chk:checked ~ .login {
+  transform: translateY(-600px);
 }
 
-#chk:checked~.login label {
-	transform: scale(1);
+#chk:checked ~ .login label {
+  transform: scale(1);
 }
 
-#chk:checked~.signup label {
-	transform: scale(.6);
+#chk:checked ~ .signup label {
+  transform: scale(0.6);
 }
