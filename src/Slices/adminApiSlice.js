@@ -69,6 +69,14 @@ export const adminApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['Agent']
         }),
+        editUserDetails: builder.mutation({
+            query: ({ userId, data }) => ({
+                url: `${ADMIN_URL}/editProfile/${userId}`,
+                method: 'PUT',
+                body: data
+            }),
+            invalidateTags: ['User']
+        }),
     })
 });
 
@@ -82,4 +90,5 @@ export const {
     useRejectAgentMutation,
     useBlockAgentMutation,
     useUnblockAgentMutation,
+    useEditUserDetailsMutation
 } = adminApiSlice;

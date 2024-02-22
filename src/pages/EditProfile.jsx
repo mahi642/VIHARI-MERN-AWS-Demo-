@@ -1,16 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 import profileImage from "../Assets/profile.png";
 import myProfile from "../Assets/myProfile.png";
 import myTrips from "../Assets/busTrips.png";
 import Navbar from "../components/UI/Navbar";
 import { useNavigate } from "react-router-dom";
+import { useEditUserDetailsMutation } from "../Slices/adminApiSlice";
 import "../components/CSS/EditProfile.css";
 const EditProfile = () => {
   const navigate = useNavigate();
+  const [editUserDetails] = useEditUserDetailsMutation();
 
-  const handleSave = (e) => {
-    navigate("/profile");
+  const [userfirstName,setuserfirstName] = useState('');
+  const [userlastName,setuserlastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [mobile, setMobile] = useState('');
+  const handleSave = async () => {
+    const userId = localStorage.getItem('userId');
+    try {
+      const { data } = await editUserDetails({ userId, data: { userfirstName, userlastName, email, mobile } });
+      alert("Profile Updated succesfully"); 
+      navigate("/profile");
+      window.location.reload();
+    } catch (error) {
+      console.error("Error editing user details:", error);
+     
+    }
   };
   const handleCancel = (e) => {
     navigate("/profile");
@@ -20,7 +35,7 @@ const EditProfile = () => {
     <div>
       <Navbar />
       <div className="profile">
-        <div className="leftdiv">
+        {/* <div className="leftdiv">
           <div style={{ marginBottom: "4rem" }} className="profile-items">
             <img className="profile-icons" src={profileImage} alt="profile" />
             <h1>User Name</h1>
@@ -35,60 +50,53 @@ const EditProfile = () => {
             <h1>My trips</h1>
           </div>
           <hr />
-        </div>
+        </div> */}
 
-        <div className="rightdiv">
-          <h1>My Profile</h1>
+        <div className="rightdiv-agent">
+          <h1>Edit Profile</h1>
 
-          <div className="profile-details">
-            <div className="nameAndGender">
-              <div>
-                <h2>Name</h2>
-
-                <input className="inp-name" type="text" placeholder="name" />
-              </div>
-              <div>
-                <h2>Gender</h2>
-
-                <input type="radio" name="gender" id="" value="male" />
-                <label for="gender">Male</label>
-
-                <input
-                  className="female-radio-btn"
-                  type="radio"
-                  name="gender"
-                  id=""
-                  value="female"
-                />
-                <label for="gender">Female</label>
-              </div>
-            </div>
-            <div className="dob1">
-              <h2>Date of Birth</h2>
+          <div className="profile-details-agent">
+          <div>
+              <h2 style={{marginTop:'20px'}}>First Name</h2>
               <input
                 className="inp-name"
-                type="date"
-                name="dob"
-                id=""
-                placeholder="dob"
+                type="text"
+                placeholder="First Name"
+                value={userfirstName}
+                onChange={(e) => setuserfirstName(e.target.value)}
               />
             </div>
-            <div className="contact-info">
-              <hr />
-              <h1>My Contact Information</h1>
-
-              <div className="nameAndGender">
-                <div>
-                  <h2>Email</h2>
-                  <input type="email" className="inp-name" />
-                </div>
-                <div>
-                  <h2>Mobile Number</h2>
-                  <input className="inp-name" type="text" name="phone" id="" />
-                </div>
-              </div>
-
-              <div className="cancel-save">
+            <div>
+              <h2 style={{marginTop:'20px'}}>Last Name</h2>
+              <input
+                className="inp-name"
+                type="text"
+                placeholder="Last Name"
+                value={userlastName}
+                onChange={(e) => setuserlastName(e.target.value)}
+              />
+            </div>
+            <div>
+              <h2 style={{marginTop:'20px'}}>Email</h2>
+              <input
+                className="inp-name"
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div>
+              <h2 style={{marginTop:'20px'}}>Mobile Number</h2>
+              <input
+                className="inp-name"
+                type="number"
+                placeholder="Mobile Number"
+                value={mobile}
+                onChange={(e) => setMobile(e.target.value)}
+              />
+            </div>
+              <div className="cancel-save" style={{marginTop:'40px'}}>
                 <button type="submit" onClick={handleCancel}>
                   CANCEL
                 </button>
@@ -100,7 +108,6 @@ const EditProfile = () => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

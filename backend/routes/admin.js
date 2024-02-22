@@ -12,5 +12,7 @@ router.put('/acceptagent/:agentId', adminController.acceptAgent);
 router.delete('/rejectagent/:agentId', adminController.rejectAgent);
 router.put('/blockagent/:agentId', adminController.blockAgent); 
 router.put('/unblockagent/:agentId', adminController.unblockAgent);
+router.put('/editProfile/:userId',adminController.userEditProfile);
+
 
 module.exports = router;

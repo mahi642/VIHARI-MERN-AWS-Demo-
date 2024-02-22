@@ -210,3 +210,22 @@ exports.rejectAgent = async (req, res) => {
     res.status(500).json({ message: "Error rejecting agent" });
   }
 };
+
+exports.userEditProfile= async (req,res)=>{
+  try{
+    const userId = req.params.userId;
+    const User= await Agent.findById(userId);
+    if(!User){
+      return res.status(404).json({ message: "User not found" });
+    }
+    const {firstName,lastName,email,mobile}=req.body;
+    User.firstName = firstName;
+    User.lastName = lastName;
+    User.email=email;
+    User.mobile = mobile;
+    await User.save();
+    res.status(200).json({ agent : User,message:"User data saved successfully"});
+  } catch(error){
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
