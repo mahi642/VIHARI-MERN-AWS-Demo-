@@ -15,13 +15,14 @@ const Tours = () => {
   const {orderRazorpay} = useContext(busContext)
   const [tours, setAllTours] = useState([]);
   const { data: tourData, isLoading } = useGetAllToursQuery();
+   const [showModal, setShowModal] = useState(false);
   const [commonData, setCommonData] = useState({
     email: '',
     mobile: '',
     seats: 0,
     price: 0
   });
-
+ 
   const handleCommonInputChange = (e) => {
     const { name, value } = e.target;
     setCommonData((prevData) => ({
@@ -38,8 +39,22 @@ const Tours = () => {
       setAllTours(updatedTourData);
     }
   }, [tourData]);
-  const HandlePayment = async(e) => {
+  const toggleModal = () => {
+    const token = localStorage.getItem('token');
+    setShowModal(token ? !showModal : false);
+    if (!token) {
+      alert('Please log in to book a tour.');
+      navigate('/login');
+    }
+  };
+  const changePrice = (e)=>{
+   setCommonData({...commonData,price:e.target.value})
+  }
+  const HandlePayment = async(e,tour) => {
     e.preventDefault()
+    console.log(commonData.seats)
+   await setCommonData({...commonData,price:commonData.seats*tour.tprice})
+      console.log(commonData.price)
       console.log('Payment logic goes here');
      let order = await orderRazorpay(commonData.price)
      const options = {
@@ -49,14 +64,24 @@ const Tours = () => {
       name: "Vihari",
       description: "A travel-site",
       order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of createOrder().
-      handler: ()=>{
+      handler: async()=>{
+        const response = await fetch('http://localhost:4000/api/tour/tourbooking',{
+          method:"POST",
+          headers:{
+            "auth-token":localStorage.getItem('token'),
+            "Content-type":"application/json"
+          },
+          body:JSON.stringify({tour:tour,tickets:commonData.seats,price:commonData.price})
+        })
+        const json = await response.json();
+        console.log(json)
        alert('Payment successful')
        navigate('/')
       },
       prefill: {
         name:'Nithin' ,
         email: commonData.email,
-        contact:commonData.phoneNumber,
+        contact:commonData.mobile,
       },
       notes: {
         address: "Razorpay Corporate Office",
@@ -85,7 +110,7 @@ const Tours = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <>
+    <> 
       <Navbar />
       <div>
         <h1 style={{ marginTop: '20px' }}>Tours</h1>
@@ -128,7 +153,7 @@ const Tours = () => {
                           </p>
                         </div>
                         <div className="about-btn">
-                          <button style={{ backgroundColor: '#06bbcc' }} className="about-view packages-btn" data-bs-toggle="modal" data-bs-target="#tour-modal">
+                          <button style={{ backgroundColor: '#06bbcc' }} className="about-view packages-btn" data-bs-toggle="modal" data-bs-target="#tour-modal" onClick={toggleModal}>
                             Book now
                           </button>
                           <div class="modal" tabindex="-1" id="tour-modal">
@@ -160,10 +185,13 @@ const Tours = () => {
                                         className="form-control"
                                         id="mobile"
                                         placeholder="Enter your phone number"
-                                        name="mobiler"
+                                        name="mobile"
                                         value={commonData.mobile}
                                         onChange={handleCommonInputChange}
+                                        required
                                         style={{ width: "60%", fontSize:"15px" }}
+                                        minLength={10}
+                                        maxLength={10}
                                       />
                                     </div>
                                     <div className="form-group" style={{ display: 'flex', marginTop:"10px" }}>
@@ -174,17 +202,19 @@ const Tours = () => {
                                         id="seats"
                                         name="seats"
                                         value={commonData.seats}
-                                        onChange={(e)=>{handleCommonInputChange(e); setCommonData({price:e.target.value*tour.tprice})}}
+                                        onChange={(e)=>{handleCommonInputChange(e);}}
                                         style={{ width: "60%", fontSize:"15px" }}
+                                        required
                                         min={1}
                                       />
+                                      <input type="number" name="price" id="price" value={commonData.seats*tour.tprice} onChange={changePrice} style={{display:"none"}} />
                                     </div>
                                   </form>
                                 </div>
                                 <div class="modal-footer" >
-                                  <h5>Price : <i class="fa-solid fa-indian-rupee-sign"></i>{commonData.price}</h5>
+                                  <h5>Price : <i class="fa-solid fa-indian-rupee-sign"></i>{commonData.seats*tour.tprice}</h5>
                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style={{fontSize:"15px"}}>Close</button>
-                                  <button type="button" class="btn btn-primary" style={{fontSize:"15px"}} onClick={HandlePayment}>Pay now</button>
+                                  <button type="button" class="btn btn-primary" style={{fontSize:"15px"}} data-bs-dismiss="modal" onClick={(e)=>{HandlePayment(e,tour)}}>Pay now</button>
                                 </div>
                               </div>
                             </div>

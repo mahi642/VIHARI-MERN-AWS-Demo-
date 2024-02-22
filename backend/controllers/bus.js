@@ -40,9 +40,9 @@ module.exports.booked = async(req,res)=>{
    try {
      const {id,date} = req.body
       const bookings = await Ticket.find({bus:id,date});
-      if(bookings){
+      if(bookings){ 
          res.json({success:true,bookings});   
-      }
+      } 
       else {
          res.json({success:false,error:"Failed to fetch"})
       }
