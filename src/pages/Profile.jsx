@@ -87,14 +87,14 @@ const Profile = () => {
               <h2>Name</h2>
               <h3>{user.firstName + " " + user.lastName}</h3>
             </div>
-            <div>
+            {/* <div>
               <h2>Gender</h2>
               <h3>Male</h3>
-            </div>
-          <div className="dob">
+            </div> */}
+          {/* <div className="dob">
             <h2>Date of Birth</h2>
             <h3>27-08-2003</h3>
-          </div>
+          </div> */}
         </div>
           <div className="contact-info">
             <hr />
@@ -126,7 +126,7 @@ const Profile = () => {
             <th scope="col">Seats</th>
             <th scope="col">Fare</th>
             <th scope="col">Booking Date</th>
-            <th scope="col">Cancel</th>
+            {/* <th scope="col">Cancel</th> */}
             </tr>
           </thead>
           
@@ -140,7 +140,7 @@ const Profile = () => {
                 <td>{booking.tickets.length}</td>
                 <td>{booking.tickets.length * buses[index].tktprice}</td>
                 <td>{booking.date}</td>
-                <td><button className="btn btn-primary cancel-ticket" style={{fontSize:'15px'}}>cancel</button></td>
+                {/* <td><button className="btn btn-primary cancel-ticket" style={{fontSize:'15px'}}>cancel</button></td> */}
               </tr> 
               <hr />
               </>

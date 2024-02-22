@@ -37,9 +37,9 @@ const Tours = () => {
                         <img style={{ height: '200px' }} src={`http://localhost:4000/${tour.DispImageurl}`} alt="package-place" />
                       </div>
                       <div className="single-package-item-txt">
-                        <h3>
-                          <a href={`/tourplaces/${tour._id}`}>{tour.tname}</a>
-                          <span className="pull-right">
+                        <h3 >
+                          <Link to={`/tourplaces/${tour._id}`} style={{textDecoration:'None'}}>{tour.tname}</Link>
+                          <span className="pull-right" style={{paddingLeft:'15px'}}>
                             <i className="fa-solid fa-indian-rupee-sign"></i>
                             {tour.tprice}
                           </span>
@@ -65,11 +65,11 @@ const Tours = () => {
                           </p>
                         </div>
                         <div className="about-btn">
-                          <a href="/payment">
+                          <Link to="/payment" style={{textDecoration:'None'}}>
                             <button style={{ backgroundColor: '#06bbcc' }} className="about-view packages-btn">
                               Book now
                             </button>
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </div>
