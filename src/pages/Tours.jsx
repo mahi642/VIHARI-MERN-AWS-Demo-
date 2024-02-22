@@ -128,11 +128,6 @@ const Tours = () => {
                           </p>
                         </div>
                         <div className="about-btn">
-                          <Link to="/payment" style={{textDecoration:'None'}}>
-                            <button style={{ backgroundColor: '#06bbcc' }} className="about-view packages-btn">
-                              Book now
-                            </button>
-                          </Link>
                           <button style={{ backgroundColor: '#06bbcc' }} className="about-view packages-btn" data-bs-toggle="modal" data-bs-target="#tour-modal">
                             Book now
                           </button>
