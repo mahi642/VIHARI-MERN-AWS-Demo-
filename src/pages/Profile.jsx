@@ -111,9 +111,9 @@ const Profile = () => {
               </div>
             </div>
 
-            <button type="submit" onClick={handleEditInProfile}>
+            {/* <button type="submit" onClick={handleEditInProfile}>
               Edit Info{" "}
-            </button>
+            </button> */}
           </div>
         </div>}
         {history && <div className="profile-details">
