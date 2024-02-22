@@ -24,19 +24,21 @@ const Profile = () => {
     const json = await response.json();
    setuser(json.user)
   }
-  const getTrips = async()=>{
-    const response = await fetch('http://localhost:4000/history',{
-      headers:{
-        "auth-token":localStorage.getItem('token')
+  const getTrips = async () => {
+    const response = await fetch('http://localhost:4000/history', {
+      headers: {
+        "auth-token": localStorage.getItem('token')
       }
-    })
+    });
     const data = await response.json();
-    setbookings(data.tickets)
-    data.tickets.forEach(async booking=>{
-      const bus = await getBusDetails(booking.bus)
-      setbuses([...buses,bus])
-    })
-  }
+    setbookings(data.tickets);
+  
+    data.tickets.forEach(async booking => {
+      const bus = await getBusDetails(booking.bus);
+      setbuses(prevBuses => [...prevBuses, bus]);
+    });
+  };
+  
   useEffect(()=>{
     getDetails()
     getTrips()
@@ -118,19 +120,22 @@ const Profile = () => {
         {bookings.length ===0?<div style={{alignContent:'center',alignItems:'center',justifyContent:"center",paddingTop:"15px"}}><img src="sweat.gif" alt="" style={{height:'70px'}}/><h1 >No Bookings yet</h1></div>:<table className="table" style={{fontSize:'20px',padding:'10px'}}>
           <thead >
             <tr >
-            <th scope="col">Bus</th>
-            <th scope="col">cost</th>
-            <th scope="col">seats</th>
-            <th scope="col">fare</th>
-            <th scope="col">DOJ</th>
-            <th scope="col">cancel</th>
+            <th scope="col">Source</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Cost</th>
+            <th scope="col">Seats</th>
+            <th scope="col">Fare</th>
+            <th scope="col">Booking Date</th>
+            <th scope="col">Cancel</th>
             </tr>
           </thead>
           
           <tbody>
             {bookings.map((booking,index)=>{
             return <><tr>
-                <td><img src={buses[index].Imageurl.replace(/^.*backend\\/i, "")} alt=""  style={{height:'60px'}}/></td>
+                {/* <td><img src={buses[index].Imageurl?.replace(/^.*backend\\/i, "")} alt=""  style={{height:'60px'}}/></td> */}
+                <td>{buses[index].srcname}</td>
+                <td>{buses[index].destname}</td>
                 <td>{buses[index].tktprice}</td>
                 <td>{booking.tickets.length}</td>
                 <td>{booking.tickets.length * buses[index].tktprice}</td>

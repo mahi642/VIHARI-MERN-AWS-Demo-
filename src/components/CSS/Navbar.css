@@ -56,12 +56,12 @@ a.nav-link.active:hover {
 }
 
 .logo{
-  margin-left: 40px;
+  margin-left: 140px;
 }
 .links{
   display: flex;
   font-size: 20px;
 }
 .links :link{
-  padding-right: 40px;
+  padding-right: 80px;
 }

@@ -119,6 +119,7 @@ function App() {
           <Route exact path='/admindb/booktour/:id' element={ <BookTour/>}/>
           <Route exact path='/contact' element={ <Contact/>}/>
           <Route exact path='/admindb/announcements' element={ <AdminAnnouncementForm/> }/>
+          <Route path="*" element={<h1>Page Not Found</h1>} />
         </Routes>
     </Router>
     </UserState>

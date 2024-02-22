@@ -34,7 +34,7 @@ const Tours = () => {
                   <div className="col-md-4 col-sm-6" key={tour._id}>
                     <div className="single-package-item">
                       <div>
-                        <img style={{ height: '200px' }} src={`/${tour.DispImageurl}`} alt="package-place" />
+                        <img style={{ height: '200px' }} src={`http://localhost:4000/${tour.DispImageurl}`} alt="package-place" />
                       </div>
                       <div className="single-package-item-txt">
                         <h3>

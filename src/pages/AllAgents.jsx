@@ -80,7 +80,7 @@ const AllAgents = () => {
                     <button
                         type="button"
                         className="reject-agent-btn btn btn-danger"
-                        style={{ fontSize: '15px' }}
+                        style={{ fontSize: '15px',marginTop:'10px'}}
                         data-agent-id={agent.id}
                         onClick={() => handleReject(agent._id)}
                     >
