@@ -1,11 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors =require('cors');
+const helmet = require('helmet');
 const path=require('path');
 const morgan = require('morgan');
 const rfs = require('rotating-file-stream');
 const app = express()
 app.use(express.json())
+
+app.use(helmet())
 
 app.use(cors());
 
@@ -35,6 +38,9 @@ app.get('/',(req,res)=>{
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/images',express.static(__dirname+'/public/Images'));
 
+app.use('/error',(req,res,next)=>{
+  throw new Error("new error")
+})
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);

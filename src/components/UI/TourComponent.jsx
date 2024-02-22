@@ -24,7 +24,7 @@ const TourComponent = ({ image, name, price, duration, accommodation, transporta
             </p>
           </div>
           <div className="about-btn">
-            <Link to="" style={{ textDecoration: "none" }}><button className="about-view packages-btn" >book now</button></Link>
+            <Link to="/tours" style={{ textDecoration: "none" }}><button className="about-view packages-btn" >book now</button></Link>
           </div>
         </div>
       </div>

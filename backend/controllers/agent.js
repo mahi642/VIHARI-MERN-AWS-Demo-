@@ -58,7 +58,7 @@ exports.getAgentBuses = async (req, res) => {
     const agentId=req.params.agentId;
     const agent = await Agent.findById(agentId).populate('buses');
     const Buses=agent.buses;
-    console.log(Buses);
+    // console.log(Buses);
     res.status(200).json({ buses: Buses });
   } catch (error) {
     res.status(500).json({ message: "Error while fetching buses" });

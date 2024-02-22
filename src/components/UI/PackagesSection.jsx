@@ -12,7 +12,7 @@ const PackagesSection = () => {
       accommodation: '5 star accommodation',
       transportation: 'Transportation',
       reviews: 254,
-      link: '/Tour1',
+      link: '/tours',
     },
     {
       name: 'Hyderabad',
@@ -22,7 +22,7 @@ const PackagesSection = () => {
       accommodation: '5 star accommodation',
       transportation: 'Transportation, Free food',
       reviews: 344,
-      link: '/Tour2',
+      link: '/tours',
     },
     {
       name: 'Delhi',
@@ -32,7 +32,7 @@ const PackagesSection = () => {
       accommodation: '5 star accommodation',
       transportation: 'Transportation, Food facilities',
       reviews: 544,
-      link: '/Tour3',
+      link: '/tours',
     },
   ];
 
