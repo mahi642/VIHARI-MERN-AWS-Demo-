@@ -10,7 +10,9 @@ import "../components/CSS/userProfile.css";
 const Profile = () => {
   const navigate = useNavigate();
   const [user, setuser] = useState({})
-  const [history, sethistory] = useState(false)
+  const [bushistory, setBusHistory] = useState(false)
+  const [profile, setprofile] = useState(true);
+  const [tourHistory,setTourHistory] = useState(false)
   const [bookings, setbookings] = useState([])
   const [buses, setbuses] = useState([])
   const getDetails = async()=>{
@@ -39,6 +41,21 @@ const Profile = () => {
     });
   };
   
+  const profileSet = ()=>{
+    setBusHistory(false)
+    setTourHistory(false)
+    setprofile(true)
+  }
+  const setTrip = ()=>{
+    setprofile(false)
+    setTourHistory(false)
+    setBusHistory(true)
+  }
+  const setTour = ()=>{
+    setprofile(false)
+    setBusHistory(false)
+    setTourHistory(true)
+  }
   useEffect(()=>{
     getDetails()
     getTrips()
@@ -69,19 +86,23 @@ const Profile = () => {
         </div>
         <div className="profile-items">
           <img className="profile-icons" src={myProfile} alt="MyProfile" />
-          <button id="profile" onClick={()=>{sethistory(false)}} style={{background:"inherit"}}><h2>My profile</h2></button>
+          <button id="profile" onClick={()=>{profileSet()}} style={{background:"inherit"}}><h2>My profile</h2></button>
         </div>
         <hr />
         <div className="profile-items">
           <img className="profile-icons" src={myTrips} alt="trips" />
-          <button id="history" onClick={()=>{sethistory(true)}} style={{background:"inherit"}}><h2>My trips</h2></button>
+          <button id="history" onClick={()=>{setTrip()}} style={{background:"inherit"}}><h2>My trips</h2></button>
+        </div> 
+        <div className="profile-items">
+          <img className="profile-icons" src={myTrips} alt="trips" />
+          <button id="history" onClick={()=>{setTour()}} style={{background:"inherit"}}><h2>My tours</h2></button>
         </div> 
         <hr />
       </div>
 
       <div className="rightdiv">
         <h1>My Profile</h1>
-{ !history && <div className="profile-details">
+{ profile && <div className="profile-details">
           <div className="nameAndGender">
             <div>
               <h2>Name</h2>
@@ -116,7 +137,7 @@ const Profile = () => {
             </button>
           </div>
         </div>}
-        {history && <div className="profile-details">
+        {bushistory && <div className="profile-details">
         {bookings.length ===0?<div style={{alignContent:'center',alignItems:'center',justifyContent:"center",paddingTop:"15px"}}><img src="sweat.gif" alt="" style={{height:'70px'}}/><h1 >No Bookings yet</h1></div>:<table className="table" style={{fontSize:'20px',padding:'10px'}}>
           <thead >
             <tr >
