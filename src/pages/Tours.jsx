@@ -54,12 +54,12 @@ const Tours = () => {
     e.preventDefault()
     console.log(commonData.seats)
    await setCommonData({...commonData,price:commonData.seats*tour.tprice})
-      console.log(commonData.price)
+      let price = commonData.seats*tour.tprice;
       console.log('Payment logic goes here');
-     let order = await orderRazorpay(commonData.price)
+     let order = await orderRazorpay(price)
      const options = {
       key: "rzp_test_lQaiC5AbagJXwZ", // Enter the Key ID generated from the Dashboard
-      amount: commonData.price * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      amount: price * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
       currency: "INR",
       name: "Vihari",
       description: "A travel-site",
@@ -71,7 +71,7 @@ const Tours = () => {
             "auth-token":localStorage.getItem('token'),
             "Content-type":"application/json"
           },
-          body:JSON.stringify({tour:tour,tickets:commonData.seats,price:commonData.price})
+          body:JSON.stringify({tour:tour,tickets:commonData.seats,price:price})
         })
         const json = await response.json();
         console.log(json)
