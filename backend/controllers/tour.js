@@ -36,11 +36,10 @@ exports.getMoreTours=(req,res)=>{
 
 };
 exports.booking = async(req,res)=>{
-    const {tour,tickets,price} = req.body;
-    console.log(tour._id + " " + tickets + " " + price)
+    
     try {
         const user = req.user.id;
-      
+        const {tour,tickets,price} = req.body;
         const Ticket = await tourTicket.create({user,tour:tour._id,tickets,price})
         if(Ticket){
             res.json({success:true}) 
