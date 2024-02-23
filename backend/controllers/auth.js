@@ -4,6 +4,7 @@ const JWT = require("jsonwebtoken")
 const JWT_SECRET = "VihariTravelSite"
 const Agent = require('../models/agent');
 const Ticket = require('../models/ticket');
+const tourTicket = require('../models/tourTickets');
 
 // Verifying login credentials
 module.exports.verifyUser =  async(req,res)=>{
@@ -103,7 +104,21 @@ module.exports.getBookings = async(req,res)=>{
   }
 
 }
-
+module.exports.tourBookings = async(req,res)=>{
+  try {
+    const user = req.user;
+    const tickets = await tourTicket.find({user:user.id})
+    if(tickets){
+      res.json({success:true,tickets})
+    }
+    else{
+      res.json({success:false,error:'network error'})
+    }
+  } catch (error) {
+    console.log(error)
+    res.json({success:false,error:"Internal error"})
+  }
+}
 
 module.exports.verifyAgent = async (req, res) => {
   const { email, password } = req.body;

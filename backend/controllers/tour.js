@@ -55,3 +55,18 @@ exports.booking = async(req,res)=>{
     }
     
 }
+module.exports.getTour = async(req,res)=>{
+    try {
+        const {id} = req.body
+    const tour = await Tour.findById(id);
+    if(tour){
+        res.json({success:true,tour})
+    }
+    else {
+        res.json({success:false,error:"Slow network"})
+    } 
+    } catch (error) {
+        console.log(error)
+        res.json({success:false,error:"Internal error"})
+    }
+}

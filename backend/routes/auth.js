@@ -10,4 +10,5 @@ router.post("/agentLogin",authController.verifyAgent);
 router.post('/order',orderController.createorder)
 router.post('/userdetails',fetchuser,authController.getUserDetails)
 router.get('/history',fetchuser,authController.getBookings);
+router.get('/tourbookings',fetchuser,authController.tourBookings)
 module.exports = router;
