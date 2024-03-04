@@ -93,6 +93,16 @@ const AgentBuses = () => {
                                 <Link to={`/agent/editbus/${bus._id}`}>
                                     <button className="btn btn-success" style={{ fontSize: '15px' }}> Edit Bus</button>
                                 </Link>
+
+
+                                    {/* written now */}
+
+                                <Link to={`/getUserDetails/${bus._id}`}>
+                                    <button className="btn btn-success" style={{ fontSize: '15px',marginTop:"1rem" }}> Bookings</button>
+                                </Link>
+
+
+
                                 <button
                                     type="button" style={{ marginTop: "10px", fontSize: '15px', width: '80px', marginLeft: '20px', marginRight: '5px' }}
                                     className="delete-bus-btn btn btn-danger"

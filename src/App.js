@@ -45,6 +45,7 @@ import AgentProfile from "./pages/agentProfile";
 import EditAgentProfile from "./pages/editAgentProfile";
 import Approval from "./pages/Approval";
 import AgentLogin from './pages/AgentLogin';
+import GetUsersByBusId from './pages/GetUsersByBusId';
 function App() {
   return (
     <div className="App">
@@ -120,6 +121,7 @@ function App() {
           <Route exact path='/contact' element={ <Contact/>}/>
           <Route exact path='/admindb/announcements' element={ <AdminAnnouncementForm/> }/>
           <Route path="*" element={<h1>Page Not Found</h1>} />
+          <Route path="/getUserDetails/:busId" element={<GetUsersByBusId/>} />
         </Routes>
     </Router>
     </UserState>
