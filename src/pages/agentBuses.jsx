@@ -89,22 +89,25 @@ const AgentBuses = () => {
                             <td>{bus.durtime}</td>
                             <td>{bus.btype}</td>
                             <td>₹{bus.tktprice}</td>
-                            <td style={{ display: 'flex', flexDirection: 'column' }}>
-                                <Link to={`/agent/editbus/${bus._id}`}>
-                                    <button className="btn btn-success" style={{ fontSize: '15px' }}> Edit Bus</button>
-                                </Link>
-
-
-                                    {/* written now */}
+                            <td style={{ display: 'flex', flexDirection: 'column' ,gap: '7px'}}>
 
                                 <Link to={`/getUserDetails/${bus._id}`}>
-                                    <button className="btn btn-success" style={{ fontSize: '15px',marginTop:"1rem" }}> Bookings</button>
+                                    <button className="btn btn-success" style={{ textDecoration: 'none', fontSize: '13px', padding: '5px', backgroundColor: 'blue', color: 'white', borderRadius: '3px' }}> Bookings</button>
                                 </Link>
+
+                                <Link to={`/agent/editbus/${bus._id}`}>
+                                    <button className="btn btn-success" style={{ fontSize: '13px' }}> Edit Bus</button>
+                                </Link>
+
+
+                                {/* written now */}
+
+
 
 
 
                                 <button
-                                    type="button" style={{ marginTop: "10px", fontSize: '15px', width: '80px', marginLeft: '20px', marginRight: '5px' }}
+                                    type="button" style={{ fontSize: '13px',width:'65px',marginLeft:'4px'}}
                                     className="delete-bus-btn btn btn-danger"
                                     data-bus-id={bus.id}
                                     onClick={() => handleDeleteBus(bus._id)}

@@ -143,6 +143,15 @@ export const agentApiSlice = apiSlice.injectEndpoints({
             invalidateTags: ['Place']
         }),
 
+        createAgent : builder.mutation({
+            query: (formData) => ({
+                url: `/agentSignUp`,
+                method: 'POST',
+                body: formData
+            }),
+            invalidateTags: ['Agent']
+        }),
+
     })
 });
 
@@ -164,5 +173,6 @@ export const {
     useDeletePlaceMutation,
     useGetTourPlacesQuery,
     useGetAgentProfileQuery,
-    useEditAgentDetailsMutation
+    useEditAgentDetailsMutation,
+    useCreateAgentMutation
 } = agentApiSlice;

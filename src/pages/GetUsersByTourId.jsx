@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import AgentNavbar from "../components/UI/AgentNavbar";
-const GetUsersByBusId = () => {
+const GetUsersByTourId = () => {
   const [userDetails, setUserDetails] = useState([]);
-  const { busId } = useParams();
+  const { tourId } = useParams();
 
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4000/api/${busId}/alldetails`
+          `http://localhost:4000/api/${tourId}/alldetails`
         );
         const data = await response.json();
 
@@ -37,7 +37,7 @@ const GetUsersByBusId = () => {
     };
 
     fetchUserDetails();
-  }, [busId]);
+  }, [tourId]);
 
   return (
     <div>
@@ -69,4 +69,4 @@ const GetUsersByBusId = () => {
   );
 };
 
-export default GetUsersByBusId;
+export default GetUsersByTourId;

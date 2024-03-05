@@ -12,6 +12,7 @@ const AllAgents = () => {
     const [rejectAgent] = useRejectAgentMutation();
     const [blockAgent] = useBlockAgentMutation();
     const [unblockAgent] = useUnblockAgentMutation();
+    const [selectedAgentId, setSelectedAgentId] = useState(null);
 
     useEffect(() => {
         if (agentData) {
@@ -30,20 +31,18 @@ const AllAgents = () => {
 
     const handleReject = async (agentId) => {
         try {
-          const confirmed = window.confirm('Are you sure you want to reject this agent?');
-          if (!confirmed) {
-            return; 
-          }
-          await rejectAgent(agentId).unwrap();
-          alert("Agent rejected successfully");
-          await refetch();
+            const confirmed = window.confirm('Are you sure you want to reject this agent?');
+            if (!confirmed) {
+                return;
+            }
+            await rejectAgent(agentId).unwrap();
+            alert("Agent rejected successfully");
+            await refetch();
         } catch (error) {
-    
-          console.error("Error deleting user:", error);
+            console.error("Error deleting user:", error);
         }
-      };
-    
-    
+    };
+
     const handleBlock = async (agentId) => {
         try {
             await blockAgent(agentId).unwrap();
@@ -80,12 +79,20 @@ const AllAgents = () => {
                     <button
                         type="button"
                         className="reject-agent-btn btn btn-danger"
-                        style={{ fontSize: '15px',marginTop:'10px'}}
+                        style={{ fontSize: '15px' }}
                         data-agent-id={agent.id}
                         onClick={() => handleReject(agent._id)}
                     >
                         Reject
                     </button>
+                    <a style={{ textDecoration: 'none', fontSize: '15px', padding: '5px', backgroundColor: 'blue', color: 'white', borderRadius: '3px' }}
+                        href={`http://localhost:4000/${agent.document ? agent.document.replace(/^.*backend\\/i, "") : ''}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => handlePdfLinkClick(agent._id)}
+                    >
+                        Show
+                    </a>
                 </>
             );
         } else if (agent.blocked) {
@@ -113,6 +120,10 @@ const AllAgents = () => {
                 </button>
             );
         }
+    };
+
+    const handlePdfLinkClick = (agentId) => {
+        setSelectedAgentId(agentId === selectedAgentId ? null : agentId);
     };
 
     return (
@@ -147,9 +158,18 @@ const AllAgents = () => {
                                     <p>Agency Email: {agent.email}</p>
                                 </div>
                             </div>
-                            <div className="col-md-1">
+                            <div className="col-md-1" style={{ display: 'flex', flexDirection: 'column', gap: '7px' }}>
                                 {renderAgentActions(agent)}
+
                             </div>
+
+                            {/* {selectedAgentId === agent._id && agent.document && (
+                                <iframe
+                                    src={`http://localhost:4000/${agent.document.replace(/^.*backend\\/i, "")}`}
+                                    title={`PDF Viewer - Agent ${agent._id}`}
+                                    style={{ width: '100%', height: '500px', border: '1px solid #ddd', marginTop: '10px' }}
+                                ></iframe>
+                            )} */}
                         </div>
                         <div>
                             <hr />

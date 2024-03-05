@@ -59,9 +59,11 @@ const UserState = (props) => {
     return response
      }
 
-  const createAgent = async(agentName,email,password)=>{
+  const createAgent = async(formData)=>{
   
     // Creating user with api call 
+    const {agentName,email,password,document}=formData;
+    console.log(formData)
     const res = await fetch(`${host}/agentSignUp`,{
       method:"POST",
       headers:{
@@ -70,7 +72,8 @@ const UserState = (props) => {
       body:JSON.stringify({
         agentName,
         email,
-        password
+        password,
+        document
       })
       })
       const response =await res.json()

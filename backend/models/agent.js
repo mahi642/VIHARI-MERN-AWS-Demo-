@@ -6,6 +6,10 @@ const agentSchema = new mongoose.Schema(
             type: "string",
             required: true,
         },
+        document:{
+            type: "string",
+            required: true,
+        },
         password:{
             type: "string",
             required:true,

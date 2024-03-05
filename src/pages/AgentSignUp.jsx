@@ -4,27 +4,39 @@ import Footer from "../components/UI/Footer";
 import { useNavigate, Link } from "react-router-dom";
 import "../components/CSS/Login.css";
 import userContext from "../context/User/userContext";
+import { useCreateAgentMutation } from "../Slices/agentApiSlice";
 import Navbar from "../components/UI/Navbar";
 
 const AgentSignUp = () => {
   const navigate = useNavigate();
-  const { verifyAgent, createAgent } = useContext(userContext);
+  const [createAgent]=useCreateAgentMutation();
+  const { verifyAgent } = useContext(userContext);
   const [SignupCreds, setSignupCreds] = useState({
     agentName: "",
     email: "",
     password: "",
     cpassword: "",
+    document: null
   });
   const onSignupInput = (e) => {
     setSignupCreds({ ...SignupCreds, [e.target.name]: e.target.value });
   };
+  const onFileChange = (e) => {
+    setSignupCreds({ ...SignupCreds, document: e.target.files[0] });
+  };
   const HandleSignup = async (e) => {
     e.preventDefault();
-    const { agentName, email, password, cpassword } = SignupCreds;
+    const { agentName, email, password, cpassword,document } = SignupCreds;
     if (password !== cpassword) {
       alert("Password mismatch");
     } else {
-      const response = await createAgent(agentName, email, password);
+      const formData=new FormData();
+      formData.append('agentName',agentName);
+      formData.append('email',email);
+      formData.append('password',password);
+      formData.append('document',document);
+     
+      const response = await createAgent(formData).unwrap();
       if (response.success) {
         localStorage.token = response.authToken;
         navigate("/agentLogin");
@@ -82,6 +94,12 @@ const AgentSignUp = () => {
                 value={SignupCreds.cpassword}
                 placeholder="Confirm Password"
                 required=""
+              />
+              <input
+                className="signup-input"
+                style={{padding:"3px"}}
+                type="file"
+                onChange={onFileChange}
               />
               <button className="login-submit" onClick={HandleSignup}>
                 Sign up

@@ -168,12 +168,15 @@ module.exports.createAgent = async(req,res)=>{
         // Hashing password
         const salt = await bcrypt.genSalt(5);
         const secPass = await bcrypt.hash(req.body.password,salt) 
+        const doc=req.file;
+        const document=doc.path;
         
         // Creating a user
        await Agent.create({
           agentName: req.body.agentName,
           email: req.body.email,
-          password: secPass
+          password: secPass,
+          document:document
       }).then(agent => {
 
         // Creating authToken for user
