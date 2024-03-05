@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import AgentNavbar from "../components/UI/AgentNavbar";
+import UserAvatar from '../Assets/User_avatar.jpg'
 const GetUsersByBusId = () => {
   const [userDetails, setUserDetails] = useState([]);
   const { busId } = useParams();
@@ -46,6 +47,7 @@ const GetUsersByBusId = () => {
       <table className="table">
         <thead>
           <tr>
+            <th>User</th>
             <th>Name</th>
             <th>Email</th>
             <th>Mobile</th>
@@ -56,6 +58,14 @@ const GetUsersByBusId = () => {
           {userDetails.map(
             ({ userId, userName, userEmail, userMobile, date }) => (
               <tr key={userId} className="bus-row" style={{ height: "50px" }}>
+                <td>
+                <img
+                  className="img-thumbnail item-image"
+                  src={UserAvatar}
+                  style={{ width: '100px' }}
+                  alt="Cannot display"
+                />
+              </td>
                 <td>{userName}</td>
                 <td>{userEmail}</td>
                 <td>{userMobile}</td>
