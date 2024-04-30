@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const Agent = require('../models/agent');
 const nodemailer = require("nodemailer");
-const sendgridTransport = require("nodemailer-sendgrid-transport");
+// const sendgridTransport = require("nodemailer-sendgrid-transport");
 const bcrypt=require('bcryptjs');
 
 const mailTransporter = nodemailer.createTransport({

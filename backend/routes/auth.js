@@ -1,15 +1,221 @@
 const express = require('express');
 const router = express.Router();
-const authController = require('../controllers/auth')
-const orderController = require('../controllers/order')
-const fileUpload=require('../middleware/fileUpload');
-const fetchuser = require('../middleware/fetchUser')
-router.post('/login',authController.verifyUser);
-router.post('/signup',authController.createUser);
-router.post("/agentSignUp",fileUpload.single('document'),authController.createAgent);
-router.post("/agentLogin",authController.verifyAgent);
-router.post('/order',orderController.createorder)
-router.post('/userdetails',fetchuser,authController.getUserDetails)
-router.get('/history',fetchuser,authController.getBookings);
-router.get('/tourbookings',fetchuser,authController.tourBookings)
+const authController = require('../controllers/auth');
+const orderController = require('../controllers/order');
+const fileUpload = require('../middleware/fileUpload');
+const fetchuser = require('../middleware/fetchUser');
+
+/**
+ * @swagger
+ * tags:
+ *   name: Authentication
+ *   description: API endpoints for user authentication and authorization
+ */
+
+/**
+ * @swagger
+ * /api/login:
+ *   post:
+ *     summary: Authenticate user
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *             required:
+ *               - email
+ *               - password
+ *     responses:
+ *       200:
+ *         description: User authenticated successfully
+ *       401:
+ *         description: Invalid credentials
+ *       500:
+ *         description: Internal server error
+ */
+
+router.post('/login', authController.verifyUser);
+
+/**
+ * @swagger
+ * /api/signup:
+ *   post:
+ *     summary: Register new user
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/User'
+ *     responses:
+ *       201:
+ *         description: User registered successfully
+ *       400:
+ *         description: User already exists
+ *       500:
+ *         description: Internal server error
+ */
+
+router.post('/signup', authController.createUser);
+
+/**
+ * @swagger
+ * /api/agentSignUp:
+ *   post:
+ *     summary: Register new agent
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               agentName:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               document:
+ *                 type: string
+ *                 format: binary
+ *             required:
+ *               - agentName
+ *               - email
+ *               - password
+ *               - document
+ *     responses:
+ *       201:
+ *         description: Agent registered successfully
+ *       400:
+ *         description: Agent already exists
+ *       500:
+ *         description: Internal server error
+ */
+
+router.post("/agentSignUp", fileUpload.single('document'), authController.createAgent);
+
+/**
+ * @swagger
+ * /api/agentLogin:
+ *   post:
+ *     summary: Authenticate agent
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *             required:
+ *               - email
+ *               - password
+ *     responses:
+ *       200:
+ *         description: Agent authenticated successfully
+ *       401:
+ *         description: Invalid credentials
+ *       500:
+ *         description: Internal server error
+ */
+
+router.post("/agentLogin", authController.verifyAgent);
+
+/**
+ * @swagger
+ * /api/order:
+ *   post:
+ *     summary: Create order
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               price:
+ *                 type: number
+ *             required:
+ *               - price
+ *     responses:
+ *       200:
+ *         description: Order created successfully
+ *       500:
+ *         description: Internal server error
+ */
+
+router.post('/order', orderController.createorder);
+
+/**
+ * @swagger
+ * /api/userdetails:
+ *   post:
+ *     summary: Get user details
+ *     tags: [Authentication]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: User details retrieved successfully
+ *       401:
+ *         description: Unauthorized access
+ *       500:
+ *         description: Internal server error
+ */
+
+router.post('/userdetails', fetchuser, authController.getUserDetails);
+
+/**
+ * @swagger
+ * /api/history:
+ *   get:
+ *     summary: Get user booking history
+ *     tags: [Authentication]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: User booking history retrieved successfully
+ *       401:
+ *         description: Unauthorized access
+ *       500:
+ *         description: Internal server error
+ */
+
+router.get('/history', fetchuser, authController.getBookings);
+
+/**
+ * @swagger
+ * /api/tourbookings:
+ *   get:
+ *     summary: Get user tour bookings
+ *     tags: [Authentication]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: User tour bookings retrieved successfully
+ *       401:
+ *         description: Unauthorized access
+ *       500:
+ *         description: Internal server error
+ */
+
+router.get('/tourbookings', fetchuser, authController.tourBookings);
+
 module.exports = router;
