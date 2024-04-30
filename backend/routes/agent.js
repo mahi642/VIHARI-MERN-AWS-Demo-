@@ -92,7 +92,7 @@ const agentController = require('../controllers/agent');
 
 /**
  * @swagger
- * /agent/addbus:
+ * /api/agent/addbus:
  *   post:
  *     summary: Add a new bus
  *     tags: [Agent]
@@ -113,7 +113,7 @@ router.post('/addbus', fileUpload.single('image'), agentController.addBus);
 
 /**
  * @swagger
- * /agent/allbuses:
+ * /api/agent/allbuses:
  *   get:
  *     summary: Get all buses
  *     tags: [Agent]
@@ -134,7 +134,7 @@ router.get('/allbuses', agentController.getBuses);
 
 /**
  * @swagger
- * /agent/deletebus/{busId}:
+ * /api/agent/deletebus/{busId}:
  *   delete:
  *     summary: Delete a bus by ID
  *     tags: [Agent]
@@ -158,7 +158,7 @@ router.delete('/deletebus/:busId', agentController.deleteBus);
 
 /**
  * @swagger
- * /agent/getbus/{busId}:
+ * /api/agent/getbus/{busId}:
  *   get:
  *     summary: Get bus details by ID
  *     tags: [Agent]
@@ -184,7 +184,7 @@ router.get('/getbus/:busId', agentController.getBusDetails);
 
 /**
  * @swagger
- * /agent/editbus/{busId}:
+ * /api/agent/editbus/{busId}:
  *   put:
  *     summary: Edit a bus by ID
  *     tags: [Agent]
@@ -214,7 +214,7 @@ router.put('/editbus/:busId', agentController.editBus);
 
 /**
  * @swagger
- * /agent/agentbuses/{agentId}:
+ * /api/agent/agentbuses/{agentId}:
  *   get:
  *     summary: Get all buses of an agent by ID
  *     tags: [Agent]
@@ -242,7 +242,7 @@ router.get('/agentbuses/:agentId', agentController.getAgentBuses);
 
 /**
  * @swagger
- * /agentProfile/{agentId}:
+ * /api/agent/agentProfile/{agentId}:
  *   get:
  *     summary: Get agent profile by ID
  *     tags: [Agent]
@@ -270,7 +270,7 @@ router.get('/agentProfile/:agentId', agentController.getAgentProfile);
 
 /**
  * @swagger
- * /editProfile/{agentId}:
+ * /api/agent/editProfile/{agentId}:
  *   put:
  *     summary: Edit agent profile by ID
  *     tags: [Agent]
@@ -300,7 +300,7 @@ router.put('/editProfile/:agentId', agentController.agentEditProfile);
 
 /**
  * @swagger
- * /addtour:
+ * /api/agent/addtour:
  *   post:
  *     summary: Add a new tour
  *     tags: [Agent]
@@ -321,7 +321,7 @@ router.post('/addtour', fileUpload.single('tourImage'), agentController.addTour)
 
 /**
  * @swagger
- * /alltours:
+ * /api/agent/alltours:
  *   get:
  *     summary: Get all tours
  *     tags: [Agent]
@@ -342,7 +342,7 @@ router.get('/alltours', agentController.getTours);
 
 /**
  * @swagger
- * /deletetour/{tourId}:
+ * /api/agent/deletetour/{tourId}:
  *   delete:
  *     summary: Delete a tour by ID
  *     tags: [Agent]
@@ -366,7 +366,7 @@ router.delete('/deletetour/:tourId', agentController.deleteTour);
 
 /**
  * @swagger
- * /gettour/{tourId}:
+ * /api/agent/gettour/{tourId}:
  *   get:
  *     summary: Get tour details by ID
  *     tags: [Agent]
@@ -394,7 +394,7 @@ router.get('/gettour/:tourId', agentController.getTourDetails);
 
 /**
  * @swagger
- * /edittour/{tourId}:
+ * /api/agent/edittour/{tourId}:
  *   put:
  *     summary: Edit tour details by ID
  *     tags: [Agent]
@@ -424,7 +424,7 @@ router.put('/edittour/:tourId', agentController.editTour);
 
 /**
  * @swagger
- * /agenttours/{agentId}:
+ * /api/agent/agenttours/{agentId}:
  *   get:
  *     summary: Get all tours of an agent by ID
  *     tags: [Agent]
@@ -452,7 +452,7 @@ router.get('/agenttours/:agentId', agentController.getAgentTours);
 
 /**
  * @swagger
- * /addplace/{tourId}:
+ * /api/agent/addplace/{tourId}:
  *   post:
  *     summary: Add a new place to a tour
  *     tags: [Agent]
@@ -480,7 +480,7 @@ router.post('/addplace/:tourId', fileUpload.single('placeImage'), agentControlle
 
 /**
  * @swagger
- * /tourplaces/{tourId}:
+ * /api/agent/tourplaces/{tourId}:
  *   get:
  *     summary: Get all places of a tour by ID
  *     tags: [Agent]
@@ -508,7 +508,7 @@ router.get('/tourplaces/:tourId', agentController.getPlaces);
 
 /**
  * @swagger
- * /deleteplace/{placeId}:
+ * /api/agent/deleteplace/{placeId}:
  *   delete:
  *     summary: Delete a place by ID
  *     tags: [Agent]

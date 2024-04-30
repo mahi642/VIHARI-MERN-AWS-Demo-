@@ -72,12 +72,10 @@ app.use(morgan('combined', { stream: accessLogStream }))
 const agentRoutes = require('./routes/agent');
 const adminRoutes = require('./routes/admin');
 const tourRoutes = require('./routes/tour');
-const testRoutes = require('./routes/test');
-const busRoutes = require('./routes/bus')
-const authRoutes = require('./routes/auth')
-app.use('/api', authRoutes)
-app.use('/api', busRoutes)
-app.use("/api", testRoutes)
+const testRoutes = require('./routes/test')
+app.use(require('./routes/bus'))
+app.use("/api",testRoutes)
+app.use(require('./routes/auth'))
 app.use('/api/agent', agentRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/tour', tourRoutes);
