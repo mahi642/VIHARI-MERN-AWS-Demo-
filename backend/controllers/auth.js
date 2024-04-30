@@ -16,12 +16,12 @@ module.exports.verifyUser =  async(req,res)=>{
       user=result
      })
      if(user==null){
-      return res.json({sucees:false,error:"User not found"})
+      return res.status(403).json({sucees:false,error:"User not found"})
      }
      const passCompare = await bcrypt.compare(password,user.password);
      if(!passCompare){
       success=false
-      return res.json({success,error:"Invalid password"})
+      return res.status(403).json({success,error:"Invalid password"})
      }
      const data ={
       user:{
