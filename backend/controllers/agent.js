@@ -81,16 +81,23 @@ exports.deleteBus =  (req, res) => {
    })
 };
 
-exports.getBusDetails=async (req,res)=>{
+exports.getBusDetails = async (req, res) => {
+  try {
+    const busId = req.params.busId;
+    const busData = await Bus.findById(busId);
+    // Check if busData is found
+    if (busData) {
+      res.status(200).json({ bus: busData });
+    } else {
+      res.status(404).json({ message: "Bus not found" });
+    }
+  } catch (error) {
+    // Handle errors
+    console.error("Error while fetching bus:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
 
-  try{
-    const busId=req.params.busId;
-    const busData=await Bus.findById(busId);
-    res.status(200).json({bus:busData});
-  } catch(error){
-    res.status(500).json({ message: "Error while fetching bus" });
-  }  
-}
 
 exports.editBus = async (req, res) => {
   const {
@@ -184,11 +191,19 @@ exports.getTourDetails = async (req, res) => {
   try {
     const tourId = req.params.tourId;
     const tourData = await Tour.findById(tourId);
-    res.status(200).json({ tour: tourData });
+    // Check if tourData is found
+    if (tourData) {
+      res.status(200).json({ tour: tourData });
+    } else {
+      res.status(404).json({ message: "Tour not found" });
+    }
   } catch (error) {
-    res.status(500).json({ message: "Error while fetching tour" });
+    // Handle errors
+    console.error("Error while fetching tour:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
+
 
 
 exports.editTour = async (req, res) => {
@@ -257,11 +272,15 @@ exports.addPlace = async (req, res) => {
 exports.getPlaces = async (req, res) => {
   try {
     const places = await Place.find({ tour: req.params.tourId }); 
-    res.status(200).json({ places:places });
+     if (places.length === 0) {
+           return res.status(404).json({ message: "No places found for the provided tour ID" });
+    }
+      res.status(200).json({ places: places });
   } catch (error) {
     res.status(500).json({ message: "Error while fetching places" });
   }
 };
+
 
 exports.deletePlace = (req, res) => {
   const placeId = req.params.placeId;
@@ -308,3 +327,4 @@ exports.agentEditProfile= async (req,res)=>{
     res.status(500).json({ message: "Internal server error" });
   }
 }
+
