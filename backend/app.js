@@ -72,7 +72,7 @@ app.use(morgan('combined', { stream: accessLogStream }))
 const agentRoutes = require('./routes/agent');
 const adminRoutes = require('./routes/admin');
 const tourRoutes = require('./routes/tour');
-const testRoutes = require('./routes/test')
+const testRoutes = require('./routes/yest')
 app.use(require('./routes/bus'))
 app.use("/api",testRoutes)
 app.use(require('./routes/auth'))
@@ -120,3 +120,4 @@ mongoose
     console.log("Mongodb connected");
   })
   .catch((err) => console.log("MongoDB connection error:", err));
+module.exports=app;
