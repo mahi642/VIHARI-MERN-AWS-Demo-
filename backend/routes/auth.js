@@ -14,7 +14,7 @@ const fetchuser = require('../middleware/fetchUser');
 
 /**
  * @swagger
- * /api/login:
+ * /login:
  *   post:
  *     summary: Authenticate user
  *     tags: [Authentication]
@@ -45,7 +45,7 @@ router.post('/login', authController.verifyUser);
 
 /**
  * @swagger
- * /api/signup:
+ * /signup:
  *   post:
  *     summary: Register new user
  *     tags: [Authentication]
@@ -68,7 +68,7 @@ router.post('/signup', authController.createUser);
 
 /**
  * @swagger
- * /api/agentSignUp:
+ * /agentSignUp:
  *   post:
  *     summary: Register new agent
  *     tags: [Authentication]
@@ -106,7 +106,7 @@ router.post("/agentSignUp", fileUpload.single('document'), authController.create
 
 /**
  * @swagger
- * /api/agentLogin:
+ * /agentLogin:
  *   post:
  *     summary: Authenticate agent
  *     tags: [Authentication]
@@ -137,7 +137,7 @@ router.post("/agentLogin", authController.verifyAgent);
 
 /**
  * @swagger
- * /api/order:
+ * /order:
  *   post:
  *     summary: Create order
  *     tags: [Authentication]
@@ -163,7 +163,7 @@ router.post('/order', orderController.createorder);
 
 /**
  * @swagger
- * /api/userdetails:
+ * /userdetails:
  *   post:
  *     summary: Get user details
  *     tags: [Authentication]
@@ -182,7 +182,7 @@ router.post('/userdetails', fetchuser, authController.getUserDetails);
 
 /**
  * @swagger
- * /api/history:
+ * /history:
  *   get:
  *     summary: Get user booking history
  *     tags: [Authentication]
@@ -201,7 +201,7 @@ router.get('/history', fetchuser, authController.getBookings);
 
 /**
  * @swagger
- * /api/tourbookings:
+ * /tourbookings:
  *   get:
  *     summary: Get user tour bookings
  *     tags: [Authentication]

@@ -24,6 +24,9 @@ const adminController = require('../controllers/admin');
  *         email:
  *           type: string
  *           format: email
+ *         password:
+ *           type: string
+ *           format: password
  *         mobile:
  *           type: string
  *       required:

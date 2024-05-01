@@ -12,7 +12,7 @@ const fetchUser = require('../middleware/fetchUser');
 
 /**
  * @swagger
- * /api/buslist:
+ * /buslist:
  *   post:
  *     summary: Get list of buses
  *     tags: [Bus]
@@ -41,7 +41,7 @@ router.post('/buslist', busController.busList);
 
 /**
  * @swagger
- * /api/booking:
+ * /booking:
  *   post:
  *     summary: Book seats on a bus
  *     tags: [Bus]
@@ -80,7 +80,7 @@ router.post('/booking', fetchUser, busController.booking);
 
 /**
  * @swagger
- * /api/busdetails:
+ * /busdetails:
  *   post:
  *     summary: Get details of a bus
  *     tags: [Bus]
@@ -106,7 +106,7 @@ router.post('/busdetails', busController.getBusDetails);
 
 /**
  * @swagger
- * /api/bookedseats:
+ * /bookedseats:
  *   post:
  *     summary: Get booked seats on a bus
  *     tags: [Bus]

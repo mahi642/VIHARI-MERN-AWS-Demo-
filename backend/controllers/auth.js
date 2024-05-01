@@ -180,8 +180,12 @@ module.exports.createAgent = async(req,res)=>{
       }).then(agent => {
 
         // Creating authToken for user
-
-        const authToken =JWT.sign(agent.id,JWT_SECRET)
+        const data ={
+          user:{
+            id:agent.id
+          }
+        }
+        const authToken =JWT.sign(data,JWT_SECRET)
         res.json({success:true,authToken,agent})
 
       }).catch((error) => {

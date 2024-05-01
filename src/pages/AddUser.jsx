@@ -24,18 +24,19 @@ const AddUser = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
-    
+
       const formDataToSend = new FormData();
       formDataToSend.append("firstName", formData.firstName);
       formDataToSend.append("lastnName", formData.lastName);
+      formDataToSend.append("mobile", formData.mobile);
       formDataToSend.append("email", formData.email);
       formDataToSend.append("password", formData.password);
       formDataToSend.append("confirmPassword", formData.confirmPassword);
 
       await addUser(formData).unwrap();
-      
+
       alert("User added successfully");
       navigate('/admindb/allusers');
     } catch (error) {
@@ -94,7 +95,24 @@ const AddUser = () => {
                         </div>
                       </div>
                     </div>
-
+                    <div className="col-md-6">
+                      <div className="input-group mb-3 user">
+                        <span className="input-group-text span">
+                          <i className="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                        <div className="form-floating" >
+                          <input
+                            type="text"
+                            className="form-control inputs"
+                            name="mobile"
+                            placeholder="mobile"
+                            onChange={handleInputChange}
+                            value={formData.mobile}
+                          />
+                          <span className="invalid-form" id="invalid-mobile"></span>
+                        </div>
+                      </div>
+                    </div>
                     <div className="col-md-6">
                       <div className="input-group mb-3 user">
                         <span className="input-group-text span">

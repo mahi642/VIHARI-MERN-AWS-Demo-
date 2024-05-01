@@ -143,6 +143,7 @@ exports.addUser = async (req, res) => {
     firstName,
     lastName,
     email,
+    mobile,
     password,
     confirmPassword,
   } = req.body;
@@ -159,6 +160,7 @@ exports.addUser = async (req, res) => {
       firstName,
       lastName,
       email,
+      mobile,
       password: hashedPassword,
       confirmPassword,
     });

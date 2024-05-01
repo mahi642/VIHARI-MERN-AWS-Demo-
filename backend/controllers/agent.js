@@ -2,8 +2,6 @@ const Bus = require("../models/buses");
 const Agent=require('../models/agent');
 const Tour=require('../models/tour');
 const Place=require('../models/place');
-// const redis = require('redis');
-const client = require('../utils/Redis');
 
 exports.addBus = async (req, res) => {
   const {
@@ -134,15 +132,9 @@ exports.editBus = async (req, res) => {
 exports.addTour = async (req, res) => {
   const { tname, tprice, agentId } = req.body;
   const TourImage = req.file;
-  const DispImageurl = TourImage ? TourImage.path : null; // Check if TourImage exists
+  const DispImageurl = TourImage.path;
 
   try {
-    // Check if the agentId is provided and corresponds to an existing Agent document
-    const agent = await Agent.findById(agentId);
-    if (!agent) {
-      return res.status(404).json({ message: "Agent not found" });
-    }
-
     const newTour = new Tour({
       tname,
       tprice,
@@ -151,51 +143,25 @@ exports.addTour = async (req, res) => {
     });
 
     const result = await newTour.save();
-
-    // Update the agent's tours array with the newly created tour's ID
+    const agent=await Agent.findById(agentId);
     agent.tours.push(result._id);
     await agent.save();
-
-    // Delete the cache key associated with tours
-    client.del('tour-data', (err, response) => {
-      if (err) {
-        console.error('Error deleting tour data from cache:', err);
-      } else {
-        console.log('Tour data deleted from cache:', response);
-      }
-    });
 
     res.status(201).json(result);
   } catch (error) {
     console.error("Error adding tour:", error);
-    // Check if the error is a validation error (e.g., agentId not found or other validation issues)
-    if (error.name === 'ValidationError') {
-      return res.status(400).json({ message: error.message });
-    }
-    res.status(500).json({ message: "Adding Tour failed, please try again later." });
+    res
+      .status(500)
+      .json({ message: "Adding Tour failed, please try again later." });
   }
 };
 
-
 exports.getTours = async (req, res) => {
   try {
-      const cacheKey = 'tour-data';
-      let data = await client.get(cacheKey);
-
-      if (!data) {
-          const tours = await Tour.find({});
-          data = { tours };
-          client.set(cacheKey, JSON.stringify(data));
-          console.log('Tour data set into Redis cache');
-      } else {
-          console.log('Tour data retrieved from Redis cache');
-          data = JSON.parse(data);
-      }
-
-      res.status(200).json(data);
+    const tours = await Tour.find({});
+    res.status(200).json({ tours:tours });
   } catch (error) {
-      console.error('Error retrieving tour data:', error);
-      res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ message: "Error while fetching tours" });
   }
 };
 
@@ -252,13 +218,13 @@ exports.editTour = async (req, res) => {
 
 exports.getAgentTours = async (req, res) => {
   try {
-    const agentId = req.params.agentId;
+    const agentId=req.params.agentId;
     const agent = await Agent.findById(agentId).populate('tours');
-    const tours = agent.tours;
-    res.status(200).json({ tours });
+    const   Tours=agent.tours;
+  
+    res.status(200).json({ tours: Tours });
   } catch (error) {
-    console.error("Error fetching agent's tours:", error);
-    res.status(500).json({ message: "Error while fetching agent's tours" });
+    res.status(500).json({ message: "Error while fetching tours" });
   }
 };
 
