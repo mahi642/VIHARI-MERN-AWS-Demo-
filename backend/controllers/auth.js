@@ -129,13 +129,13 @@ module.exports.verifyAgent = async (req, res) => {
     });
 
     if (agent == null) {
-      return res.json({ success: false, error: "Agent not found" });
+      return res.status(403).json({ success: false, error: "Agent not found" });
     }
 
     const passCompare = await bcrypt.compare(password, agent.password);
     if (!passCompare) {
       success = false;
-      return res.json({ success, error: "Invalid password" });
+      return res.status(403).json({ success, error: "Invalid password" });
     }
 
     if (agent.flag !== 1 || agent.blocked) {

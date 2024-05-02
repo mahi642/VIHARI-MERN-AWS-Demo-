@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const tourControllers = require('../controllers/tour');
 const fetchUser = require('../middleware/fetchUser');
+const auth = require('../middleware/auth');
 
 /**
  * @swagger
@@ -57,7 +58,7 @@ const fetchUser = require('../middleware/fetchUser');
  *         description: Internal server error
  */
 
-router.post("/tourbooking", fetchUser, tourControllers.booking);
+router.post("/tourbooking", auth, tourControllers.booking);
 
 /**
  * @swagger
@@ -80,6 +81,6 @@ router.post("/tourbooking", fetchUser, tourControllers.booking);
  *         description: Internal server error
  */
 
-router.post("/gettour", fetchUser, tourControllers.getTour);
+router.post("/gettour", auth, tourControllers.getTour);
 
 module.exports = router;

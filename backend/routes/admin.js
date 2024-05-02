@@ -73,6 +73,8 @@ const adminController = require('../controllers/admin');
  *         - tours
  */
 
+router.post('/announcements',adminController.postsendmail);
+
 /**
  * @swagger
  * /api/admin/allusers:

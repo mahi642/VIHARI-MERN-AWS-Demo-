@@ -49,9 +49,9 @@ const PassengerDetails = () => {
     alert('payment successfull')
     const response = await fetch('http://localhost:4000/booking',{
       method:'POST',
-      headers:{
-        "Content-type":"application/json",
-        "auth-token":localStorage.getItem('token')
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("token")
       },
       body:JSON.stringify({bus:selectedSeats.bus,seats:data,date:searchDetails.date})
     })

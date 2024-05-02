@@ -49,6 +49,35 @@ describe("POST /login", () => {
 
 });
 
+describe("POST /agentLogin", () => {
+  test("should return a token for valid email and password", async () => {
+    const credentials = {
+      email: "srikar.a21@iiits.in",
+      password: "srikar123",
+    };
+
+    const res = await request(app)
+      .post("/agentLogin")
+      .send(credentials);
+
+    expect(res.status).toBe(200);
+  }, 15000);
+
+  test("should return 403 for invalid credentials", async () => {
+    const credentials = {
+      email: "ashok@gmail.com",
+      password: "ashok@123",
+    };
+
+    const res = await request(app)
+      .post("/agentLogin")
+      .send(credentials);
+
+    expect(res.status).toBe(403);
+  }, 5000);
+
+});
+
 describe("GET /api/agent/getbus/:busId", () => {
   test("should return course data for valid Bus ID", (done) => {
     const validBusId = "663281a0522cc6b77ad47df4";
