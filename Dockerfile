@@ -13,10 +13,9 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-EXPOSE 4000
+EXPOSE 3000
 
 CMD ["npm", "start"]
 
 
-# docker run -p 3000:3000 vihari-frontend:dev
-# docker run -p 4000:4000 vihari-backend:dev
+# docker run -p 3000:3000 f_healthnexus-client:latest
