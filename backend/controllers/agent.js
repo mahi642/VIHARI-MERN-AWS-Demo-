@@ -2,7 +2,7 @@ const Bus = require("../models/buses");
 const Agent=require('../models/agent');
 const Tour=require('../models/tour');
 const Place=require('../models/place');
-
+const redisClient = require('../utils/Redis');
 exports.addBus = async (req, res) => {
   const {
     srcname,
@@ -136,7 +136,7 @@ exports.editBus = async (req, res) => {
   }
 };
 
-exports.addTour = async (req, res) => {
+exports.addTour = async (req, res, next) => {
   const { tname, tprice, agentId } = req.body;
   const TourImage = req.file;
   const DispImageurl = TourImage.path;
@@ -150,41 +150,54 @@ exports.addTour = async (req, res) => {
     });
 
     const result = await newTour.save();
-    const agent=await Agent.findById(agentId);
+
+    const agent = await Agent.findById(agentId);
+    if (!agent) {
+      throw new HttpError('Agent not found', 404);
+    }
+
     agent.tours.push(result._id);
     await agent.save();
 
+    // Update Redis cache for all tours
+    await redisClient.del('all-tours');
+    const allTours = await Tour.find({});
+    await redisClient.set('all-tours', JSON.stringify(allTours));
+
     res.status(201).json(result);
   } catch (error) {
-    console.error("Error adding tour:", error);
-    res
-      .status(500)
-      .json({ message: "Adding Tour failed, please try again later." });
+    return next(error);
   }
 };
 
 exports.getTours = async (req, res) => {
   try {
-    const tours = await Tour.find({});
-    res.status(200).json({ tours:tours });
+    const cachedTours = await redisClient.get('all-tours');
+    if (cachedTours) {
+      res.status(200).json({ tours: JSON.parse(cachedTours) });
+    } else {
+      const tours = await Tour.find({});
+      await redisClient.set('all-tours', JSON.stringify(tours));
+      res.status(200).json({ tours });
+    }
   } catch (error) {
     res.status(500).json({ message: "Error while fetching tours" });
   }
 };
 
-exports.deleteTour = (req, res) => {
+exports.deleteTour = async (req, res) => {
   const tourId = req.params.tourId;
 
-  Tour.findByIdAndDelete(tourId)
-    .then((deletedTour) => {
-      if (!deletedTour) {
-        return res.status(404).json({ message: "Tour not found" });
-      }
-      res.status(200).json({ message: "Tour deleted successfully" });
-    })
-    .catch((error) => {
-      res.status(500).json({ message: "Internal server error" });
-    });
+  try {
+    const deletedTour = await Tour.findByIdAndDelete(tourId);
+    if (!deletedTour) {
+      return res.status(404).json({ message: "Tour not found" });
+    }
+    await redisClient.del('all-tours');
+    res.status(200).json({ message: "Tour deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 
 exports.getTourDetails = async (req, res) => {
@@ -206,6 +219,7 @@ exports.getTourDetails = async (req, res) => {
 
 
 
+
 exports.editTour = async (req, res) => {
   const { tourName, tourPrice } = req.body;
   const tourId = req.params.tourId;
@@ -221,13 +235,12 @@ exports.editTour = async (req, res) => {
 
     const updatedTour = await tourToUpdate.save();
 
+    await redisClient.del('all-tours'); // Invalidate the cache for all tours
+
     res.status(200).json({ tour: updatedTour });
   } catch (error) {
     console.error("Error updating tour:", error);
-    res
-      .status(500)
-      .json({ message: "Updating tour failed, please try again later." });
-
+    res.status(500).json({ message: "Updating tour failed, please try again later." });
   }
 };
 

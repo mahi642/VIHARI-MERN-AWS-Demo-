@@ -20,8 +20,8 @@ const Profile = () => {
     const response = await fetch("http://localhost:4000/userdetails", {
       method: "POST",
       headers: {
-        "Content-type": "application/json",
-        "auth-token": localStorage.getItem("token"),
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("token")
       },
     });
     const json = await response.json();
@@ -30,7 +30,8 @@ const Profile = () => {
   const getTrips = async () => {
     const response = await fetch("http://localhost:4000/history", {
       headers: {
-        "auth-token": localStorage.getItem("token"),
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("token")
       },
     });
     const data = await response.json();
@@ -70,7 +71,8 @@ const Profile = () => {
     const response = await fetch("http://localhost:4000/busdetails", {
       method: "POST",
       headers: {
-        "Content-type": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("token")
       },
       body: JSON.stringify({ id }),
     });
@@ -82,7 +84,8 @@ const Profile = () => {
   const getTourBookings = async () => {
     const response = await fetch("http://localhost:4000/tourbookings", {
       headers: {
-        "auth-token": localStorage.getItem("token"),
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("token")
       },
     });
     const json = await response.json();
@@ -91,13 +94,13 @@ const Profile = () => {
       const res = await fetch("http://localhost:4000/api/tour/gettour", {
         method: "POST",
         headers: {
-          "auth-token": localStorage.getItem("token"),
-          "Content-type": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token")
         },
         body: JSON.stringify({ id: ticket.tour }),
       });
       const data = await res.json();
-      tours.push({tour:data.tour,seats:ticket.tickets,price:ticket.price});
+      tours.push({ tour: data.tour, seats: ticket.tickets, price: ticket.price });
     });
     console.log(tours)
     setTourBookings(tours);
@@ -264,8 +267,8 @@ const Profile = () => {
                 </div>
               ) : (
                 <table
-                className="table"
-                style={{ fontSize: "20px", padding: "10px" }}
+                  className="table"
+                  style={{ fontSize: "20px", padding: "10px" }}
                 >
                   <thead>
                     <tr>
@@ -277,8 +280,8 @@ const Profile = () => {
                   </thead>
                   <hr />
                   <tbody>
-                    {tourBookings.map((tour)=>{
-                       return (
+                    {tourBookings.map((tour) => {
+                      return (
                         <>
                           <tr>
                             {/* <td><img src={buses[index].Imageurl?.replace(/^.*backend\\/i, "")} alt=""  style={{height:'60px'}}/></td> */}
@@ -289,7 +292,7 @@ const Profile = () => {
                           </tr>
                           <hr />
                         </>
-                      ); 
+                      );
                     })}
 
                   </tbody>

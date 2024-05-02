@@ -4,6 +4,7 @@ const authController = require('../controllers/auth');
 const orderController = require('../controllers/order');
 const fileUpload = require('../middleware/fileUpload');
 const fetchuser = require('../middleware/fetchUser');
+const auth = require('../middleware/auth');
 
 /**
  * @swagger
@@ -178,7 +179,7 @@ router.post('/order', orderController.createorder);
  *         description: Internal server error
  */
 
-router.post('/userdetails', fetchuser, authController.getUserDetails);
+router.post('/userdetails', auth, authController.getUserDetails);
 
 /**
  * @swagger
@@ -197,7 +198,7 @@ router.post('/userdetails', fetchuser, authController.getUserDetails);
  *         description: Internal server error
  */
 
-router.get('/history', fetchuser, authController.getBookings);
+router.get('/history', auth, authController.getBookings);
 
 /**
  * @swagger
@@ -216,6 +217,6 @@ router.get('/history', fetchuser, authController.getBookings);
  *         description: Internal server error
  */
 
-router.get('/tourbookings', fetchuser, authController.tourBookings);
+router.get('/tourbookings', auth, authController.tourBookings);
 
 module.exports = router;

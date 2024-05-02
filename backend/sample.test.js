@@ -23,13 +23,8 @@ describe("GET /", function () {
 describe("POST /login", () => {
   test("should return a token for valid email and password", async () => {
     const credentials = {
-<<<<<<< HEAD
       email: "shanmukhashreyan.d21@iiits.in",
       password: "shreyan123",
-=======
-      email: "srikar.a21@iiits.in",
-      password: "srikar123",
->>>>>>> 7826c6048c9607a78b28403846fc6ab2d2dd9f71
     };
 
     const res = await request(app)
