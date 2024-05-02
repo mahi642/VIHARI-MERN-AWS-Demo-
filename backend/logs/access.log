@@ -1094,3 +1094,11 @@
 =======
 >>>>>>> 36d8e8576f6d5c609b83ef35557436b6182b4263
 >>>>>>> f2cdc483d0d7217eeb6bcd3ceee7fa27b58639fa
+::ffff:127.0.0.1 - - [02/May/2024:04:36:13 +0000] "POST /login HTTP/1.1" 200 492 "-" "-"
+::ffff:127.0.0.1 - - [02/May/2024:04:36:14 +0000] "POST /login HTTP/1.1" 403 41 "-" "-"
+::ffff:127.0.0.1 - - [02/May/2024:04:36:14 +0000] "GET /api/agent/getbus/663281a0522cc6b77ad47df4 HTTP/1.1" 200 385 "-" "-"
+::ffff:127.0.0.1 - - [02/May/2024:04:36:14 +0000] "GET /api/agent/getbus/661412d4d9d5b0efd05f3080 HTTP/1.1" 404 27 "-" "-"
+::ffff:127.0.0.1 - - [02/May/2024:04:36:14 +0000] "GET /api/agent/gettour/66328f35d899c8d9c976c6ad HTTP/1.1" 200 294 "-" "-"
+::ffff:127.0.0.1 - - [02/May/2024:04:36:14 +0000] "GET /api/agent/gettour/661412d4d9d5b0efd05f3080 HTTP/1.1" 404 28 "-" "-"
+::ffff:127.0.0.1 - - [02/May/2024:04:36:14 +0000] "GET /api/agent/tourplaces/66328f35d899c8d9c976c6ad HTTP/1.1" 200 983 "-" "-"
+::ffff:127.0.0.1 - - [02/May/2024:04:36:14 +0000] "GET /api/agent/gettour/661412d4d9d5b0efd05f3080 HTTP/1.1" 404 28 "-" "-"
