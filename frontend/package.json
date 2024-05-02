@@ -36,7 +36,7 @@
     "start:frontend": "react-scripts start",
     "start:backend": "nodemon backend/app.js",
     "server": "json-server --watch db.json --port 8000",
-    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "start": "npm start:frontend",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
