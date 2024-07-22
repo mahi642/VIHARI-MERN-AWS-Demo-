@@ -25,6 +25,11 @@ Welcome to Vihari, an travel and tour platform built using the MERN stack. Vihar
 
 ## You can access the website at  http://your-ec2-public-ip.
 
+<img width="960" alt="vihari-aws" src="https://github.com/user-attachments/assets/5b1b6c75-cecd-4805-b882-71352ea36fc7">
+
+## Above is the preview of Home page 
+
+
 
 ### Summary
 This guide provides the steps necessary to deploy the Vihari travel and tour platform on an AWS EC2 instance. For detailed project features and functionality, please refer to the below details.
@@ -58,6 +63,10 @@ npm start
 ```
 
 5. Access the website at [http://localhost:3000](http://localhost:3000).
+
+
+
+
 
 ## Users
 
