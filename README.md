@@ -1,6 +1,34 @@
-# Vihari - Travel and Tour Platform
+# Vihari - Travel and Tour Platform  deployed on AWS EC2 instance 
 
-Welcome to Vhari, an travel and tour platform built using the MERN stack. Vihari offers a comprehensive set of features for agents, users(traveler), and administrators.
+
+
+Welcome to Vihari, an travel and tour platform built using the MERN stack. Vihari offers a comprehensive set of features for agents, users(traveler), and administrators.
+
+
+## To deploy Vihari on an AWS EC2 instance, follow these steps:
+- An AWS account
+- An EC2 instance (Ubuntu/Debian recommended)
+- Node.js and npm installed on the instance
+- Git installed on the instance
+- Security group with appropriate rules for HTTP/HTTPS traffic
+
+## Steps:
+- Launch an EC2 Instance
+- Connect to Your EC2 Instance
+- Update and Install Dependencies
+- Clone the GitHub Repository:
+- Navigate to the Cloned Directory
+- Install Dependencies
+- Configure Environment Variables
+- Start the Development Server
+- Access the Website
+
+## You can access the website at  http://your-ec2-public-ip.
+
+
+### Summary
+This guide provides the steps necessary to deploy the Vihari travel and tour platform on an AWS EC2 instance. For detailed project features and functionality, please refer to the below details.
+
 
 ## How to Run
 
